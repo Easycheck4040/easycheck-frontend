@@ -1,0 +1,73 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Faturas – Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+</head><body>
+<header><a class="card" href="index.html">← Voltar</a></header>
+<main>
+  <h2>Faturas</h2>
+  <form id="iform">
+    <div class="row">
+      <div style="flex:1">
+        <label>Cliente</label><select id="client"></select>
+      </div>
+      <div style="flex:1">
+        <label>Vencimento</label><input name="due" type="date"/>
+      </div>
+    </div>
+    <h3>Itens</h3>
+    <div id="items"></div>
+    <div class="toolbar"><button type="button" id="addItem">+ Adicionar item</button></div>
+    <button>Criar fatura (rascunho)</button>
+  </form>
+
+  <div id="result"></div>
+
+  <h3>Enviar por e-mail</h3>
+  <div class="notice small">Precisas ter <a href="connections.html">uma conexão SMTP</a> e um <a href="templates.html">template</a> do tipo <b>invoice</b>.</div>
+  <div class="row">
+    <div style="flex:1"><label>Conexão SMTP</label><select id="conn"></select></div>
+    <div style="flex:1"><label>Template</label><select id="tpl"></select></div>
+  </div>
+  <button id="sendBtn" disabled>Enviar fatura por e-mail</button>
+</main>
+
+<script>
+const API='https://api.easycheckglobal.com/api';
+const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
+async function jget(p){return (await fetch(API+p)).json()}
+async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+function $(s,r=document){return r.querySelector(s)}
+function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
+
+let INVOICE_ID=null;
+function addItemRow(d={}){const w=el('div',{className:'row'});
+  w.append(el('input',{placeholder:'Descrição',value:d.description||''}),
+           el('input',{type:'number',placeholder:'Qtd',value:d.qty||1,min:'0'}),
+           el('input',{type:'number',placeholder:'Preço',value:d.unit_price||0,step:'0.01',min:'0'}),
+           el('input',{type:'number',placeholder:'VAT %',value:d.vat_rate||17,step:'0.01',min:'0'}));
+  $('#items').append(w);
+}
+$('#addItem').onclick=()=>addItemRow();
+
+async function loadClients(){const d=await jget(`/clients/list?company_id=${COMPANY}`);const s=$('#client');s.innerHTML='';(d.clients||[]).forEach(c=>s.append(el('option',{value:c.id,textContent:`${c.name} (${c.email||'-'})`})))}
+async function loadSMTP(){const d=await jget(`/connections/list?company_id=${COMPANY}`);const s=$('#conn');s.innerHTML='';(d.connections||[]).filter(x=>x.type==='email_smtp').forEach(c=>s.append(el('option',{value:c.id,textContent:c.display_name||c.id})));}
+async function loadTpl(){const d=await jget(`/templates/list?company_id=${COMPANY}&type=invoice`);const s=$('#tpl');s.innerHTML='';(d.templates||[]).forEach(t=>s.append(el('option',{value:t.id,textContent:`${t.name} (${t.locale})`})))}
+
+$('#iform').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const items=Array.from($('#items').children).map(r=>{const [d,q,p,v]=r.querySelectorAll('input');return{description:d.value,qty:+q.value||1,unit_price:+p.value||0,vat_rate:+v.value||0}}).filter(it=>it.description);
+  if(items.length===0) return alert('Adiciona pelo menos um item.');
+  const due=$('input[name="due"]').value||new Date(Date.now()+7*864e5).toISOString().slice(0,10);
+  const out=await jpost('/invoices/create',{company_id:COMPANY,client_id:$('#client').value,due_date:due,items});
+  if(!out.ok) return alert(out.error||'erro');
+  INVOICE_ID=out.invoice.id; $('#result').innerHTML=`<div class="badge">Rascunho criado</div> Nº ${out.invoice.number} — Total € ${out.invoice.total}`; $('#sendBtn').disabled=false;
+});
+$('#sendBtn').onclick=async ()=>{
+  if(!INVOICE_ID) return alert('Cria a fatura primeiro.');
+  const out=await jpost('/invoices/send',{company_id:COMPANY,invoice_id:INVOICE_ID,template_id:$('#tpl').value,connection_id:$('#conn').value});
+  if(!out.ok) return alert(out.error||'erro'); alert('Enviado!');
+};
+addItemRow(); loadClients(); loadSMTP(); loadTpl();
+</script>
+</body></html>
