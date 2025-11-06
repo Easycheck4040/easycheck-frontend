@@ -1,0 +1,61 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Conexões – Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+</head><body>
+<header><a class="card" href="index.html">← Voltar</a></header>
+<main>
+  <h2>Conexões (SMTP/IA)</h2>
+  <div class="notice small">Credenciais ficam na tua conta (tabela <i>connections</i>). A senha é cifrada no servidor.</div>
+
+  <form id="smtpForm">
+    <h3>SMTP</h3>
+    <div class="row">
+      <div style="flex:1">
+        <label>Display name</label>
+        <input required name="display_name" placeholder="SMTP Principal"/>
+      </div>
+      <div style="width:180px">
+        <label>Porta</label>
+        <input required name="port" type="number" placeholder="587"/>
+      </div>
+    </div>
+    <label>Host</label><input required name="host" placeholder="smtp.seudominio.com"/>
+    <label>Utilizador</label><input required name="user" placeholder="user@seudominio.com"/>
+    <label>Senha (cifrada)</label><input required name="pass" type="password" placeholder="••••••••"/>
+    <label>From (opcional)</label><input name="from" placeholder="noreply@seudominio.com"/>
+    <button type="submit">Guardar conexão SMTP</button>
+  </form>
+
+  <h3>Conexões ativas</h3>
+  <div id="list"></div>
+</main>
+
+<script>
+const API='https://api.easycheckglobal.com/api';
+const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
+
+async function jget(p){return (await fetch(API+p)).json()}
+async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+function $(s,r=document){return r.querySelector(s)}
+function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
+function tableFrom(items, cols){const t=el('table'),th=el('thead'),tr=el('tr');cols.forEach(c=>tr.append(el('th',{textContent:c.label})));th.append(tr);t.append(th);const tb=el('tbody');(items||[]).forEach(row=>{const tr=el('tr');cols.forEach(c=>{const td=el('td');td.textContent=typeof c.render=='function'?c.render(row):(row[c.key]??'');tr.append(td)});tb.append(tr)});t.append(tb);return t}
+
+async function loadList(){
+  const out = await jget(`/connections/list?company_id=${COMPANY}`);
+  if(!out.ok){ $('#list').textContent = out.error||'erro'; return;}
+  const cols=[{key:'display_name',label:'Nome'},{key:'type',label:'Tipo'},{key:'created_at',label:'Criado'}];
+  $('#list').innerHTML=''; $('#list').append(tableFrom(out.connections,cols));
+}
+$('#smtpForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const fd=new FormData(e.target);
+  const body={company_id:COMPANY,type:'email_smtp',display_name:fd.get('display_name'),
+    config:{host:fd.get('host'),port:fd.get('port'),user:fd.get('user'),pass:fd.get('pass'),from:fd.get('from')}};
+  const out=await jpost('/connections/save',body);
+  if(!out.ok) return alert(out.error||'erro');
+  alert('Conexão guardada!'); e.target.reset(); loadList();
+});
+loadList();
+</script>
+</body></html>
