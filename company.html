@@ -1,0 +1,281 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Empresa & Funcionários – Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+<!-- Proteção + sessão -->
+<script src="lib/supabase.js"></script>
+<script src="guard.js"></script>
+<style>
+  .grid{display:grid;gap:14px}
+  @media(min-width:1100px){ .grid{grid-template-columns:1.2fr .8fr} }
+  .card{background:#121520;border:1px solid #22283a;border-radius:12px;padding:16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #1e2436;background:#0f1320;color:#e6e8ef}
+  label{display:block;margin:6px 0 4px}
+  button{padding:10px 14px;border-radius:10px;border:0;background:#0A84FF;color:#fff;cursor:pointer}
+  button.secondary{background:#1f2538}
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px solid #1a1f2d;padding:8px;text-align:left;vertical-align:top}
+  .muted{opacity:.85;font-size:.9em}
+  .right{text-align:right}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#1f2538;margin:2px 4px 0 0;font-size:.85em}
+  .chat{max-height:380px;overflow:auto;border:1px solid #1a1f2d;border-radius:10px;padding:10px;background:#0f1320}
+  .chat .me{color:#bcd4ff}
+  .chat .ai{color:#d8ffe1}
+</style>
+</head><body>
+<header class="container" style="padding:12px 0"><a class="card" href="index.html">← Voltar</a></header>
+
+<main class="container">
+  <h2>Empresa & Funcionários</h2>
+  <p class="muted">Define os dados oficiais da tua empresa, adiciona funcionários (nomes, funções, e-mails) e usa o Command Center para instruções em linguagem natural.</p>
+
+  <section class="grid">
+    <!-- PERFIL DA EMPRESA -->
+    <form id="companyForm" class="card">
+      <h3 style="margin-top:0">Perfil da empresa</h3>
+
+      <label>Nome legal</label>
+      <input name="name" placeholder="Easycheck S.à r.l." required>
+
+      <div class="row">
+        <div style="flex:1;min-width:220px">
+          <label>País</label>
+          <input name="country" placeholder="Luxembourg">
+        </div>
+        <div style="width:220px">
+          <label>Idioma</label>
+          <select name="locale">
+            <option value="pt">Português</option>
+            <option value="en" selected>English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </div>
+        <div style="width:260px">
+          <label>Timezone</label>
+          <input name="timezone" placeholder="Europe/Luxembourg" value="Europe/Luxembourg">
+        </div>
+      </div>
+
+      <label>Endereço fiscal</label>
+      <input name="address" placeholder="Rua X, 123, 1000 Luxembourg">
+
+      <div class="row">
+        <div style="width:220px">
+          <label>VAT Nº</label>
+          <input name="vat_no" placeholder="LU12345678">
+        </div>
+        <div style="width:220px">
+          <label>IVA padrão (%)</label>
+          <input type="number" name="vat_default" step="0.01" value="17">
+        </div>
+        <div style="width:220px">
+          <label>Prefixo fatura</label>
+          <input name="inv_prefix" placeholder="EC-">
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="flex:1;min-width:260px">
+          <label>IBAN</label>
+          <input name="iban" placeholder="LUkk BBBB CCCC CCCC CCCC">
+        </div>
+        <div style="width:260px">
+          <label>BIC</label>
+          <input name="bic" placeholder="ABCDEFGHXXX">
+        </div>
+      </div>
+
+      <label>Email “From” (para faturas/avisos)</label>
+      <input name="from_email" placeholder="billing@seu-dominio.com">
+
+      <div class="row" style="justify-content:space-between;margin-top:10px">
+        <button type="reset" class="secondary" id="btnCoClear">Limpar</button>
+        <button type="submit">Guardar empresa</button>
+      </div>
+    </form>
+
+    <!-- FUNCIONÁRIOS + COMMAND CENTER -->
+    <section class="card">
+      <h3 style="margin-top:0">Funcionários</h3>
+      <form id="empForm" class="card" style="margin:0 0 12px 0">
+        <div class="row">
+          <div style="flex:1;min-width:220px">
+            <label>Nome</label>
+            <input name="name" placeholder="Daniel Silva" required>
+          </div>
+          <div style="flex:1;min-width:220px">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="daniel@empresa.com">
+          </div>
+          <div style="width:220px">
+            <label>Função</label>
+            <input name="role" placeholder="Gestor / Diretor / Contabilista">
+          </div>
+        </div>
+        <div class="row" style="justify-content:flex-end;margin-top:8px">
+          <button type="submit">Adicionar funcionário</button>
+        </div>
+      </form>
+
+      <div id="empList" style="margin-top:8px"></div>
+
+      <hr style="border:0;border-top:1px solid #1a1f2d;margin:16px 0">
+
+      <h3 style="margin:0 0 8px">Command Center (IA)</h3>
+      <p class="muted">Exemplos: “Gera um relatório financeiro e envia ao meu contabilista, copia para o gerente e traduz para francês.” · “Envia as faturas 63 ao gestor Daniel hoje às 15h.”</p>
+      <div class="chat" id="chat"></div>
+      <div class="row" style="margin-top:8px">
+        <input id="cmd" placeholder="Escreve aqui o teu comando..." />
+        <button id="run">Executar IA</button>
+      </div>
+    </section>
+  </section>
+</main>
+
+<script>
+// ===== Helpers (baseados no guard.js) =====
+const api = (p) => `${(window.API || 'https://api.easycheckglobal.com/api')}${p}`;
+const company = () => window.COMPANY || localStorage.getItem('ec.company_id') || '22871176-0909-4ba5-a642-5db70db2e35f';
+
+async function jget(p){ const r = await fetch(api(p)); return r.json(); }
+async function jpost(p,b){ 
+  const r = await fetch(api(p), {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(b)});
+  return r.json();
+}
+function $(s,r=document){return r.querySelector(s)}
+function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
+
+// ===== Empresa =====
+async function loadCompany(){
+  const out = await jget(`/company/get?company_id=${encodeURIComponent(company())}`);
+  if(!out.ok || !out.company) return;
+  const c = out.company;
+  const f = $('#companyForm');
+  f.name.value       = c.name       || '';
+  f.country.value    = c.country    || '';
+  f.locale.value     = c.locale     || 'en';
+  f.timezone.value   = c.timezone   || 'Europe/Luxembourg';
+  f.address.value    = c.address    || '';
+  f.vat_no.value     = c.vat_no     || '';
+  f.vat_default.value= c.vat_default|| 17;
+  f.inv_prefix.value = c.inv_prefix || '';
+  f.iban.value       = c.iban       || '';
+  f.bic.value        = c.bic        || '';
+  f.from_email.value = c.from_email || '';
+}
+
+$('#companyForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = {
+    company_id: company(),
+    name: fd.get('name')?.trim(),
+    country: fd.get('country')?.trim(),
+    locale: fd.get('locale') || 'en',
+    timezone: fd.get('timezone') || 'Europe/Luxembourg',
+    address: fd.get('address')?.trim(),
+    vat_no: fd.get('vat_no')?.trim(),
+    vat_default: Number(fd.get('vat_default') || 17),
+    inv_prefix: fd.get('inv_prefix')?.trim(),
+    iban: fd.get('iban')?.trim(),
+    bic: fd.get('bic')?.trim(),
+    from_email: fd.get('from_email')?.trim()
+  };
+  const out = await jpost('/company/save', body);
+  if(!out.ok) return alert(out.error || 'erro ao guardar empresa');
+  alert('Empresa guardada!');
+  loadCompany();
+});
+
+$('#btnCoClear').onclick = (e)=>{ e.preventDefault(); $('#companyForm').reset(); };
+
+// ===== Funcionários =====
+async function loadEmployees(){
+  const out = await jget(`/company/employees/list?company_id=${encodeURIComponent(company())}`);
+  const wrap = $('#empList'); wrap.innerHTML='';
+
+  if(!out.ok){ wrap.textContent = out.error || 'erro'; return; }
+
+  const t = el('table');
+  const head = el('thead'), hr = el('tr');
+  ['Nome','Email','Função','Criado'].forEach(h=>hr.append(el('th',{textContent:h})));
+  head.append(hr); t.append(head);
+  const body = el('tbody');
+
+  (out.employees||[]).forEach(emp=>{
+    const tr = el('tr');
+    tr.append(
+      el('td',{textContent:emp.name||''}),
+      el('td',{textContent:emp.email||''}),
+      el('td',{textContent:emp.role||''}),
+      el('td',{textContent:(emp.created_at||'').replace('T',' ').slice(0,16)})
+    );
+    body.append(tr);
+  });
+
+  t.append(body);
+  wrap.append(t);
+}
+
+$('#empForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = {
+    company_id: company(),
+    name: fd.get('name')?.trim(),
+    email: fd.get('email')?.trim(),
+    role: fd.get('role')?.trim()
+  };
+  const out = await jpost('/company/employees/save', body);
+  if(!out.ok) return alert(out.error || 'erro ao adicionar funcionário');
+  e.target.reset();
+  loadEmployees();
+});
+
+// ===== Command Center (IA) =====
+function chatAppend(text, who='me'){
+  const line = el('div',{className:who, innerHTML: text.replace(/\n/g,'<br>')});
+  $('#chat').append(line);
+  $('#chat').scrollTop = $('#chat').scrollHeight;
+}
+
+$('#run').onclick = async ()=>{
+  const cmd = $('#cmd').value.trim();
+  if(!cmd) return;
+  chatAppend(`Você: ${cmd}`, 'me');
+  $('#cmd').value='';
+
+  // context básico com funcionários (para a IA entender quem é quem)
+  let employees = [];
+  try {
+    const out = await jget(`/company/employees/list?company_id=${encodeURIComponent(company())}`);
+    if(out.ok) employees = out.employees || [];
+  } catch {}
+
+  // chamada à IA (endpoint genérico)
+  const body = {
+    company_id: company(),
+    command: cmd,
+    context: { employees } // backend pode usar para resolver "gestor Daniel"
+  };
+  const out = await jpost('/ai/command', body);
+
+  if(!out.ok){
+    chatAppend(`IA: ${out.error || 'erro ao processar comando'}`, 'ai');
+    return;
+  }
+
+  // espera algo como { message: "...", actions: [...] }
+  const msg = out.message || 'Comando registado.';
+  chatAppend(`IA: ${msg}`, 'ai');
+};
+
+// ===== Init =====
+(async function init(){
+  await loadCompany();
+  await loadEmployees();
+})();
+</script>
+</body></html>
