@@ -2,97 +2,326 @@
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>RH – Easycheck</title>
 <link rel="stylesheet" href="./style.css"/>
+<!-- Proteção + sessão -->
+<script src="lib/supabase.js"></script>
+<script src="guard.js"></script>
+<style>
+  .grid{display:grid;gap:14px}
+  @media(min-width:1100px){ .grid{grid-template-columns:1.1fr .9fr} }
+  .card{background:#121520;border:1px solid #22283a;border-radius:12px;padding:16px}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #1e2436;background:#0f1320;color:#e6e8ef}
+  label{display:block;margin:6px 0 4px}
+  button{padding:10px 14px;border-radius:10px;border:0;background:#0A84FF;color:#fff;cursor:pointer}
+  button.secondary{background:#1f2538}
+  button.danger{background:#a33}
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px solid #1a1f2d;padding:8px;text-align:left;vertical-align:top}
+  .muted{opacity:.85;font-size:.9em}
+  .right{text-align:right}
+  .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:#1f2538;margin:2px 4px 0 0;font-size:.85em}
+</style>
 </head><body>
-<header><a class="card" href="index.html">← Voltar</a></header>
-<main>
-  <h2>Recursos Humanos</h2>
+<header class="container" style="padding:12px 0"><a class="card" href="index.html">← Voltar</a></header>
 
-  <form id="crit">
-    <h3>Criar critérios</h3>
-    <label>Título</label><input name="title" value="Assistente Administrativo"/>
-    <div class="row">
-      <div style="flex:1"><label>Peso Experiência</label><input type="number" name="wE" value="30"/></div>
-      <div style="flex:1"><label>Peso Skills</label><input type="number" name="wS" value="40"/></div>
-      <div style="flex:1"><label>Peso Idiomas</label><input type="number" name="wL" value="20"/></div>
-      <div style="flex:1"><label>Peso Educação</label><input type="number" name="wEd" value="10"/></div>
-    </div>
-    <label>Skills obrigatórias (vírgula)</label><input name="skills" value="excel,accounting,sage"/>
-    <label>Idiomas obrigatórios (vírgula)</label><input name="langs" value="french,german"/>
-    <label>Termos proibidos (vírgula)</label><input name="forb" value="idade,foto,religião"/>
-    <button>Guardar critérios</button>
-  </form>
+<main class="container">
+  <h2>Recursos Humanos – Triagem de CV com IA</h2>
+  <p class="muted">Define critérios da vaga, regista candidatos (PDF/DOCX/texto) e executa ranking com IA (multi-idioma).</p>
 
-  <div class="toolbar"><button id="listCrit">Listar critérios</button></div>
-  <div id="critList"></div>
-  <hr/>
+  <section class="grid">
+    <!-- COLUNA ESQUERDA: CRITÉRIOS -->
+    <form id="critForm" class="card">
+      <h3 style="margin-top:0">Critérios da Vaga</h3>
 
-  <form id="up" enctype="multipart/form-data">
-    <h3>Upload de CV</h3>
-    <label>Nome</label><input name="name" value="João Silva"/>
-    <label>Email</label><input name="email" value="joao@example.com"/>
-    <input type="file" name="cv" accept=".pdf,.docx,.txt"/>
-    <button>Guardar candidato</button>
-  </form>
+      <label>Título da vaga</label>
+      <input name="title" placeholder="Ex.: Gestor de Projetos" required>
 
-  <div class="row">
-    <div style="flex:1"><label>Candidate ID</label><input id="candId" placeholder="preenche após upload"/></div>
-    <div style="flex:1"><label>Criteria ID</label><input id="critId" placeholder="seleciona da lista"/></div>
-  </div>
-  <div class="toolbar">
-    <button id="proc1">Processar 1 candidato</button>
-    <button id="rankAll">Rankear todos</button>
-  </div>
-  <pre id="out" class="small"></pre>
+      <div class="row">
+        <div style="flex:1;min-width:220px">
+          <label>Localização</label>
+          <input name="location" placeholder="Luxembourg / Remoto">
+        </div>
+        <div style="width:160px">
+          <label>Idioma</label>
+          <select name="locale">
+            <option value="pt">Português</option>
+            <option value="en" selected>English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </div>
+        <div style="width:180px">
+          <label>Experiência mínima (anos)</label>
+          <input type="number" name="min_years" value="1" min="0">
+        </div>
+      </div>
+
+      <label>Competências obrigatórias (separar por vírgula)</label>
+      <input name="must_skills" placeholder="Excel avançado, IFRS, gestão de equipa">
+
+      <label>Competências desejáveis</label>
+      <input name="nice_skills" placeholder="Power BI, VBA, SAP">
+
+      <label>Palavras-chave proibidas (ex.: “estágio”, “júnior”)</label>
+      <input name="ban_words" placeholder="junior, estágio">
+
+      <div class="row">
+        <div style="flex:1;min-width:180px">
+          <label>Peso experiência (0–100)</label>
+          <input type="number" name="w_exp" value="35" min="0" max="100">
+        </div>
+        <div style="flex:1;min-width:180px">
+          <label>Peso competências (0–100)</label>
+          <input type="number" name="w_skills" value="45" min="0" max="100">
+        </div>
+        <div style="flex:1;min-width:180px">
+          <label>Peso idioma (0–100)</label>
+          <input type="number" name="w_lang" value="15" min="0" max="100">
+        </div>
+        <div style="flex:1;min-width:180px">
+          <label>Peso formação (0–100)</label>
+          <input type="number" name="w_edu" value="5" min="0" max="100">
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:space-between;margin-top:10px">
+        <button type="reset" class="secondary" id="btnCritClear">Limpar</button>
+        <button type="submit">Guardar critérios</button>
+      </div>
+
+      <hr style="border:0;border-top:1px solid #1a1f2d;margin:16px 0">
+
+      <div class="row" style="align-items:center;gap:8px">
+        <label style="margin:0">Critério ativo:</label>
+        <select id="critSelect" style="flex:1;min-width:220px"></select>
+        <button type="button" id="btnReloadCrit" class="secondary">Recarregar</button>
+      </div>
+      <p class="muted">Seleciona aqui o critério que será usado no ranking.</p>
+    </form>
+
+    <!-- COLUNA DIREITA: CANDIDATOS + RANK -->
+    <section class="card">
+      <h3 style="margin-top:0">Candidatos</h3>
+
+      <!-- Upload de CV -->
+      <form id="cvUpload" class="card" style="margin:0 0 12px 0">
+        <h4 style="margin:0 0 8px 0">Adicionar candidato (PDF/DOC/DOCX)</h4>
+        <div class="row">
+          <div style="flex:1;min-width:200px"><label>Nome</label><input name="name" required></div>
+          <div style="flex:1;min-width:220px"><label>Email</label><input type="email" name="email"></div>
+          <div style="width:160px">
+            <label>Idioma</label>
+            <select name="locale">
+              <option value="pt">PT</option><option value="en" selected>EN</option>
+              <option value="fr">FR</option><option value="de">DE</option>
+            </select>
+          </div>
+          <div style="width:160px"><label>Anos exp.</label><input type="number" name="years" value="0" min="0"></div>
+        </div>
+        <label>Competências (vírgula)</label>
+        <input name="skills" placeholder="Excel, SAP, IFRS">
+        <label>Arquivo</label>
+        <input type="file" name="file" accept=".pdf,.doc,.docx" required>
+        <div class="row" style="justify-content:flex-end;margin-top:8px">
+          <button type="submit">Enviar CV</button>
+        </div>
+      </form>
+
+      <!-- Candidato por texto -->
+      <form id="cvText" class="card" style="margin:12px 0">
+        <h4 style="margin:0 0 8px 0">Adicionar candidato (colar texto do CV)</h4>
+        <div class="row">
+          <div style="flex:1;min-width:200px"><label>Nome</label><input name="name" required></div>
+          <div style="flex:1;min-width:220px"><label>Email</label><input type="email" name="email"></div>
+        </div>
+        <label>Texto do CV</label>
+        <textarea name="content" placeholder="Cole aqui o conteúdo do CV…" rows="8"></textarea>
+        <div class="row" style="justify-content:flex-end;margin-top:8px">
+          <button type="submit" class="secondary">Guardar candidato (texto)</button>
+        </div>
+      </form>
+
+      <!-- Lista + ranking -->
+      <div class="row" style="justify-content:space-between;align-items:center;margin:6px 0 0">
+        <h4 style="margin:0">Lista de candidatos</h4>
+        <div class="row" style="gap:8px">
+          <button id="btnRank" title="Ranquear com IA">Ranquear IA</button>
+          <button id="btnRefresh" class="secondary">Atualizar</button>
+        </div>
+      </div>
+      <div id="candList" style="margin-top:8px"></div>
+
+      <h4 style="margin:16px 0 6px">Resultado do ranking</h4>
+      <div id="rankOut" class="card" style="padding:12px"></div>
+    </section>
+  </section>
 </main>
 
 <script>
-const API='https://api.easycheckglobal.com/api';
-const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
-async function jget(p){return (await fetch(API+p)).json()}
-async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+// ===== Helpers baseados no guard.js =====
+const api = (p) => `${(window.API || 'https://api.easycheckglobal.com/api')}${p}`;
+const company = () => window.COMPANY || localStorage.getItem('ec.company_id') || '22871176-0909-4ba5-a642-5db70db2e35f';
+
+async function jget(p){ const r = await fetch(api(p)); return r.json(); }
+async function jpost(p,b){ 
+  const r = await fetch(api(p), {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(b)}); 
+  return r.json(); 
+}
+async function jform(p, formData){
+  const r = await fetch(api(p), { method:'POST', body: formData });
+  return r.json();
+}
 function $(s,r=document){return r.querySelector(s)}
 function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
-function tableFrom(items, cols){const t=el('table'),th=el('thead'),tr=el('tr');cols.forEach(c=>tr.append(el('th',{textContent:c.label})));th.append(tr);t.append(th);const tb=el('tbody');(items||[]).forEach(row=>{const tr=el('tr');cols.forEach(c=>{const td=el('td');td.textContent=typeof c.render=='function'?c.render(row):(row[c.key]??'');tr.append(td)});tb.append(tr)});t.append(tb);return t}
 
-$('#crit').addEventListener('submit', async e=>{
-  e.preventDefault();
-  const fd=new FormData(e.target);
-  const out=await jpost('/hr/criteria/save',{
-    company_id:COMPANY,title:fd.get('title'),
-    weight_experience:+fd.get('wE'),weight_skills:+fd.get('wS'),
-    weight_languages:+fd.get('wL'),weight_education:+fd.get('wEd'),
-    must_have_skills:(fd.get('skills')||'').split(',').map(s=>s.trim()).filter(Boolean),
-    must_have_languages:(fd.get('langs')||'').split(',').map(s=>s.trim()).filter(Boolean),
-    forbidden_terms:(fd.get('forb')||'').split(',').map(s=>s.trim()).filter(Boolean)
+// ===== Critérios =====
+async function loadCriteria(){
+  const out = await jget(`/hr/criteria/list?company_id=${encodeURIComponent(company())}`);
+  const sel = $('#critSelect');
+  sel.innerHTML = '';
+  if(!out.ok){ sel.append(el('option',{textContent:'(erro a carregar)'})); return; }
+  (out.criteria || []).forEach(c=>{
+    const o = el('option',{value:c.id,textContent:`${c.title} [${c.locale}]`});
+    sel.append(o);
   });
-  if(!out.ok) return alert(out.error||'erro');
-  alert('Critérios guardados!'); $('#critId').value=out.criteria.id;
-});
+}
 
-$('#listCrit').onclick=async ()=>{
-  const data=await jget(`/hr/criteria/list?company_id=${COMPANY}`);
-  if(!data.ok) return alert(data.error||'erro');
-  const cols=[{key:'id',label:'ID'},{key:'title',label:'Título'},{key:'weight_experience',label:'wE'},{key:'weight_skills',label:'wS'},{key:'weight_languages',label:'wL'},{key:'weight_education',label:'wEd'}];
-  $('#critList').innerHTML=''; $('#critList').append(tableFrom(data.criteria,cols));
-};
-
-$('#up').addEventListener('submit', async e=>{
+$('#critForm').addEventListener('submit', async e=>{
   e.preventDefault();
-  const fd=new FormData(e.target); fd.append('company_id',COMPANY);
-  const r=await fetch(`${API}/hr/upload`,{method:'POST',body:fd}); const out=await r.json();
-  if(!out.ok) return alert(out.error||'erro'); alert('Candidato guardado!'); $('#candId').value=out.candidate.id;
+  const fd = new FormData(e.target);
+  const body = {
+    company_id: company(),
+    title: fd.get('title')?.trim(),
+    location: fd.get('location')?.trim(),
+    locale: fd.get('locale') || 'en',
+    min_years: Number(fd.get('min_years') || 0),
+    must_skills: (fd.get('must_skills')||'').trim(),
+    nice_skills: (fd.get('nice_skills')||'').trim(),
+    ban_words: (fd.get('ban_words')||'').trim(),
+    weights: {
+      exp: Number(fd.get('w_exp')||0),
+      skills: Number(fd.get('w_skills')||0),
+      lang: Number(fd.get('w_lang')||0),
+      edu: Number(fd.get('w_edu')||0)
+    }
+  };
+  const out = await jpost('/hr/criteria/save', body);
+  if(!out.ok) return alert(out.error || 'erro ao guardar critérios');
+  alert('Critérios guardados!');
+  e.target.reset();
+  loadCriteria();
 });
 
-$('#proc1').onclick=async ()=>{
-  const candidate_id=$('#candId').value.trim(); const criteria_id=$('#critId').value.trim();
-  if(!candidate_id||!criteria_id) return alert('Preenche Candidate ID e Criteria ID.');
-  const out=await jpost('/hr/process-one',{company_id:COMPANY,candidate_id,criteria_id});
-  $('#out').textContent=JSON.stringify(out,null,2);
+$('#btnCritClear').onclick = (e)=>{ e.preventDefault(); $('#critForm').reset(); };
+$('#btnReloadCrit').onclick = loadCriteria;
+
+// ===== Candidatos =====
+async function loadCandidates(){
+  const out = await jget(`/hr/candidates/list?company_id=${encodeURIComponent(company())}`);
+  const wrap = $('#candList'); wrap.innerHTML='';
+  if(!out.ok){ wrap.textContent = out.error || 'erro'; return; }
+
+  const t = el('table');
+  const head = el('thead'), hr = el('tr');
+  ['#','Nome','Email','Idioma','Anos','Skills','Criado'].forEach(h=>hr.append(el('th',{textContent:h})));
+  head.append(hr); t.append(head);
+
+  const body = el('tbody');
+  (out.candidates||[]).forEach(c=>{
+    const tr = el('tr');
+    const cb = el('input',{type:'checkbox', value:c.id});
+    tr.append(
+      el('td',{},[cb]),
+      el('td',{textContent:c.name||''}),
+      el('td',{textContent:c.email||''}),
+      el('td',{textContent:c.locale||''}),
+      el('td',{textContent:c.years||0}),
+      el('td',{},[(c.skills||'').split(',').filter(Boolean).map(s=>el('span',{className:'pill',textContent:s.trim()}))]),
+      el('td',{textContent:(c.created_at||'').replace('T',' ').slice(0,16)})
+    );
+    body.append(tr);
+  });
+  t.append(body);
+  wrap.append(t);
+}
+
+$('#cvUpload').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  fd.append('company_id', company());
+  const out = await jform('/hr/candidates/upload', fd);
+  if(!out.ok) return alert(out.error || 'erro ao enviar CV');
+  alert('Candidato registado via arquivo!');
+  e.target.reset();
+  loadCandidates();
+});
+
+$('#cvText').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = {
+    company_id: company(),
+    name: fd.get('name')?.trim(),
+    email: fd.get('email')?.trim(),
+    content: fd.get('content') || ''
+  };
+  const out = await jpost('/hr/candidates/save', body);
+  if(!out.ok) return alert(out.error || 'erro ao guardar candidato (texto)');
+  alert('Candidato registado via texto!');
+  e.target.reset();
+  loadCandidates();
+});
+
+$('#btnRefresh').onclick = loadCandidates;
+
+// ===== Ranking =====
+$('#btnRank').onclick = async ()=>{
+  const critId = $('#critSelect').value;
+  if(!critId){ alert('Seleciona um critério da vaga.'); return; }
+
+  // candidatos selecionados (se nenhum selecionado, o backend pode usar todos)
+  const selected = Array.from(document.querySelectorAll('#candList tbody input[type=checkbox]:checked')).map(x=>x.value);
+
+  const body = {
+    company_id: company(),
+    criteria_id: critId,
+    candidate_ids: selected.length ? selected : undefined
+  };
+  const out = await jpost('/hr/rank', body);
+  const wrap = $('#rankOut'); wrap.innerHTML='';
+
+  if(!out.ok){ wrap.textContent = out.error || 'erro no ranking'; return; }
+
+  // Espera-se que venha algo como: { rankings: [{candidate:{...}, score:87, matches:{skills:['IFRS',...], lang:true, exp_years:5}, warnings:['...']}, ...] }
+  const t = el('table'); 
+  const head = el('thead'), hr = el('tr');
+  ['#','Candidato','Score','Exp.','Idioma','Skills','Observações'].forEach(h=>hr.append(el('th',{textContent:h})));
+  head.append(hr); t.append(head);
+  const bodyEl = el('tbody');
+
+  (out.rankings||[]).forEach((r,i)=>{
+    const c = r.candidate || {};
+    const tr = el('tr');
+    tr.append(
+      el('td',{textContent:String(i+1)}),
+      el('td',{textContent: c.name || c.email || c.id || ''}),
+      el('td',{textContent: `${Math.round(r.score||0)} / 100` }),
+      el('td',{textContent: String(r.matches?.exp_years ?? c.years ?? '-') }),
+      el('td',{textContent: r.matches?.lang===true ? 'OK' : (r.matches?.lang===false ? '—' : (c.locale||'')) }),
+      el('td',{},[(r.matches?.skills||[]).map(s=>el('span',{className:'pill',textContent:s}))]),
+      el('td',{textContent: (r.warnings||[]).join('; ') })
+    );
+    bodyEl.append(tr);
+  });
+
+  t.append(bodyEl);
+  wrap.append(t);
 };
-$('#rankAll').onclick=async ()=>{
-  const criteria_id=$('#critId').value.trim(); if(!criteria_id) return alert('Preenche Criteria ID.');
-  const out=await jpost('/hr/rank-all',{company_id:COMPANY,criteria_id});
-  $('#out').textContent=JSON.stringify(out,null,2);
-};
+
+// ===== Bootstrap da página =====
+(async function init(){
+  await loadCriteria();
+  await loadCandidates();
+})();
 </script>
 </body></html>
