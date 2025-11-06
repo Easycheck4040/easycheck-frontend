@@ -2,73 +2,197 @@
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Templates – Easycheck</title>
 <link rel="stylesheet" href="./style.css"/>
+<!-- Proteção + sessão -->
+<script src="lib/supabase.js"></script>
+<script src="guard.js"></script>
+<style>
+  .grid{display:grid;gap:12px}
+  @media(min-width:900px){ .grid{grid-template-columns:1fr 1fr} }
+  textarea{min-height:220px;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}
+  .muted{opacity:.8;font-size:.9em}
+  .actions{display:flex;gap:8px;flex-wrap:wrap}
+</style>
 </head><body>
 <header><a class="card" href="index.html">← Voltar</a></header>
-<main>
-  <h2>Templates</h2>
-  <form id="tform">
-    <div class="row">
-      <div style="flex:1"><label>Tipo</label>
-        <select name="type">
-          <option value="invoice">invoice</option><option value="credit_note">credit_note</option>
-          <option value="devis">devis</option><option value="po">po</option>
-          <option value="delivery_note">delivery_note</option><option value="reminder">reminder</option>
-          <option value="minutes">minutes</option>
-        </select>
-      </div>
-      <div style="flex:1"><label>Nome</label><input name="name" value="Invoice PT"/></div>
-      <div style="flex:1"><label>Locale</label><input name="locale" value="pt"/></div>
-    </div>
-    <label>HTML do template (usa {{chaves}})</label>
-<textarea name="html"><html><body style="font-family:Arial;padding:24px">
-<h2>Fatura {{invoice.number}}</h2>
-<p>Data: {{invoice.date}}</p>
-<p>Cliente: {{client.name}}</p>
-<p>Total: € {{invoice.total}}</p>
-<hr/><small>{{company.name}}</small>
-</body></html></textarea>
-    <button>Guardar template</button>
-  </form>
 
-  <div class="toolbar">
-    <button id="btnList">Listar</button>
-    <span class="small">Selecione um template e clique “Render PDF de teste”.</span>
-  </div>
-  <div id="list"></div>
+<main class="container">
+  <h2>Templates</h2>
+  <p class="notice small">Cria modelos para documentos: fatura, nota de crédito, devis, bon de commande, bilan, etc. Podes usar placeholders como <code>{{company.name}}</code>, <code>{{client.name}}</code>, <code>{{invoice.number}}</code>.</p>
+
+  <section class="grid">
+    <!-- Editor -->
+    <form id="tplForm" class="card" style="padding:16px">
+      <h3>Novo / Editar Template</h3>
+
+      <label>Nome</label>
+      <input required name="name" placeholder="Invoice A4 – LU"/>
+
+      <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
+        <div style="flex:1;min-width:220px">
+          <label>Tipo</label>
+          <select name="type">
+            <option value="invoice">Fatura</option>
+            <option value="credit_note">Nota de crédito</option>
+            <option value="devis">Devis (Orçamento)</option>
+            <option value="purchase_order">Bon de commande</option>
+            <option value="bilan">Bilan</option>
+            <option value="statement">Extrato</option>
+            <option value="generic" selected>Genérico</option>
+          </select>
+        </div>
+        <div style="width:220px">
+          <label>Formato</label>
+          <select name="format">
+            <option value="html">HTML (renderiza em PDF)</option>
+            <option value="docx">DOCX (servidor converte)</option>
+            <option value="text">Texto</option>
+          </select>
+        </div>
+        <div style="width:220px">
+          <label>Idioma</label>
+          <select name="locale">
+            <option value="pt">Português</option>
+            <option value="en" selected>English</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </div>
+      </div>
+
+      <label>Conteúdo (HTML / texto com placeholders)</label>
+      <textarea name="content" placeholder="&lt;html&gt;... {{client.name}} ... {{invoice.total}} ...&lt;/html&gt;"></textarea>
+
+      <div class="actions" style="margin-top:10px">
+        <button type="submit">Guardar template</button>
+        <button type="button" id="btnClear" class="secondary">Limpar</button>
+      </div>
+      <div class="muted">Dica: guarda versões por país/idioma (ex.: “Invoice A4 – LU – EN”).</div>
+    </form>
+
+    <!-- Lista -->
+    <div class="card" style="padding:16px">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">Lista de templates</h3>
+        <input id="search" placeholder="Pesquisar..." style="width:220px"/>
+      </div>
+      <div id="list" style="margin-top:10px"></div>
+    </div>
+  </section>
 </main>
 
 <script>
-const API='https://api.easycheckglobal.com/api';
-const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
-async function jget(p){return (await fetch(API+p)).json()}
-async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+// Helpers com base no guard.js
+const api = (p) => `${(window.API || 'https://api.easycheckglobal.com/api')}${p}`;
+const company = () => window.COMPANY || localStorage.getItem('ec.company_id') || '22871176-0909-4ba5-a642-5db70db2e35f';
+
+async function jget(p){ const r = await fetch(api(p)); return r.json(); }
+async function jpost(p,b){
+  const r = await fetch(api(p), {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(b)});
+  return r.json();
+}
 function $(s,r=document){return r.querySelector(s)}
 function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
-function tableFrom(items, cols){const t=el('table'),th=el('thead'),tr=el('tr');cols.forEach(c=>tr.append(el('th',{textContent:c.label})));th.append(tr);t.append(th);const tb=el('tbody');(items||[]).forEach(row=>{const tr=el('tr');cols.forEach(c=>{const td=el('td');td.textContent=typeof c.render=='function'?c.render(row):(row[c.key]??'');tr.append(td)});tb.append(tr)});t.append(tb);return t}
 
-let templates=[];
-async function list(){
-  const out=await jget(`/templates/list?company_id=${COMPANY}`); if(!out.ok) return alert(out.error||'erro');
-  templates=out.templates||[]; const d=$('#list'); d.innerHTML='';
-  if(templates.length===0){d.textContent='Sem templates.'; return;}
-  const cols=[{key:'name',label:'Nome'},{key:'type',label:'Tipo'},{key:'locale',label:'Locale'},{key:'id',label:'Ações',render:()=>''}];
-  const t=tableFrom(templates,cols);
-  Array.from(t.querySelectorAll('tbody tr')).forEach((tr,i)=>{
-    const btn=el('button',{textContent:'Render PDF de teste'}); btn.onclick=()=>renderTest(templates[i].id);
-    tr.lastChild.append(btn);
-  }); d.append(t);
+let itemsCache = [];
+
+function tableFrom(items){
+  const cols = [
+    { key:'name', label:'Nome' },
+    { key:'type', label:'Tipo' },
+    { key:'format', label:'Formato' },
+    { key:'locale', label:'Idioma' },
+    { key:'updated_at', label:'Atualizado' },
+    { key:'__actions', label:'Ações' },
+  ];
+  const t=el('table',{style:'width:100%;border-collapse:collapse'});
+  const th=el('thead'), tr=el('tr');
+  cols.forEach(c=>tr.append(el('th',{textContent:c.label,style:'text-align:left;border-bottom:1px solid #222;padding:10px'})));
+  th.append(tr); t.append(th);
+  const tb=el('tbody');
+
+  (items||[]).forEach(row=>{
+    const tr=el('tr');
+    cols.forEach(c=>{
+      const td=el('td',{style:'border-bottom:1px solid #161a24;padding:10px;vertical-align:top'});
+      if(c.key==='__actions'){
+        const edit=el('button',{textContent:'Editar',className:'secondary'});
+        edit.onclick=()=>fillForm(row);
+        td.append(edit);
+        const del=el('button',{textContent:'Apagar',style:'margin-left:8px',className:'danger'});
+        del.onclick=()=>removeTpl(row.id);
+        td.append(del);
+      } else {
+        td.textContent = row[c.key] ?? '';
+      }
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+  t.append(tb);
+  return t;
 }
-async function renderTest(template_id){
-  const out=await jpost('/templates/render',{company_id:COMPANY,template_id,
-    data_map:{'company.name':'Easycheck (Teste)','client.name':'Cliente Teste',
-      'invoice.number':'FAT-TESTE','invoice.date':new Date().toISOString().slice(0,10),'invoice.total':'123.45'}});
-  if(!out.ok) return alert(out.error||'erro'); window.open(out.pdf_url,'_blank');
+
+async function loadList(){
+  const out = await jget(`/templates/list?company_id=${encodeURIComponent(company())}`);
+  $('#list').innerHTML='';
+  if(!out.ok){ $('#list').textContent = out.error || 'erro'; return; }
+  itemsCache = out.templates || [];
+  $('#list').append(tableFrom(itemsCache));
 }
-$('#tform').addEventListener('submit',async e=>{
-  e.preventDefault(); const fd=new FormData(e.target);
-  const out=await jpost('/templates/save',{company_id:COMPANY,type:fd.get('type'),name:fd.get('name'),locale:fd.get('locale'),html:fd.get('html')});
-  if(!out.ok) return alert(out.error||'erro'); alert('Template guardado!'); list();
+
+function filterList(q){
+  q = (q||'').toLowerCase();
+  const filtered = !q ? itemsCache : itemsCache.filter(x =>
+    [x.name,x.type,x.format,x.locale].some(v => String(v||'').toLowerCase().includes(q))
+  );
+  $('#list').innerHTML='';
+  $('#list').append(tableFrom(filtered));
+}
+
+function fillForm(row){
+  const f = $('#tplForm');
+  f.dataset.id = row.id || '';
+  f.name.value   = row.name || '';
+  f.type.value   = row.type || 'generic';
+  f.format.value = row.format || 'html';
+  f.locale.value = row.locale || 'en';
+  f.content.value= row.content || '';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+$('#tplForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const f = e.target;
+  const fd = new FormData(f);
+  const body = {
+    company_id: company(),
+    id: f.dataset.id || undefined, // permite update se existir
+    name: fd.get('name')?.trim(),
+    type: fd.get('type') || 'generic',
+    format: fd.get('format') || 'html',
+    locale: fd.get('locale') || 'en',
+    content: fd.get('content') || ''
+  };
+  const out = await jpost('/templates/save', body);
+  if(!out.ok) return alert(out.error || 'erro');
+  alert('Template guardado!');
+  f.reset(); f.dataset.id='';
+  loadList();
 });
-$('#btnList').onclick=list; list();
+
+$('#btnClear').onclick = () => {
+  const f = $('#tplForm'); f.reset(); f.dataset.id='';
+};
+
+$('#search').addEventListener('input', (e)=>filterList(e.target.value));
+
+async function removeTpl(id){
+  if(!confirm('Apagar este template?')) return;
+  const out = await jpost('/templates/delete', { company_id: company(), id });
+  if(!out.ok) return alert(out.error || 'erro');
+  loadList();
+}
+
+loadList();
 </script>
 </body></html>
