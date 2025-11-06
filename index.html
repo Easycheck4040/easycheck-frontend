@@ -1,280 +1,79 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Easycheck - AI-powered back-office suite for European SMEs. Automate accounting, HR, marketing, and security." />
-  <meta name="keywords" content="SaaS, back-office, accounting, HR, AI assistant, SME, Europe" />
-  <meta property="og:title" content="Easycheck - All-in-One AI Back-Office Suite" />
-  <meta property="og:description" content="Automate your back-office. Accounting, HR, marketing, and security in one platform." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://easycheck.app" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Easycheck - AI Back-Office Suite" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://easycheck.app" />
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Easycheck — Suite de Back-Office com IA</title>
+<meta name="description" content="Automatiza contabilidade, RH, e-mails, reuniões e muito mais. Tudo com IA, em conformidade com GDPR.">
+<link rel="stylesheet" href="./style.css"/>
+<style>
+  body{background:#0f1115;color:#e6e8ef;font-family:Inter,system-ui,Arial;margin:0}
+  .container{max-width:1120px;margin:0 auto;padding:0 16px}
+  .nav{border-bottom:1px solid #1f2437}
+  .navbar{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+  .brand .logo{background:#0A84FF;color:#fff;border-radius:10px;padding:6px 10px}
+  .menu a{color:#9bbcff;margin:0 10px;text-decoration:none}
+  .menu a:hover{color:#cfe0ff}
+  .btn{display:inline-block;background:#0A84FF;border:0;color:#fff;border-radius:10px;padding:12px 16px;text-decoration:none;font-weight:600}
+  .btn.ghost{background:#1f2538}
+  .hero{padding:56px 0 28px}
+  .hero h1{font-size:36px;margin:0 0 10px}
+  .hero p{opacity:.9;max-width:720px}
+  .cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+  .grid{display:grid;gap:14px;margin:36px 0}
+  @media(min-width:900px){ .grid{grid-template-columns:repeat(3,1fr)} }
+  .card{background:#121520;border:1px solid #22283a;border-radius:12px;padding:16px}
+  footer{border-top:1px solid #1f2437;margin-top:32px}
+  .muted{opacity:.85}
+</style>
+</head><body>
 
-  <!-- Inter font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <title>Easycheck - AI-Powered Back-Office Suite for SMEs</title>
-  <link rel="stylesheet" href="style.css" />
-
-  <!-- Prefetch das páginas do app para abrir mais rápido -->
-  <link rel="prefetch" href="connections.html">
-  <link rel="prefetch" href="clients.html">
-  <link rel="prefetch" href="templates.html">
-  <link rel="prefetch" href="invoices.html">
-  <link rel="prefetch" href="hr.html">
-
-  <!-- Fallback leve para a secção de atalhos do app (não interfere com o teu CSS) -->
-  <style>
-    .app-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-    .app-card{display:block;padding:18px;border-radius:12px;background:#151923;color:#fff;text-decoration:none;border:1px solid #23283b}
-    .app-card:hover{border-color:#3a4a72}
-  </style>
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="navbar" role="navigation" aria-label="Main navigation">
-    <div class="navbar-container">
-      <div class="navbar-brand">
-        <a href="index.html" class="logo" aria-label="Easycheck home">
-          <span class="logo-icon">✓</span>
-          <span class="logo-text">Easycheck</span>
-        </a>
-      </div>
-
-      <div class="navbar-menu" id="navbarMenu">
-        <ul class="nav-list" role="menubar">
-          <li role="none"><a href="index.html" role="menuitem" data-i18n="nav.home">Home</a></li>
-          <li role="none"><a href="features.html" role="menuitem" data-i18n="nav.features">Features</a></li>
-          <li role="none"><a href="connections.html" role="menuitem">App</a></li>
-          <li role="none"><a href="pricing.html" role="menuitem" data-i18n="nav.pricing">Pricing</a></li>
-          <li role="none"><a href="contact.html" role="menuitem" data-i18n="nav.contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="navbar-actions">
-        <div class="language-switcher" role="group" aria-label="Language selection">
-          <button class="lang-btn active" data-lang="en" aria-label="English" title="English">EN</button>
-          <button class="lang-btn" data-lang="pt" aria-label="Português" title="Português">PT</button>
-          <button class="lang-btn" data-lang="fr" aria-label="Français" title="Français">FR</button>
-          <button class="lang-btn" data-lang="de" aria-label="Deutsch" title="Deutsch">DE</button>
-        </div>
-        <a href="connections.html" id="loginBtn" class="btn btn-secondary" data-i18n="nav.signin">Sign In</a>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
+<header class="nav">
+  <div class="container navbar">
+    <div class="brand">
+      <span class="logo">✓</span>
+      <span>Easycheck</span>
     </div>
-  </nav>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="features.html">Funcionalidades</a>
+      <a href="pricing.html">Preços</a>
+      <a href="login.html"><b>Entrar</b></a>
+    </nav>
+  </div>
+</header>
 
-  <!-- Main -->
-  <main id="main-content">
-    <!-- Hero Section -->
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="container">
-        <div class="hero-content">
-          <span class="badge" data-i18n="hero.badge">Trusted by 500+ European SMEs</span>
-          <h1 id="hero-title" data-i18n="hero.title">All-in-One AI Back-Office Suite</h1>
-          <p class="hero-subtitle" data-i18n="hero.subtitle">Automate accounting, HR, marketing, and security. Focus on growth, not paperwork.</p>
-          <div class="hero-ctas">
-            <button class="btn btn-primary btn-lg" id="ctaPrimary" data-i18n="cta.start">Start Free Trial</button>
-            <button class="btn btn-outline btn-lg" id="ctaSecondary" data-i18n="cta.demo">Watch Demo</button>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <div class="hero-placeholder">
-            <img src="/placeholder.svg?height=400&width=500" alt="Easycheck dashboard interface" loading="lazy">
-          </div>
-        </div>
-      </div>
-    </section>
+<main class="container">
+  <section class="hero">
+    <h1>Toda a tua operação administrativa, <br/>automatizada com IA.</h1>
+    <p>Contabilidade (faturas, notas de crédito, bilan, TVA), RH (triagem de CV com critérios), e-mails/reuniões, marketing, traduções e compliance — tudo num único painel, preparado para PME europeias.</p>
+    <div class="cta">
+      <a class="btn" href="login.html">Começar (entrar/criar conta)</a>
+      <a class="btn ghost" href="connections.html">Abrir App</a>
+    </div>
+    <p class="muted" style="margin-top:8px">Sem cartão para criar conta. Dados hospedados na UE.</p>
+  </section>
 
-    <!-- Trust Logos Section -->
-    <section class="trust-section" aria-labelledby="trust-title">
-      <div class="container">
-        <h2 id="trust-title" class="section-title" data-i18n="trust.title">Trusted by Leading European Companies</h2>
-        <div class="trust-logos">
-          <div class="trust-logo"><div class="logo-placeholder">COMPANY A</div></div>
-          <div class="trust-logo"><div class="logo-placeholder">COMPANY B</div></div>
-          <div class="trust-logo"><div class="logo-placeholder">COMPANY C</div></div>
-          <div class="trust-logo"><div class="logo-placeholder">COMPANY D</div></div>
-        </div>
-      </div>
-    </section>
+  <section class="grid">
+    <div class="card">
+      <h3>Contabilidade inteligente</h3>
+      <p>Gera faturas, notas de crédito, devis, bons de commande, bilans e relatórios em PDF/DOCX a partir de templates editáveis.</p>
+    </div>
+    <div class="card">
+      <h3>RH avançado com IA</h3>
+      <p>Define critérios, lê CVs (PDF/DOCX/texto) e ranqueia candidatos por experiência, skills, idioma e formação.</p>
+    </div>
+    <div class="card">
+      <h3>E-mails & reuniões</h3>
+      <p>Conecta SMTP, responde com IA, agenda reuniões e gera atas automáticas.</p>
+    </div>
+  </section>
+</main>
 
-    <!-- Features Overview -->
-    <section class="features-overview" aria-labelledby="features-title">
-      <div class="container">
-        <h2 id="features-title" class="section-title" data-i18n="features.overview">Why Choose Easycheck?</h2>
-        <div class="features-grid">
-          <article class="feature-card">
-            <div class="feature-icon">📊</div>
-            <h3 data-i18n="features.accounting">Accounting Automation</h3>
-            <p data-i18n="features.accounting.desc">Invoices, VAT, balance sheets, and more.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">🤖</div>
-            <h3 data-i18n="features.email_ai">Email & Meetings AI</h3>
-            <p data-i18n="features.email_ai.desc">AI assistant for your communications.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">👥</div>
-            <h3 data-i18n="features.hr">Advanced HR</h3>
-            <p data-i18n="features.hr.desc">CV parsing, multilingual ranking.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">📢</div>
-            <h3 data-i18n="features.marketing">Marketing Automation</h3>
-            <p data-i18n="features.marketing.desc">Campaign management simplified.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">🌍</div>
-            <h3 data-i18n="features.translations">Multi-Language Support</h3>
-            <p data-i18n="features.translations.desc">Reach customers globally.</p>
-          </article>
-          <article class="feature-card">
-            <div class="feature-icon">🔒</div>
-            <h3 data-i18n="features.security">GDPR Compliant & Secure</h3>
-            <p data-i18n="features.security.desc">Enterprise-grade security standards.</p>
-          </article>
-        </div>
-        <div class="text-center">
-          <a href="features.html" class="btn btn-outline" data-i18n="cta.learn_more">Learn More About Features</a>
-        </div>
-      </div>
-    </section>
+<footer>
+  <div class="container" style="padding:16px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <span class="muted">© 2025 Easycheck. Todos os direitos reservados.</span>
+    <span class="muted">GDPR-ready • Hospedado na UE</span>
+  </div>
+</footer>
 
-    <!-- Pricing Preview -->
-    <section class="pricing-preview" aria-labelledby="pricing-title">
-      <div class="container">
-        <h2 id="pricing-title" class="section-title" data-i18n="pricing.title">Simple, Transparent Pricing</h2>
-        <p class="section-subtitle" data-i18n="pricing.subtitle">Choose the plan that fits your business.</p>
-        <div class="pricing-cards-preview">
-          <div class="pricing-card">
-            <h3 data-i18n="pricing.starter">Starter</h3>
-            <div class="price"><span class="currency">€</span><span class="amount" data-i18n="pricing.starter.price">49</span><span class="period">/mo</span></div>
-            <ul class="feature-list">
-              <li>✓ <span data-i18n="pricing.up_to">Up to</span> 5 users</li>
-              <li>✓ <span data-i18n="pricing.basic_accounting">Basic accounting</span></li>
-              <li>✓ <span data-i18n="pricing.ai_assistant">AI assistant</span></li>
-            </ul>
-            <button class="btn btn-primary btn-full" id="pricingCTAs-starter" data-i18n="cta.get_started">Get Started</button>
-          </div>
-          <div class="pricing-card featured">
-            <span class="popular-badge" data-i18n="pricing.popular">Most Popular</span>
-            <h3 data-i18n="pricing.professional">Professional</h3>
-            <div class="price"><span class="currency">€</span><span class="amount" data-i18n="pricing.professional.price">149</span><span class="period">/mo</span></div>
-            <ul class="feature-list">
-              <li>✓ <span data-i18n="pricing.unlimited_users">Unlimited users</span></li>
-              <li>✓ <span data-i18n="pricing.full_accounting">Full accounting suite</span></li>
-              <li>✓ <span data-i18n="pricing.advanced_hr">Advanced HR tools</span></li>
-              <li>✓ <span data-i18n="pricing.marketing_automation">Marketing automation</span></li>
-            </ul>
-            <button class="btn btn-primary btn-full" id="pricingCTAs-pro" data-i18n="cta.get_started">Get Started</button>
-          </div>
-          <div class="pricing-card">
-            <h3 data-i18n="pricing.enterprise">Enterprise</h3>
-            <div class="price"><span data-i18n="pricing.custom">Custom</span></div>
-            <ul class="feature-list">
-              <li>✓ <span data-i18n="pricing.dedicated_support">Dedicated support</span></li>
-              <li>✓ <span data-i18n="pricing.api_access">API access</span></li>
-              <li>✓ <span data-i18n="pricing.sso">SSO integration</span></li>
-              <li>✓ <span data-i18n="pricing.custom_features">Custom features</span></li>
-            </ul>
-            <button class="btn btn-outline btn-full" id="pricingCTAs-enterprise" data-i18n="contact.contact_us">Contact Sales</button>
-          </div>
-        </div>
-        <div class="text-center">
-          <a href="pricing.html" class="btn btn-outline" data-i18n="cta.view_full_pricing">View Full Pricing</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- APP SHORTCUTS -->
-    <section class="container" aria-labelledby="app-tiles-title" style="padding:48px 0">
-      <h2 id="app-tiles-title" class="section-title">Open the App</h2>
-      <p class="section-subtitle">Start using Easycheck modules right now.</p>
-
-      <div class="app-grid" style="margin-top:24px">
-        <a class="app-card" href="connections.html">Conexões (SMTP/IA)</a>
-        <a class="app-card" href="clients.html">Clientes</a>
-        <a class="app-card" href="templates.html">Templates</a>
-        <a class="app-card" href="invoices.html">Faturas</a>
-        <a class="app-card" href="hr.html">Recursos Humanos</a>
-        <a class="app-card" href="pricing.html">Planos & Subscrição</a>
-      </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta-section" aria-labelledby="cta-section-title">
-      <div class="container">
-        <h2 id="cta-section-title" data-i18n="cta.ready">Ready to Transform Your Back-Office?</h2>
-        <p data-i18n="cta.ready.desc">Start your free trial today. No credit card required.</p>
-        <button class="btn btn-primary btn-lg" id="ctaStartFreeBottom" data-i18n="cta.start_free">Start Free Trial</button>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-      <div class="container">
-        <div class="footer-grid">
-          <div class="footer-column">
-            <h4 class="footer-title">Easycheck</h4>
-            <p data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
-          </div>
-          <div class="footer-column">
-            <h4 class="footer-title" data-i18n="footer.product">Product</h4>
-            <ul>
-              <li><a href="features.html" data-i18n="nav.features">Features</a></li>
-              <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
-              <li><a href="connections.html" data-i18n="footer.roadmap">Roadmap</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4 class="footer-title" data-i18n="footer.company">Company</h4>
-            <ul>
-              <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
-              <li><a href="#" data-i18n="footer.blog">Blog</a></li>
-              <li><a href="#" data-i18n="footer.careers">Careers</a></li>
-            </ul>
-          </div>
-          <div class="footer-column">
-            <h4 class="footer-title" data-i18n="footer.legal">Legal</h4>
-            <ul>
-              <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
-              <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
-              <li><a href="#" data-i18n="footer.cookies">Cookie Policy</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="footer-bottom">
-          <p data-i18n="footer.copyright">&copy; 2025 Easycheck. All rights reserved.</p>
-          <div class="footer-social">
-            <a href="#" aria-label="LinkedIn" class="social-link">in</a>
-            <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
-            <a href="#" aria-label="GitHub" class="social-link">gh</a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </main>
-
-  <!-- Liga CTAs aos módulos do app -->
-  <script>
-    const nav = (id, href) => { const el = document.getElementById(id); if (el) el.onclick = () => location.href = href; };
-    nav('ctaPrimary', 'connections.html');
-    nav('ctaSecondary', 'features.html');
-    nav('pricingCTAs-starter', 'pricing.html');
-    nav('pricingCTAs-pro', 'pricing.html');
-    nav('pricingCTAs-enterprise', 'contact.html');
-    nav('ctaStartFreeBottom', 'connections.html');
-  </script>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</body></html>
