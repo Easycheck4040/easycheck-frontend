@@ -1,313 +1,80 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Easycheck Pricing - Affordable plans for European SMEs. Starter, Professional, and Enterprise options.">
-    <meta name="keywords" content="pricing, plans, SaaS, back-office">
-    <meta property="og:title" content="Easycheck Pricing">
-    <meta property="og:description" content="Simple, transparent pricing plans for every business size.">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://easycheck.app/pricing">
-    <title>Pricing - Easycheck</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <a href="index.html" class="logo" aria-label="Easycheck home">
-                    <span class="logo-icon">✓</span>
-                    <span class="logo-text">Easycheck</span>
-                </a>
-            </div>
-            
-            <div class="navbar-menu" id="navbarMenu">
-                <ul class="nav-list" role="menubar">
-                    <li role="none"><a href="index.html" role="menuitem" data-i18n="nav.home">Home</a></li>
-                    <li role="none"><a href="features.html" role="menuitem" data-i18n="nav.features">Features</a></li>
-                    <li role="none"><a href="pricing.html" role="menuitem" aria-current="page" data-i18n="nav.pricing">Pricing</a></li>
-                    <li role="none"><a href="contact.html" role="menuitem" data-i18n="nav.contact">Contact</a></li>
-                </ul>
-            </div>
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Preços — Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+<style>
+  .price{font-size:38px;font-weight:800;margin:8px 0}
+  .period{font-size:.55em;font-weight:600;opacity:.85}
+  .features li{margin:6px 0}
+  .popular{border-color:#2b3860;box-shadow:0 0 0 2px #2b386060 inset}
+</style>
+</head><body>
 
-            <div class="navbar-actions">
-                <div class="language-switcher" role="group" aria-label="Language selection">
-                    <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
-                    <button class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
-                    <button class="lang-btn" data-lang="fr" aria-label="Français">FR</button>
-                    <button class="lang-btn" data-lang="de" aria-label="Deutsch">DE</button>
-                </div>
-                <a href="#" id="loginBtn" class="btn btn-secondary" data-i18n="nav.signin">Sign In</a>
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
+<header class="nav">
+  <div class="container navbar">
+    <div class="brand"><span class="logo">✓</span><span>Easycheck</span></div>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="features.html">Funcionalidades</a>
+      <a href="pricing.html"><b>Preços</b></a>
+      <a href="login.html">Entrar</a>
     </nav>
+  </div>
+</header>
 
-    <main id="main-content">
-        <!-- Header -->
-        <section class="page-header" aria-labelledby="page-title">
-            <div class="container">
-                <h1 id="page-title" data-i18n="pricing.page_title">Simple, Transparent Pricing</h1>
-                <p data-i18n="pricing.page_subtitle">Choose the plan that fits your business needs.</p>
-            </div>
-        </section>
+<main class="container" style="padding:24px 0">
+  <h1>Preços simples e transparentes</h1>
+  <p class="muted">Começa pequeno e escala quando precisares. Sem taxas escondidas.</p>
 
-        <!-- Billing Toggle -->
-        <section class="billing-toggle-section" aria-labelledby="billing-title">
-            <div class="container">
-                <h2 id="billing-title" class="visually-hidden">Billing period selection</h2>
-                <div class="billing-toggle">
-                    <span data-i18n="pricing.monthly">Monthly</span>
-                    <button class="toggle-switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle annual billing">
-                        <span class="toggle-slider"></span>
-                    </button>
-                    <span data-i18n="pricing.annual">Annual</span>
-                    <span class="savings-badge" id="savingsBadge" style="display:none;" data-i18n="pricing.save_20">Save 20%</span>
-                </div>
-            </div>
-        </section>
+  <section class="grid cols-3" style="margin-top:16px">
+    <div class="card">
+      <h3>Starter</h3>
+      <div class="price">€49 <span class="period">/ mês</span></div>
+      <ul class="features">
+        <li>Até 5 utilizadores</li>
+        <li>Contabilidade básica</li>
+        <li>IA Assistant (nível 1)</li>
+      </ul>
+      <a class="btn block" href="login.html">Começar</a>
+    </div>
 
-        <!-- Pricing Cards -->
-        <section class="pricing-section" aria-labelledby="pricing-cards-title">
-            <div class="container">
-                <h2 id="pricing-cards-title" class="visually-hidden">Pricing plans</h2>
-                <div class="pricing-cards">
-                    <!-- Starter -->
-                    <div class="pricing-card">
-                        <h3 data-i18n="pricing.starter">Starter</h3>
-                        <div class="price">
-                            <span class="currency">€</span>
-                            <span class="amount" data-monthly="49" data-annual="468">49</span>
-                            <span class="period">/mo</span>
-                        </div>
-                        <p class="price-description" data-i18n="pricing.perfect_for">Perfect for small teams</p>
-                        <ul class="feature-list">
-                            <li>✓ <span data-i18n="pricing.up_to">Up to</span> 5 users</li>
-                            <li>✓ <span data-i18n="pricing.basic_accounting">Basic accounting</span></li>
-                            <li>✓ <span data-i18n="pricing.ai_assistant">AI assistant</span></li>
-                            <li>✓ <span data-i18n="pricing.email_support">Email support</span></li>
-                            <li>✓ <span data-i18n="pricing.1gb_storage">1 GB storage</span></li>
-                        </ul>
-                        <button class="btn btn-outline btn-full" id="pricingCTAs-starter" data-i18n="cta.get_started">Get Started</button>
-                    </div>
+    <div class="card popular">
+      <h3>Professional</h3>
+      <div class="price">€149 <span class="period">/ mês</span></div>
+      <ul class="features">
+        <li>Utilizadores ilimitados</li>
+        <li>Suite completa de contabilidade</li>
+        <li>RH avançado (ranking IA)</li>
+        <li>Automação de e-mails/reuniões</li>
+      </ul>
+      <a class="btn block" href="login.html">Começar</a>
+    </div>
 
-                    <!-- Professional -->
-                    <div class="pricing-card featured">
-                        <span class="popular-badge" data-i18n="pricing.most_popular">Most Popular</span>
-                        <h3 data-i18n="pricing.professional">Professional</h3>
-                        <div class="price">
-                            <span class="currency">€</span>
-                            <span class="amount" data-monthly="149" data-annual="1428">149</span>
-                            <span class="period">/mo</span>
-                        </div>
-                        <p class="price-description" data-i18n="pricing.best_for">Best for growing teams</p>
-                        <ul class="feature-list">
-                            <li>✓ <span data-i18n="pricing.unlimited_users">Unlimited users</span></li>
-                            <li>✓ <span data-i18n="pricing.full_accounting">Full accounting suite</span></li>
-                            <li>✓ <span data-i18n="pricing.advanced_hr">Advanced HR tools</span></li>
-                            <li>✓ <span data-i18n="pricing.marketing_automation">Marketing automation</span></li>
-                            <li>✓ <span data-i18n="pricing.priority_support">Priority support</span></li>
-                            <li>✓ <span data-i18n="pricing.50gb_storage">50 GB storage</span></li>
-                            <li>✓ <span data-i18n="pricing.api_access">API access</span></li>
-                        </ul>
-                        <button class="btn btn-primary btn-full" id="pricingCTAs-pro" data-i18n="cta.get_started">Get Started</button>
-                    </div>
+    <div class="card">
+      <h3>Enterprise</h3>
+      <div class="price">Custom</div>
+      <ul class="features">
+        <li>SSO / SAML • SLA dedicado</li>
+        <li>Integrações especiais</li>
+        <li>On-prem / data residency</li>
+      </ul>
+      <a class="btn ghost block" href="login.html">Falar com vendas</a>
+    </div>
+  </section>
 
-                    <!-- Enterprise -->
-                    <div class="pricing-card">
-                        <h3 data-i18n="pricing.enterprise">Enterprise</h3>
-                        <div class="price">
-                            <span data-i18n="pricing.custom">Custom</span>
-                        </div>
-                        <p class="price-description" data-i18n="pricing.tailored">Tailored for enterprises</p>
-                        <ul class="feature-list">
-                            <li>✓ <span data-i18n="pricing.dedicated_support">Dedicated account manager</span></li>
-                            <li>✓ <span data-i18n="pricing.unlimited_api">Unlimited API access</span></li>
-                            <li>✓ <span data-i18n="pricing.sso">Single Sign-On (SSO)</span></li>
-                            <li>✓ <span data-i18n="pricing.custom_integrations">Custom integrations</span></li>
-                            <li>✓ <span data-i18n="pricing.sla">99.9% SLA</span></li>
-                            <li>✓ <span data-i18n="pricing.unlimited_storage">Unlimited storage</span></li>
-                            <li>✓ <span data-i18n="pricing.custom_features">Custom features</span></li>
-                        </ul>
-                        <button class="btn btn-outline btn-full" id="pricingCTAs-enterprise" data-i18n="contact.contact_us">Contact Sales</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div class="card" style="margin-top:18px">
+    <h3 style="margin-top:0">Pagamentos</h3>
+    <p class="muted">A subscrição será processada dentro da app com o teu login. Podes começar já e ativar o plano depois.</p>
+    <a class="btn" href="login.html">Entrar / Criar conta</a>
+  </div>
+</main>
 
-        <!-- Feature Comparison -->
-        <section class="comparison-section" aria-labelledby="comparison-title">
-            <div class="container">
-                <h2 id="comparison-title" data-i18n="pricing.feature_comparison">Feature Comparison</h2>
-                <div class="table-responsive">
-                    <table class="comparison-table" role="table">
-                        <thead>
-                            <tr>
-                                <th scope="col" data-i18n="pricing.feature">Feature</th>
-                                <th scope="col" data-i18n="pricing.starter">Starter</th>
-                                <th scope="col" data-i18n="pricing.professional">Professional</th>
-                                <th scope="col" data-i18n="pricing.enterprise">Enterprise</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td data-i18n="pricing.users">Users</td>
-                                <td>5</td>
-                                <td data-i18n="pricing.unlimited">Unlimited</td>
-                                <td data-i18n="pricing.unlimited">Unlimited</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="pricing.accounting">Accounting</td>
-                                <td>Basic</td>
-                                <td data-i18n="pricing.full">Full</td>
-                                <td data-i18n="pricing.full">Full</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="pricing.hr_tools">HR Tools</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="pricing.marketing">Marketing Automation</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="pricing.api">API Access</td>
-                                <td>—</td>
-                                <td>✓</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="pricing.sso">SSO Integration</td>
-                                <td>—</td>
-                                <td>—</td>
-                                <td>✓</td>
-                            </tr>
-                            <tr>
-                                <td data-i18n="pricing.support">Support</td>
-                                <td data-i18n="pricing.email">Email</td>
-                                <td data-i18n="pricing.priority">Priority</td>
-                                <td data-i18n="pricing.dedicated">Dedicated</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </section>
+<footer>
+  <div class="container" style="padding:16px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <span class="muted">© 2025 Easycheck.</span>
+    <span class="muted">GDPR-ready • Hospedado na UE</span>
+  </div>
+</footer>
 
-        <!-- FAQ Section -->
-        <section class="faq-section" aria-labelledby="faq-title">
-            <div class="container">
-                <h2 id="faq-title" data-i18n="pricing.faq">Frequently Asked Questions</h2>
-                <div class="faq-grid">
-                    <details class="faq-item">
-                        <summary class="faq-question" data-i18n="faq.free_trial">Do you offer a free trial?</summary>
-                        <div class="faq-answer">
-                            <p data-i18n="faq.free_trial_answer">Yes! All plans come with a 14-day free trial. No credit card required.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question" data-i18n="faq.cancellation">Can I cancel anytime?</summary>
-                        <div class="faq-answer">
-                            <p data-i18n="faq.cancellation_answer">Absolutely. Cancel your subscription at any time with no penalties.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question" data-i18n="faq.upgrade">Can I upgrade or downgrade?</summary>
-                        <div class="faq-answer">
-                            <p data-i18n="faq.upgrade_answer">Yes, you can change your plan at any time. Changes take effect on your next billing cycle.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question" data-i18n="faq.data_security">Is my data secure?</summary>
-                        <div class="faq-answer">
-                            <p data-i18n="faq.data_security_answer">All data is encrypted end-to-end and stored in GDPR-compliant servers across Europe.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question" data-i18n="faq.integrations">What integrations are available?</summary>
-                        <div class="faq-answer">
-                            <p data-i18n="faq.integrations_answer">We integrate with 100+ popular business tools. Custom integrations are available on Enterprise plans.</p>
-                        </div>
-                    </details>
-
-                    <details class="faq-item">
-                        <summary class="faq-question" data-i18n="faq.support_hours">What are your support hours?</summary>
-                        <div class="faq-answer">
-                            <p data-i18n="faq.support_hours_answer">Email support is available 24/7. Priority support includes phone support 9am-6pm CET Monday-Friday.</p>
-                        </div>
-                    </details>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section" aria-labelledby="cta-title">
-            <div class="container">
-                <h2 id="cta-title" data-i18n="cta.ready">Ready to Transform Your Back-Office?</h2>
-                <p data-i18n="cta.ready.desc">Start your free trial today. No credit card required.</p>
-                <button class="btn btn-primary btn-lg" data-i18n="cta.start_free">Start Free Trial</button>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer" role="contentinfo">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-column">
-                        <h4 class="footer-title">Easycheck</h4>
-                        <p data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-title" data-i18n="footer.product">Product</h4>
-                        <ul>
-                            <li><a href="features.html" data-i18n="nav.features">Features</a></li>
-                            <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
-                            <li><a href="#" data-i18n="footer.roadmap">Roadmap</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-title" data-i18n="footer.company">Company</h4>
-                        <ul>
-                            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
-                            <li><a href="#" data-i18n="footer.blog">Blog</a></li>
-                            <li><a href="#" data-i18n="footer.careers">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-title" data-i18n="footer.legal">Legal</h4>
-                        <ul>
-                            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
-                            <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
-                            <li><a href="#" data-i18n="footer.cookies">Cookie Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p data-i18n="footer.copyright">&copy; 2025 Easycheck. All rights reserved.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
-                        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
-                        <a href="#" aria-label="GitHub" class="social-link">gh</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</body></html>
