@@ -1,0 +1,74 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Templates – Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+</head><body>
+<header><a class="card" href="index.html">← Voltar</a></header>
+<main>
+  <h2>Templates</h2>
+  <form id="tform">
+    <div class="row">
+      <div style="flex:1"><label>Tipo</label>
+        <select name="type">
+          <option value="invoice">invoice</option><option value="credit_note">credit_note</option>
+          <option value="devis">devis</option><option value="po">po</option>
+          <option value="delivery_note">delivery_note</option><option value="reminder">reminder</option>
+          <option value="minutes">minutes</option>
+        </select>
+      </div>
+      <div style="flex:1"><label>Nome</label><input name="name" value="Invoice PT"/></div>
+      <div style="flex:1"><label>Locale</label><input name="locale" value="pt"/></div>
+    </div>
+    <label>HTML do template (usa {{chaves}})</label>
+<textarea name="html"><html><body style="font-family:Arial;padding:24px">
+<h2>Fatura {{invoice.number}}</h2>
+<p>Data: {{invoice.date}}</p>
+<p>Cliente: {{client.name}}</p>
+<p>Total: € {{invoice.total}}</p>
+<hr/><small>{{company.name}}</small>
+</body></html></textarea>
+    <button>Guardar template</button>
+  </form>
+
+  <div class="toolbar">
+    <button id="btnList">Listar</button>
+    <span class="small">Selecione um template e clique “Render PDF de teste”.</span>
+  </div>
+  <div id="list"></div>
+</main>
+
+<script>
+const API='https://api.easycheckglobal.com/api';
+const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
+async function jget(p){return (await fetch(API+p)).json()}
+async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+function $(s,r=document){return r.querySelector(s)}
+function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
+function tableFrom(items, cols){const t=el('table'),th=el('thead'),tr=el('tr');cols.forEach(c=>tr.append(el('th',{textContent:c.label})));th.append(tr);t.append(th);const tb=el('tbody');(items||[]).forEach(row=>{const tr=el('tr');cols.forEach(c=>{const td=el('td');td.textContent=typeof c.render=='function'?c.render(row):(row[c.key]??'');tr.append(td)});tb.append(tr)});t.append(tb);return t}
+
+let templates=[];
+async function list(){
+  const out=await jget(`/templates/list?company_id=${COMPANY}`); if(!out.ok) return alert(out.error||'erro');
+  templates=out.templates||[]; const d=$('#list'); d.innerHTML='';
+  if(templates.length===0){d.textContent='Sem templates.'; return;}
+  const cols=[{key:'name',label:'Nome'},{key:'type',label:'Tipo'},{key:'locale',label:'Locale'},{key:'id',label:'Ações',render:()=>''}];
+  const t=tableFrom(templates,cols);
+  Array.from(t.querySelectorAll('tbody tr')).forEach((tr,i)=>{
+    const btn=el('button',{textContent:'Render PDF de teste'}); btn.onclick=()=>renderTest(templates[i].id);
+    tr.lastChild.append(btn);
+  }); d.append(t);
+}
+async function renderTest(template_id){
+  const out=await jpost('/templates/render',{company_id:COMPANY,template_id,
+    data_map:{'company.name':'Easycheck (Teste)','client.name':'Cliente Teste',
+      'invoice.number':'FAT-TESTE','invoice.date':new Date().toISOString().slice(0,10),'invoice.total':'123.45'}});
+  if(!out.ok) return alert(out.error||'erro'); window.open(out.pdf_url,'_blank');
+}
+$('#tform').addEventListener('submit',async e=>{
+  e.preventDefault(); const fd=new FormData(e.target);
+  const out=await jpost('/templates/save',{company_id:COMPANY,type:fd.get('type'),name:fd.get('name'),locale:fd.get('locale'),html:fd.get('html')});
+  if(!out.ok) return alert(out.error||'erro'); alert('Template guardado!'); list();
+});
+$('#btnList').onclick=list; list();
+</script>
+</body></html>
