@@ -2,57 +2,133 @@
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Clientes – Easycheck</title>
 <link rel="stylesheet" href="./style.css"/>
+<!-- Proteção + sessão -->
+<script src="lib/supabase.js"></script>
+<script src="guard.js"></script>
 </head><body>
 <header><a class="card" href="index.html">← Voltar</a></header>
-<main>
+<main class="container">
   <h2>Clientes</h2>
-  <form id="cform">
-    <label>Nome</label><input required name="name" placeholder="Cliente Teste"/>
-    <label>Email</label><input name="email" placeholder="cliente@exemplo.com"/>
-    <label>VAT</label><input name="vat" placeholder="LU12345678"/>
-    <label>Endereço</label><input name="address" placeholder="Rua X, 123"/>
-    <div class="row">
-      <div style="flex:1"><label>País</label><input name="country" value="LU"/></div>
-      <div style="flex:1"><label>Idioma</label><input name="locale" value="pt"/></div>
-    </div>
-    <div class="row">
-      <div style="flex:1"><label>Dias de rapel</label><input name="dunning_days" type="number" value="15"/></div>
-      <div style="flex:1"><label>Rapel automático</label>
-        <select name="auto_dunning"><option value="false">Não</option><option value="true">Sim</option></select>
+  <p class="notice small">Cada cliente fica ligado apenas à tua empresa. Rapel automático pode ser ativado por cliente.</p>
+
+  <form id="clientForm" class="card" style="margin:12px 0;padding:16px">
+    <h3>Novo cliente</h3>
+    <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px">
+        <label>Nome</label>
+        <input required name="name" placeholder="João Teste"/>
+      </div>
+      <div style="flex:1;min-width:220px">
+        <label>Email</label>
+        <input required type="email" name="email" placeholder="joao@exemplo.com"/>
+      </div>
+      <div style="width:220px">
+        <label>VAT</label>
+        <input name="vat" placeholder="LU12345678"/>
       </div>
     </div>
-    <button>Guardar cliente</button>
+
+    <label>Endereço</label>
+    <input name="address" placeholder="Rua X, 123"/>
+
+    <div class="row" style="display:flex;gap:12px;flex-wrap:wrap">
+      <div style="flex:1;min-width:220px">
+        <label>País</label>
+        <input name="country" placeholder="Luxembourg"/>
+      </div>
+      <div style="width:220px">
+        <label>Idioma</label>
+        <select name="locale">
+          <option value="pt">Português</option>
+          <option value="en" selected>English</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </div>
+      <div style="width:220px">
+        <label>Dias de rapel</label>
+        <input type="number" name="dunning_days" value="15"/>
+      </div>
+      <div style="width:220px;display:flex;align-items:end;gap:8px">
+        <input type="checkbox" id="dunning_auto" name="dunning_auto"/>
+        <label for="dunning_auto" style="margin:0">Rapel automático</label>
+      </div>
+    </div>
+
+    <button type="submit" style="margin-top:10px">Guardar cliente</button>
   </form>
 
-  <h3>Lista</h3>
-  <div id="list"></div>
+  <h3 style="margin-top:18px">Lista de clientes</h3>
+  <div id="list" class="card" style="padding:0"></div>
 </main>
 
 <script>
-const API='https://api.easycheckglobal.com/api';
-const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
-async function jget(p){return (await fetch(API+p)).json()}
-async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+// Helpers baseados no guard.js
+const api = (p) => `${(window.API || 'https://api.easycheckglobal.com/api')}${p}`;
+const company = () => window.COMPANY || localStorage.getItem('ec.company_id') || '22871176-0909-4ba5-a642-5db70db2e35f';
+
+async function jget(p){ const r = await fetch(api(p)); return r.json(); }
+async function jpost(p,b){ 
+  const r = await fetch(api(p), {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(b)}); 
+  return r.json(); 
+}
 function $(s,r=document){return r.querySelector(s)}
 function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
-function tableFrom(items, cols){const t=el('table'),th=el('thead'),tr=el('tr');cols.forEach(c=>tr.append(el('th',{textContent:c.label})));th.append(tr);t.append(th);const tb=el('tbody');(items||[]).forEach(row=>{const tr=el('tr');cols.forEach(c=>{const td=el('td');td.textContent=typeof c.render=='function'?c.render(row):(row[c.key]??'');tr.append(td)});tb.append(tr)});t.append(tb);return t}
 
-async function load(){
-  const out=await jget(`/clients/list?company_id=${COMPANY}`);
-  if(!out.ok) return $('#list').textContent=out.error||'erro';
-  const cols=[{key:'name',label:'Nome'},{key:'email',label:'Email'},{key:'vat',label:'VAT'},{key:'dunning_days',label:'Rapel (dias)'},{key:'auto_dunning',label:'Auto?'}];
-  $('#list').innerHTML=''; $('#list').append(tableFrom(out.clients,cols));
-}
-$('#cform').addEventListener('submit', async e=>{
-  e.preventDefault();
-  const fd=new FormData(e.target);
-  const out=await jpost('/clients/create',{
-    company_id:COMPANY,name:fd.get('name'),email:fd.get('email'),vat:fd.get('vat'),address:fd.get('address'),
-    country:fd.get('country')||'LU',locale:fd.get('locale')||'pt',
-    dunning_days:Number(fd.get('dunning_days')||15),auto_dunning:fd.get('auto_dunning')==='true'
+function tableFrom(items, cols){
+  const t=el('table',{style:'width:100%;border-collapse:collapse'});
+  const th=el('thead'), tr=el('tr');
+  cols.forEach(c=>tr.append(el('th',{textContent:c.label,style:'text-align:left;border-bottom:1px solid #222;padding:10px'})));
+  th.append(tr); t.append(th);
+  const tb=el('tbody');
+  (items||[]).forEach(row=>{
+    const tr=el('tr');
+    cols.forEach(c=>{
+      const td=el('td',{style:'border-bottom:1px solid #161a24;padding:10px'});
+      td.textContent = typeof c.render=='function' ? c.render(row) : (row[c.key]??'');
+      tr.append(td);
+    });
+    tb.append(tr);
   });
-  if(!out.ok) return alert(out.error||'erro'); alert('Cliente criado!'); e.target.reset(); load();
+  t.append(tb);
+  return t;
+}
+
+async function loadList(){
+  const out = await jget(`/clients/list?company_id=${encodeURIComponent(company())}`);
+  $('#list').innerHTML='';
+  if(!out.ok){ $('#list').textContent = out.error||'erro'; return;}
+  const cols = [
+    { key:'name',   label:'Nome' },
+    { key:'email',  label:'Email' },
+    { key:'vat',    label:'VAT' },
+    { key:'locale', label:'Idioma' },
+    { key:'created_at', label:'Criado' }
+  ];
+  $('#list').append(tableFrom(out.clients, cols));
+}
+
+$('#clientForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const body = {
+    company_id: company(),
+    name: fd.get('name')?.trim(),
+    email: fd.get('email')?.trim(),
+    vat: fd.get('vat')?.trim(),
+    address: fd.get('address')?.trim(),
+    country: fd.get('country')?.trim(),
+    locale: fd.get('locale') || 'en',
+    dunning_days: Number(fd.get('dunning_days') || 15),
+    dunning_auto: !!fd.get('dunning_auto')
+  };
+  const out = await jpost('/clients/save', body);
+  if(!out.ok) return alert(out.error||'erro');
+  alert('Cliente guardado!');
+  e.target.reset();
+  loadList();
 });
-load();
+
+loadList();
 </script>
 </body></html>
