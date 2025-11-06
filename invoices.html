@@ -2,72 +2,295 @@
 <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Faturas – Easycheck</title>
 <link rel="stylesheet" href="./style.css"/>
+<!-- Proteção + sessão -->
+<script src="lib/supabase.js"></script>
+<script src="guard.js"></script>
+<style>
+  .grid{display:grid;gap:12px}
+  @media(min-width:1000px){ .grid{grid-template-columns:1.1fr .9fr} }
+  .card{background:#121520;border:1px solid #22283a;border-radius:12px;padding:16px}
+  table{width:100%;border-collapse:collapse}
+  th,td{border-bottom:1px solid #1a1f2d;padding:8px;text-align:left}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .muted{opacity:.85;font-size:.9em}
+  input,select,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #1e2436;background:#0f1320;color:#e6e8ef}
+  button{padding:10px 14px;border-radius:10px;border:0;background:#0A84FF;color:#fff;cursor:pointer}
+  button.secondary{background:#1f2538}
+  button.danger{background:#a33}
+  .right{text-align:right}
+</style>
 </head><body>
-<header><a class="card" href="index.html">← Voltar</a></header>
-<main>
+<header class="container" style="padding:12px 0"><a class="card" href="index.html">← Voltar</a></header>
+
+<main class="container">
   <h2>Faturas</h2>
-  <form id="iform">
-    <div class="row">
-      <div style="flex:1">
-        <label>Cliente</label><select id="client"></select>
-      </div>
-      <div style="flex:1">
-        <label>Vencimento</label><input name="due" type="date"/>
-      </div>
-    </div>
-    <h3>Itens</h3>
-    <div id="items"></div>
-    <div class="toolbar"><button type="button" id="addItem">+ Adicionar item</button></div>
-    <button>Criar fatura (rascunho)</button>
-  </form>
+  <p class="muted">Cria faturas com itens, IVA e vencimento. (Depois ligamos templates e PDF.)</p>
 
-  <div id="result"></div>
+  <section class="grid">
+    <!-- Criar/editar fatura -->
+    <form id="invForm" class="card">
+      <h3 style="margin-top:0">Nova fatura</h3>
 
-  <h3>Enviar por e-mail</h3>
-  <div class="notice small">Precisas ter <a href="connections.html">uma conexão SMTP</a> e um <a href="templates.html">template</a> do tipo <b>invoice</b>.</div>
-  <div class="row">
-    <div style="flex:1"><label>Conexão SMTP</label><select id="conn"></select></div>
-    <div style="flex:1"><label>Template</label><select id="tpl"></select></div>
-  </div>
-  <button id="sendBtn" disabled>Enviar fatura por e-mail</button>
+      <div class="row">
+        <div style="flex:1;min-width:220px">
+          <label>Cliente (nome)</label>
+          <input name="client_name" placeholder="Empresa XYZ" required>
+        </div>
+        <div style="flex:1;min-width:220px">
+          <label>Email do cliente</label>
+          <input type="email" name="client_email" placeholder="contato@empresa.com">
+        </div>
+      </div>
+
+      <div class="row">
+        <div style="width:180px">
+          <label>Moeda</label>
+          <select name="currency">
+            <option value="EUR" selected>EUR</option>
+            <option value="USD">USD</option>
+            <option value="GBP">GBP</option>
+          </select>
+        </div>
+        <div style="width:220px">
+          <label>Data de vencimento</label>
+          <input type="date" name="due_date" required>
+        </div>
+        <div style="width:180px">
+          <label>IVA (%)</label>
+          <input type="number" name="vat_rate" value="17" step="0.01">
+        </div>
+      </div>
+
+      <h4>Itens</h4>
+      <table id="itemsTbl">
+        <thead>
+          <tr>
+            <th style="width:45%">Descrição</th>
+            <th style="width:15%">Qtd</th>
+            <th style="width:20%">Preço</th>
+            <th style="width:15%" class="right">Total</th>
+            <th style="width:5%"></th>
+          </tr>
+        </thead>
+        <tbody id="itemsBody"></tbody>
+        <tfoot>
+          <tr><td colspan="5"><button type="button" id="addItem" class="secondary">+ Adicionar item</button></td></tr>
+        </tfoot>
+      </table>
+
+      <div class="row">
+        <div style="flex:1">
+          <label>Notas (opcional)</label>
+          <textarea name="notes" placeholder="Observações para o cliente..."></textarea>
+        </div>
+        <div style="width:320px">
+          <div class="card" style="padding:12px">
+            <div class="row" style="justify-content:space-between">
+              <div>Subtotal</div><div id="subtotal" class="right">€ 0,00</div>
+            </div>
+            <div class="row" style="justify-content:space-between">
+              <div>IVA</div><div id="vat" class="right">€ 0,00</div>
+            </div>
+            <div class="row" style="justify-content:space-between;font-weight:700">
+              <div>Total</div><div id="grand" class="right">€ 0,00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row" style="justify-content:space-between;margin-top:10px">
+        <div style="display:flex;gap:8px;align-items:center">
+          <input type="checkbox" id="send_email" name="send_email">
+          <label for="send_email">Enviar fatura por e-mail (quando ligado ao SMTP)</label>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button type="reset" class="secondary" id="btnClear">Limpar</button>
+          <button type="submit">Guardar fatura</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Lista -->
+    <section class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <h3 style="margin:0">Faturas recentes</h3>
+        <input id="search" placeholder="Pesquisar..." style="width:240px">
+      </div>
+      <div id="list" style="margin-top:10px"></div>
+    </section>
+  </section>
 </main>
 
 <script>
-const API='https://api.easycheckglobal.com/api';
-const COMPANY='22871176-0909-4ba5-a642-5db70db2e35f';
-async function jget(p){return (await fetch(API+p)).json()}
-async function jpost(p,b){return (await fetch(API+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)})).json()}
+// Helpers baseados no guard.js
+const api = (p) => `${(window.API || 'https://api.easycheckglobal.com/api')}${p}`;
+const company = () => window.COMPANY || localStorage.getItem('ec.company_id') || '22871176-0909-4ba5-a642-5db70db2e35f';
+
+async function jget(p){ const r = await fetch(api(p)); return r.json(); }
+async function jpost(p,b){ 
+  const r = await fetch(api(p), {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(b)}); 
+  return r.json(); 
+}
 function $(s,r=document){return r.querySelector(s)}
 function el(t,p={},c=[]){const e=document.createElement(t);Object.assign(e,p);(c||[]).forEach(x=>e.append(x));return e}
+const fmt = (v,cur='EUR') => new Intl.NumberFormat('pt-PT',{style:'currency',currency:cur}).format(Number(v||0));
 
-let INVOICE_ID=null;
-function addItemRow(d={}){const w=el('div',{className:'row'});
-  w.append(el('input',{placeholder:'Descrição',value:d.description||''}),
-           el('input',{type:'number',placeholder:'Qtd',value:d.qty||1,min:'0'}),
-           el('input',{type:'number',placeholder:'Preço',value:d.unit_price||0,step:'0.01',min:'0'}),
-           el('input',{type:'number',placeholder:'VAT %',value:d.vat_rate||17,step:'0.01',min:'0'}));
-  $('#items').append(w);
+function addItemRow(initial={desc:'', qty:1, price:0}){
+  const tr = el('tr');
+  const desc = el('input',{value:initial.desc, placeholder:'Descrição'});
+  const qty  = el('input',{type:'number',value:initial.qty,step:'1',min:'0'});
+  const price= el('input',{type:'number',value:initial.price,step:'0.01',min:'0'});
+  const total= el('div',{className:'right',textContent:fmt(0)});
+  const rm   = el('button',{className:'danger',type:'button',textContent:'×'});
+
+  function recalcRow(){
+    const t = Number(qty.value||0) * Number(price.value||0);
+    total.textContent = fmt(t, $('#invForm [name=currency]').value || 'EUR');
+    recalcAll();
+  }
+  [qty,price].forEach(i=>i.addEventListener('input', recalcRow));
+  desc.addEventListener('input', ()=>{ /* só para manter */ });
+
+  rm.onclick = ()=>{ tr.remove(); recalcAll(); }
+
+  tr.append(
+    el('td',{},[desc]),
+    el('td',{},[qty]),
+    el('td',{},[price]),
+    el('td',{},[total]),
+    el('td',{},[rm]),
+  );
+  $('#itemsBody').append(tr);
+  recalcRow();
 }
-$('#addItem').onclick=()=>addItemRow();
 
-async function loadClients(){const d=await jget(`/clients/list?company_id=${COMPANY}`);const s=$('#client');s.innerHTML='';(d.clients||[]).forEach(c=>s.append(el('option',{value:c.id,textContent:`${c.name} (${c.email||'-'})`})))}
-async function loadSMTP(){const d=await jget(`/connections/list?company_id=${COMPANY}`);const s=$('#conn');s.innerHTML='';(d.connections||[]).filter(x=>x.type==='email_smtp').forEach(c=>s.append(el('option',{value:c.id,textContent:c.display_name||c.id})));}
-async function loadTpl(){const d=await jget(`/templates/list?company_id=${COMPANY}&type=invoice`);const s=$('#tpl');s.innerHTML='';(d.templates||[]).forEach(t=>s.append(el('option',{value:t.id,textContent:`${t.name} (${t.locale})`})))}
+function collectItems(){
+  const rows = Array.from(document.querySelectorAll('#itemsBody tr'));
+  return rows.map(tr=>{
+    const [desc,qty,price] = tr.querySelectorAll('input');
+    return {
+      description: (desc.value||'').trim(),
+      quantity: Number(qty.value||0),
+      unit_price: Number(price.value||0),
+      line_total: Number(qty.value||0) * Number(price.value||0)
+    };
+  }).filter(x=>x.description || x.quantity || x.unit_price);
+}
 
-$('#iform').addEventListener('submit',async e=>{
+function recalcAll(){
+  const cur = $('#invForm [name=currency]').value || 'EUR';
+  const items = collectItems();
+  const subtotal = items.reduce((s,x)=>s+(x.line_total||0),0);
+  const vatRate  = Number($('#invForm [name=vat_rate]').value||0)/100;
+  const vat = subtotal * vatRate;
+  const grand = subtotal + vat;
+  $('#subtotal').textContent = fmt(subtotal, cur);
+  $('#vat').textContent      = fmt(vat, cur);
+  $('#grand').textContent    = fmt(grand, cur);
+}
+
+let invoicesCache = [];
+
+function tableFrom(items){
+  const cols = [
+    {key:'number', label:'Nº'},
+    {key:'client_name', label:'Cliente'},
+    {key:'currency', label:'Moeda'},
+    {key:'total', label:'Total'},
+    {key:'status', label:'Estado'},
+    {key:'due_date', label:'Vence em'},
+  ];
+  const t=el('table'); const th=el('thead'), tr=el('tr');
+  cols.forEach(c=>tr.append(el('th',{textContent:c.label})));
+  th.append(tr); t.append(th);
+  const tb=el('tbody');
+  (items||[]).forEach(row=>{
+    const tr=el('tr');
+    cols.forEach(c=>{
+      const td=el('td');
+      let v = row[c.key];
+      if(c.key==='total') v = fmt(v, row.currency||'EUR');
+      td.textContent = v ?? '';
+      tr.append(td);
+    });
+    tb.append(tr);
+  });
+  t.append(tb);
+  return t;
+}
+
+async function loadList(){
+  const out = await jget(`/invoices/list?company_id=${encodeURIComponent(company())}`);
+  $('#list').innerHTML='';
+  if(!out.ok){ $('#list').textContent = out.error||'erro'; return; }
+  invoicesCache = out.invoices || [];
+  $('#list').append(tableFrom(invoicesCache));
+}
+
+$('#addItem').onclick = ()=> addItemRow({qty:1,price:0});
+$('#invForm [name=vat_rate]').addEventListener('input', recalcAll);
+$('#invForm [name=currency]').addEventListener('change', recalcAll);
+
+// botão limpar
+$('#btnClear').onclick = (e)=>{
   e.preventDefault();
-  const items=Array.from($('#items').children).map(r=>{const [d,q,p,v]=r.querySelectorAll('input');return{description:d.value,qty:+q.value||1,unit_price:+p.value||0,vat_rate:+v.value||0}}).filter(it=>it.description);
-  if(items.length===0) return alert('Adiciona pelo menos um item.');
-  const due=$('input[name="due"]').value||new Date(Date.now()+7*864e5).toISOString().slice(0,10);
-  const out=await jpost('/invoices/create',{company_id:COMPANY,client_id:$('#client').value,due_date:due,items});
-  if(!out.ok) return alert(out.error||'erro');
-  INVOICE_ID=out.invoice.id; $('#result').innerHTML=`<div class="badge">Rascunho criado</div> Nº ${out.invoice.number} — Total € ${out.invoice.total}`; $('#sendBtn').disabled=false;
-});
-$('#sendBtn').onclick=async ()=>{
-  if(!INVOICE_ID) return alert('Cria a fatura primeiro.');
-  const out=await jpost('/invoices/send',{company_id:COMPANY,invoice_id:INVOICE_ID,template_id:$('#tpl').value,connection_id:$('#conn').value});
-  if(!out.ok) return alert(out.error||'erro'); alert('Enviado!');
+  $('#invForm').reset();
+  $('#itemsBody').innerHTML='';
+  addItemRow({qty:1,price:0});
+  recalcAll();
 };
-addItemRow(); loadClients(); loadSMTP(); loadTpl();
+
+// submit
+$('#invForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const f = e.target;
+  const fd = new FormData(f);
+
+  const items = collectItems();
+  if(items.length===0){ alert('Adiciona pelo menos 1 item.'); return; }
+
+  const subtotal = items.reduce((s,x)=>s+(x.line_total||0),0);
+  const vatRate  = Number(fd.get('vat_rate')||0)/100;
+  const vat      = subtotal * vatRate;
+  const total    = subtotal + vat;
+
+  const body = {
+    company_id: company(),
+    client_name : (fd.get('client_name')||'').trim(),
+    client_email: (fd.get('client_email')||'').trim(),
+    currency    : fd.get('currency') || 'EUR',
+    due_date    : fd.get('due_date'),
+    vat_rate    : Number(fd.get('vat_rate')||0),
+    notes       : (fd.get('notes')||'').trim(),
+    items,
+    subtotal, vat, total,
+    send_email  : !!fd.get('send_email')
+  };
+
+  const out = await jpost('/invoices/save', body);
+  if(!out.ok) return alert(out.error || 'erro ao guardar fatura');
+
+  alert('Fatura guardada!');
+  f.reset();
+  $('#itemsBody').innerHTML='';
+  addItemRow({qty:1,price:0});
+  recalcAll();
+  loadList();
+});
+
+(function init(){
+  addItemRow({qty:1,price:0});
+  recalcAll();
+  loadList();
+
+  // pesquisa local
+  $('#search').addEventListener('input', (e)=>{
+    const q = e.target.value.toLowerCase();
+    const filtered = !q ? invoicesCache : invoicesCache.filter(x =>
+      [x.number,x.client_name,x.status,x.currency].some(v => String(v||'').toLowerCase().includes(q))
+    );
+    const wrap = $('#list'); wrap.innerHTML=''; wrap.append(tableFrom(filtered));
+  });
+})();
 </script>
 </body></html>
