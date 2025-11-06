@@ -1,283 +1,91 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Easycheck Features - AI-powered back-office suite with accounting, HR, marketing automation, and security.">
-    <meta name="keywords" content="accounting, HR, AI, marketing automation, GDPR, security">
-    <meta property="og:title" content="Easycheck Features">
-    <meta property="og:description" content="Discover all the features of Easycheck's all-in-one back-office suite.">
-    <meta property="og:type" content="website">
-    <link rel="canonical" href="https://easycheck.app/features">
-    <!-- Added Inter font from Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <title>Features - Easycheck</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Navigation -->
-    <nav class="navbar" role="navigation" aria-label="Main navigation">
-        <div class="navbar-container">
-            <div class="navbar-brand">
-                <a href="index.html" class="logo" aria-label="Easycheck home">
-                    <span class="logo-icon">✓</span>
-                    <span class="logo-text">Easycheck</span>
-                </a>
-            </div>
-            
-            <div class="navbar-menu" id="navbarMenu">
-                <ul class="nav-list" role="menubar">
-                    <li role="none"><a href="index.html" role="menuitem" data-i18n="nav.home">Home</a></li>
-                    <li role="none"><a href="features.html" role="menuitem" aria-current="page" data-i18n="nav.features">Features</a></li>
-                    <li role="none"><a href="pricing.html" role="menuitem" data-i18n="nav.pricing">Pricing</a></li>
-                    <li role="none"><a href="contact.html" role="menuitem" data-i18n="nav.contact">Contact</a></li>
-                </ul>
-            </div>
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Funcionalidades — Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+</head><body>
 
-            <div class="navbar-actions">
-                <div class="language-switcher" role="group" aria-label="Language selection">
-                    <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
-                    <button class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
-                    <button class="lang-btn" data-lang="fr" aria-label="Français">FR</button>
-                    <button class="lang-btn" data-lang="de" aria-label="Deutsch">DE</button>
-                </div>
-                <a href="#" id="loginBtn" class="btn btn-secondary" data-i18n="nav.signin">Sign In</a>
-                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </div>
+<header class="nav">
+  <div class="container navbar">
+    <div class="brand"><span class="logo">✓</span><span>Easycheck</span></div>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="features.html"><b>Funcionalidades</b></a>
+      <a href="pricing.html">Preços</a>
+      <a href="login.html">Entrar</a>
     </nav>
+  </div>
+</header>
 
-    <main id="main-content">
-        <!-- Header -->
-        <section class="page-header" aria-labelledby="page-title">
-            <div class="container">
-                <h1 id="page-title" data-i18n="features.page_title">Powerful Features for Modern SMEs</h1>
-                <p data-i18n="features.page_subtitle">Everything you need to manage your back-office, all in one place.</p>
-            </div>
-        </section>
+<main class="container" style="padding:24px 0">
+  <h1>Funcionalidades</h1>
+  <p class="muted">Suite de back-office com IA para PME europeias: contabilidade, RH, e-mails/reuniões, marketing, traduções e compliance.</p>
 
-        <!-- Accounting Feature -->
-        <section class="feature-section" aria-labelledby="accounting-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-text">
-                        <h2 id="accounting-title" data-i18n="features.accounting">Accounting Automation</h2>
-                        <p data-i18n="features.accounting.long">Streamline your financial management with our comprehensive accounting suite.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.invoices">✓ Invoices & Credit Notes</li>
-                            <li data-i18n="features.quotes">✓ Devis/Quotes & Purchase Orders</li>
-                            <li data-i18n="features.vat">✓ VAT/TVA Management</li>
-                            <li data-i18n="features.balance">✓ Balance Sheets (Bilan)</li>
-                            <li data-i18n="features.reporting">✓ Real-time Financial Reporting</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Accounting feature interface" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
+  <section class="grid cols-3" style="margin-top:16px">
+    <div class="card">
+      <h3>Contabilidade inteligente</h3>
+      <ul>
+        <li>Faturas, notas de crédito, devis, bons de commande</li>
+        <li>Bilans, relatórios de TVA e extratos</li>
+        <li>Templates HTML/DOCX editáveis → PDF</li>
+        <li>Rapel automático com IA (PDF + e-mail)</li>
+        <li>Exportação para Bob50, Sage, WinBooks, Horus…</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>RH com IA</h3>
+      <ul>
+        <li>Critérios por vaga (pesos, skills, idioma…)</li>
+        <li>Leitura de CV (PDF/DOCX/texto)</li>
+        <li>Ranking de candidatos por score</li>
+        <li>Resumos e comparativos automáticos</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>E-mails & reuniões</h3>
+      <ul>
+        <li>Conexão SMTP da tua empresa</li>
+        <li>Respostas com IA, agendas e lembretes</li>
+        <li>Atas automáticas (transcrição/resumo)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Command Center</h3>
+      <ul>
+        <li>“Envia as faturas 63 ao gestor Daniel às 15h”</li>
+        <li>“Gera relatório financeiro e traduz para FR”</li>
+        <li>Contexto de funcionários + permissões</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Traduções</h3>
+      <ul>
+        <li>PT • EN • FR • DE no núcleo</li>
+        <li>Deteção de idioma por cliente</li>
+        <li>Documentos e e-mails multilingue</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Segurança & GDPR</h3>
+      <ul>
+        <li>Hospedagem UE • Logs auditáveis</li>
+        <li>Criptografia de credenciais (ENC_KEY)</li>
+        <li>Controlo de acesso por empresa/usuário</li>
+      </ul>
+    </div>
+  </section>
 
-        <!-- HR Feature -->
-        <section class="feature-section alternate" aria-labelledby="hr-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Advanced HR feature interface" loading="lazy">
-                    </div>
-                    <div class="feature-text">
-                        <h2 id="hr-title" data-i18n="features.advanced_hr_title">Advanced HR Management</h2>
-                        <p data-i18n="features.advanced_hr.desc">Intelligent recruitment and talent management powered by AI.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.cv_parsing">✓ CV Parsing & Extraction</li>
-                            <li data-i18n="features.multilingual_ranking">✓ Multilingual Candidate Ranking</li>
-                            <li data-i18n="features.bias_checks">✓ Bias Detection & Fair Hiring</li>
-                            <li data-i18n="features.talent_database">✓ Centralized Talent Database</li>
-                            <li data-i18n="features.workflow">✓ Recruitment Workflow Automation</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <div style="margin-top:24px">
+    <a class="btn" href="login.html">Criar conta / Entrar</a>
+    <a class="btn ghost" href="connections.html">Abrir App</a>
+  </div>
+</main>
 
-        <!-- Email & Meetings AI -->
-        <section class="feature-section" aria-labelledby="email-ai-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-text">
-                        <h2 id="email-ai-title" data-i18n="features.email_ai_title">Email & Meetings AI Assistant</h2>
-                        <p data-i18n="features.email_ai.long">Enhance communications with intelligent AI-powered assistance.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.email_drafting">✓ Smart Email Drafting</li>
-                            <li data-i18n="features.meeting_notes">✓ Automatic Meeting Notes</li>
-                            <li data-i18n="features.action_items">✓ Action Item Extraction</li>
-                            <li data-i18n="features.follow_ups">✓ Intelligent Follow-ups</li>
-                            <li data-i18n="features.scheduling">✓ Smart Scheduling</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Email and Meetings AI feature" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
+<footer>
+  <div class="container" style="padding:16px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <span class="muted">© 2025 Easycheck.</span>
+    <span class="muted">GDPR-ready • Hospedado na UE</span>
+  </div>
+</footer>
 
-        <!-- Marketing Automation -->
-        <section class="feature-section alternate" aria-labelledby="marketing-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Marketing automation interface" loading="lazy">
-                    </div>
-                    <div class="feature-text">
-                        <h2 id="marketing-title" data-i18n="features.marketing_auto_title">Marketing Automation</h2>
-                        <p data-i18n="features.marketing_auto.desc">Run targeted campaigns and nurture leads automatically.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.campaign_mgmt">✓ Campaign Management</li>
-                            <li data-i18n="features.email_sequences">✓ Automated Email Sequences</li>
-                            <li data-i18n="features.lead_scoring">✓ Lead Scoring</li>
-                            <li data-i18n="features.analytics">✓ Performance Analytics</li>
-                            <li data-i18n="features.integrations">✓ CRM Integrations</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Translations -->
-        <section class="feature-section" aria-labelledby="translations-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-text">
-                        <h2 id="translations-title" data-i18n="features.translations_title">Multi-Language Translation</h2>
-                        <p data-i18n="features.translations.long">Reach customers globally with instant, professional translations.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.50_languages">✓ Support for 50+ Languages</li>
-                            <li data-i18n="features.context_aware">✓ Context-Aware Translation</li>
-                            <li data-i18n="features.document_translation">✓ Document Translation</li>
-                            <li data-i18n="features.localization">✓ Content Localization</li>
-                            <li data-i18n="features.terminology">✓ Terminology Management</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Translation feature interface" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Security & Compliance -->
-        <section class="feature-section alternate" aria-labelledby="security-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Security and compliance interface" loading="lazy">
-                    </div>
-                    <div class="feature-text">
-                        <h2 id="security-title" data-i18n="features.security_title">Enterprise Security & GDPR</h2>
-                        <p data-i18n="features.security.long">Full compliance with GDPR and enterprise-grade security standards.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.gdpr_compliant">✓ Full GDPR Compliance</li>
-                            <li data-i18n="features.encryption">✓ End-to-End Encryption</li>
-                            <li data-i18n="features.access_control">✓ Role-Based Access Control</li>
-                            <li data-i18n="features.audit_logs">✓ Comprehensive Audit Logs</li>
-                            <li data-i18n="features.sso">✓ Single Sign-On (SSO)</li>
-                            <li data-i18n="features.two_factor">✓ Two-Factor Authentication</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Dashboard -->
-        <section class="feature-section" aria-labelledby="dashboard-title">
-            <div class="container">
-                <div class="feature-content">
-                    <div class="feature-text">
-                        <h2 id="dashboard-title" data-i18n="features.dashboard_title">Unified Dashboard</h2>
-                        <p data-i18n="features.dashboard.desc">Get complete visibility into all business metrics at a glance.</p>
-                        <ul class="feature-points">
-                            <li data-i18n="features.real_time">✓ Real-Time Dashboards</li>
-                            <li data-i18n="features.custom_widgets">✓ Customizable Widgets</li>
-                            <li data-i18n="features.reports">✓ Advanced Reporting</li>
-                            <li data-i18n="features.kpi_tracking">✓ KPI Tracking</li>
-                            <li data-i18n="features.data_export">✓ Data Export Options</li>
-                        </ul>
-                        <button class="btn btn-primary" data-i18n="cta.learn_more">Learn More</button>
-                    </div>
-                    <div class="feature-image">
-                        <img src="/placeholder.svg?height=400&width=500" alt="Unified dashboard interface" loading="lazy">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section class="cta-section" aria-labelledby="features-cta-title">
-            <div class="container">
-                <h2 id="features-cta-title" data-i18n="cta.ready">Ready to Get Started?</h2>
-                <p data-i18n="cta.ready.desc">Start your free trial today. No credit card required.</p>
-                <button class="btn btn-primary btn-lg" data-i18n="cta.start_free">Start Free Trial</button>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer" role="contentinfo">
-            <div class="container">
-                <div class="footer-grid">
-                    <div class="footer-column">
-                        <h4 class="footer-title">Easycheck</h4>
-                        <p data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-title" data-i18n="footer.product">Product</h4>
-                        <ul>
-                            <li><a href="features.html" data-i18n="nav.features">Features</a></li>
-                            <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
-                            <li><a href="#" data-i18n="footer.roadmap">Roadmap</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-title" data-i18n="footer.company">Company</h4>
-                        <ul>
-                            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
-                            <li><a href="#" data-i18n="footer.blog">Blog</a></li>
-                            <li><a href="#" data-i18n="footer.careers">Careers</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-column">
-                        <h4 class="footer-title" data-i18n="footer.legal">Legal</h4>
-                        <ul>
-                            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
-                            <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
-                            <li><a href="#" data-i18n="footer.cookies">Cookie Policy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                    <p data-i18n="footer.copyright">&copy; 2025 Easycheck. All rights reserved.</p>
-                    <div class="footer-social">
-                        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
-                        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
-                        <a href="#" aria-label="GitHub" class="social-link">gh</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
-    </main>
-
-    <script src="script.js"></script>
-</body>
-</html>
+</body></html>
