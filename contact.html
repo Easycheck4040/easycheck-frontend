@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Easycheck - Get in touch with our sales and support team.">
+    <meta name="keywords" content="contact, support, sales, inquiries">
+    <meta property="og:title" content="Contact Easycheck">
+    <meta property="og:description" content="Reach out to our team. We're here to help.">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="https://easycheck.app/contact">
+    <title>Contact - Easycheck</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="navbar-container">
+            <div class="navbar-brand">
+                <a href="index.html" class="logo" aria-label="Easycheck home">
+                    <span class="logo-icon">✓</span>
+                    <span class="logo-text">Easycheck</span>
+                </a>
+            </div>
+            
+            <div class="navbar-menu" id="navbarMenu">
+                <ul class="nav-list" role="menubar">
+                    <li role="none"><a href="index.html" role="menuitem" data-i18n="nav.home">Home</a></li>
+                    <li role="none"><a href="features.html" role="menuitem" data-i18n="nav.features">Features</a></li>
+                    <li role="none"><a href="pricing.html" role="menuitem" data-i18n="nav.pricing">Pricing</a></li>
+                    <li role="none"><a href="contact.html" role="menuitem" aria-current="page" data-i18n="nav.contact">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="navbar-actions">
+                <div class="language-switcher" role="group" aria-label="Language selection">
+                    <button class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+                    <button class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+                    <button class="lang-btn" data-lang="fr" aria-label="Français">FR</button>
+                    <button class="lang-btn" data-lang="de" aria-label="Deutsch">DE</button>
+                </div>
+                <a href="#" id="loginBtn" class="btn btn-secondary" data-i18n="nav.signin">Sign In</a>
+                <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <!-- Header -->
+        <section class="page-header" aria-labelledby="page-title">
+            <div class="container">
+                <h1 id="page-title" data-i18n="contact.title">Get in Touch</h1>
+                <p data-i18n="contact.subtitle">We'd love to hear from you. Send us a message.</p>
+            </div>
+        </section>
+
+        <!-- Contact Content -->
+        <section class="contact-section" aria-labelledby="contact-content-title">
+            <div class="container">
+                <h2 id="contact-content-title" class="visually-hidden">Contact information and form</h2>
+                <div class="contact-grid">
+                    <!-- Contact Info -->
+                    <div class="contact-info">
+                        <h3 data-i18n="contact.info">Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <h4 data-i18n="contact.email_address">Email</h4>
+                            <a href="mailto:support@easycheck.app">support@easycheck.app</a>
+                            <p class="contact-detail" data-i18n="contact.email_response">Usually responds within 24 hours</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <h4 data-i18n="contact.sales">Sales Team</h4>
+                            <a href="mailto:sales@easycheck.app">sales@easycheck.app</a>
+                            <p class="contact-detail" data-i18n="contact.sales_inquiry">For inquiries and demos</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <h4 data-i18n="contact.support_hours">Support Hours</h4>
+                            <p data-i18n="contact.support_hours_info">Monday - Friday: 9:00 AM - 6:00 PM CET</p>
+                            <p data-i18n="contact.support_hours_info_2">Saturday - Sunday: Closed</p>
+                        </div>
+
+                        <div class="contact-item">
+                            <h4 data-i18n="contact.headquarters">Headquarters</h4>
+                            <p>Easycheck GmbH<br>Berlin, Germany</p>
+                        </div>
+
+                        <div class="contact-social">
+                            <p data-i18n="contact.follow_us">Follow us</p>
+                            <div class="social-links">
+                                <a href="#" aria-label="LinkedIn">LinkedIn</a>
+                                <a href="#" aria-label="Twitter">Twitter</a>
+                                <a href="#" aria-label="GitHub">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-container">
+                        <form class="contact-form" id="contactForm" novalidate>
+                            <div class="form-group">
+                                <label for="name" data-i18n="form.name">Name</label>
+                                <input type="text" id="name" name="name" required aria-required="true">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" data-i18n="form.email">Email</label>
+                                <input type="email" id="email" name="email" required aria-required="true">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="company" data-i18n="form.company">Company</label>
+                                <input type="text" id="company" name="company">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="subject" data-i18n="form.subject">Subject</label>
+                                <select id="subject" name="subject" required aria-required="true">
+                                    <option value="">— Select subject —</option>
+                                    <option data-i18n="form.general_inquiry">General Inquiry</option>
+                                    <option data-i18n="form.sales_inquiry">Sales Inquiry</option>
+                                    <option data-i18n="form.support">Support</option>
+                                    <option data-i18n="form.partnership">Partnership</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="message" data-i18n="form.message">Message</label>
+                                <textarea id="message" name="message" rows="6" required aria-required="true"></textarea>
+                            </div>
+
+                            <div class="form-group checkbox">
+                                <input type="checkbox" id="privacy" name="privacy" required aria-required="true">
+                                <label for="privacy" data-i18n="form.privacy_consent">I agree to the privacy policy</label>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-full" data-i18n="form.send">Send Message</button>
+                            <p class="form-note" data-i18n="form.required">* Required fields</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section" aria-labelledby="cta-title">
+            <div class="container">
+                <h2 id="cta-title" data-i18n="cta.still_interested">Still interested? Start your free trial</h2>
+                <button class="btn btn-primary btn-lg" data-i18n="cta.start_free">Start Free Trial</button>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" role="contentinfo">
+            <div class="container">
+                <div class="footer-grid">
+                    <div class="footer-column">
+                        <h4 class="footer-title">Easycheck</h4>
+                        <p data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title" data-i18n="footer.product">Product</h4>
+                        <ul>
+                            <li><a href="features.html" data-i18n="nav.features">Features</a></li>
+                            <li><a href="pricing.html" data-i18n="nav.pricing">Pricing</a></li>
+                            <li><a href="#" data-i18n="footer.roadmap">Roadmap</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title" data-i18n="footer.company">Company</h4>
+                        <ul>
+                            <li><a href="contact.html" data-i18n="nav.contact">Contact</a></li>
+                            <li><a href="#" data-i18n="footer.blog">Blog</a></li>
+                            <li><a href="#" data-i18n="footer.careers">Careers</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4 class="footer-title" data-i18n="footer.legal">Legal</h4>
+                        <ul>
+                            <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
+                            <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
+                            <li><a href="#" data-i18n="footer.cookies">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p data-i18n="footer.copyright">&copy; 2025 Easycheck. All rights reserved.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+                        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+                        <a href="#" aria-label="GitHub" class="social-link">gh</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
