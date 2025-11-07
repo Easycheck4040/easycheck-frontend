@@ -1,97 +1,210 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Preços | Easycheck</title>
+  <meta name="description" content="Easycheck Pricing — Simple, transparent plans for SMEs." />
+  <meta property="og:title" content="Pricing — Easycheck" />
+  <meta property="og:description" content="Choose the plan that fits your business needs." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://easycheck.app/pricing" />
+  <title>Pricing — Easycheck</title>
+
   <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="/assets/logo-mark.png" sizes="32x32" />
-<link rel="icon" type="image/png" href="/assets/favicon-512.png" sizes="512x512" />
-<meta property="og:image" content="/assets/logo-full.png" />
+  <link rel="icon" type="image/png" href="./assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
+  <meta property="og:image" content="./assets/logo-full.png" />
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
-  <div class="container navbar">
-    <a class="brand" href="/index.html" aria-label="Easycheck — Início">
-      <img src="/assets/logo-mark.png" alt="Easycheck" />
-      <span>Easycheck</span>
-    </a>
-    <nav class="nav" aria-label="Principal">
-      <a href="/index.html">Início</a>
-      <a href="/features.html">Funcionalidades</a>
-      <a href="/pricing.html" class="active">Preços</a>
-      <a href="/contact.html">Contato</a>
-    </nav>
-    <div class="cta">
-      <div class="lang-switcher" role="group" aria-label="Language">
-        <button class="lang-btn" data-lang="en">EN</button>
-        <button class="lang-btn" data-lang="pt">PT</button>
-        <button class="lang-btn" data-lang="fr">FR</button>
-        <button class="lang-btn" data-lang="de">DE</button>
-      </div>
-      <a class="btn btn-secondary" href="/login.html" id="loginBtn">Entrar</a>
-      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </div>
-</header>
-
-  <main class="section">
-    <div class="container stack">
-      <h1>Preços simples e transparentes</h1>
-      <p class="muted">Escolhe o plano certo para o teu negócio.</p>
-
-      <div class="pricing">
-        <div class="card elevated tier">
-          <span class="badge">Starter</span>
-          <div class="price">€49<small>/mês</small></div>
-          <ul>
-            <li>✓ 1 utilizador</li>
-            <li>✓ Módulo básico de contabilidade</li>
-            <li>✓ Até 100 faturas/mês</li>
-            <li>✓ Suporte por email</li>
-          </ul>
-          <a class="btn btn-primary" href="./login.html#signup">Começar</a>
+    <div class="container navbar">
+      <a class="brand" href="./index.html" aria-label="Easycheck — Home">
+        <img src="./assets/logo-mark.png" alt="Easycheck" width="28" height="28" />
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./index.html" data-i18n="nav.home">Home</a>
+        <a href="./features.html" data-i18n="nav.features">Features</a>
+        <a class="active" href="./pricing.html" data-i18n="nav.pricing">Pricing</a>
+        <a href="./contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="cta" style="display:flex;align-items:center;gap:.5rem">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="pt">PT</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
         </div>
-
-        <div class="card elevated tier">
-          <span class="badge">Professional</span>
-          <div class="price">€149<small>/mês</small></div>
-          <ul>
-            <li>✓ Até 5 utilizadores</li>
-            <li>✓ Suite completa (contabilidade, RH, IA)</li>
-            <li>✓ Faturas ilimitadas</li>
-            <li>✓ 100GB de storage</li>
-          </ul>
-          <a class="btn btn-primary" href="./login.html#signup">Começar</a>
-        </div>
-
-        <div class="card elevated tier">
-          <span class="badge">Enterprise</span>
-          <div class="price">Custom</div>
-          <ul>
-            <li>✓ Utilizadores e storage ilimitados</li>
-            <li>✓ Suporte dedicado</li>
-            <li>✓ Integrações customizadas</li>
-          </ul>
-          <a class="btn btn-primary" href="./contact.html">Falar com Vendas</a>
-        </div>
+        <a class="btn btn-secondary" href="./login.html" id="loginBtn" data-i18n="nav.signin">Sign in</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
+  </header>
+
+  <main>
+    <!-- Hero / Title -->
+    <section class="hero">
+      <div class="container center">
+        <span class="badge" data-i18n="pricing.title">Simple, Transparent Pricing</span>
+        <h1 data-i18n="pricing.pageTitle">Simple, Transparent Pricing</h1>
+        <p class="lead" data-i18n="pricing.pageSubtitle">Choose the plan that fits your business needs.</p>
+
+        <!-- Toggle Monthly / Annual -->
+        <div style="margin-top:1rem;display:inline-flex;gap:.5rem" role="group" aria-label="Billing period">
+          <button class="btn btn-secondary toggle-btn active" data-period="monthly" data-i18n="pricing.monthly">Monthly</button>
+          <button class="btn btn-secondary toggle-btn" data-period="annual">
+            <span data-i18n="pricing.annual">Annual</span> — <small data-i18n="pricing.save" style="margin-left:.25rem">Save 20%</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing tiers -->
+    <section class="section">
+      <div class="container pricing">
+        <!-- Starter -->
+        <div class="card padded tier">
+          <span class="badge" data-i18n="pricing.starter.title">Starter</span>
+          <div class="price">
+            €<span data-i18n="pricing.starter_price">49</span>
+            <small class="muted">/ <span data-i18n="pricing.monthly">Monthly</span></small>
+          </div>
+          <p class="muted" data-i18n="pricing.starter.desc">Perfect for solopreneurs and small teams</p>
+          <ul>
+            <li data-i18n="pricing.starter.f1">✓ Basic accounting module</li>
+            <li data-i18n="pricing.starter.f2">✓ Up to 100 invoices/month</li>
+            <li data-i18n="pricing.starter.f3">✓ Email support</li>
+            <li data-i18n="pricing.starter.f4">✓ 1 user account</li>
+            <li data-i18n="pricing.starter.f5">✓ 5GB storage</li>
+          </ul>
+          <div style="margin-top:1rem">
+            <a class="btn btn-primary btn-lg" href="./login.html" data-i18n="cta.start_free">Start Free Trial</a>
+          </div>
+        </div>
+
+        <!-- Professional -->
+        <div class="card padded tier elevated">
+          <span class="badge" data-i18n="pricing.professional.title">Professional</span>
+          <div class="price">
+            €<span data-i18n="pricing.professional_price">149</span>
+            <small class="muted">/ <span data-i18n="pricing.monthly">Monthly</span></small>
+          </div>
+          <p class="muted" data-i18n="pricing.professional.desc">For growing SMEs with advanced needs</p>
+          <ul>
+            <li data-i18n="pricing.pro.f1">✓ Full accounting suite</li>
+            <li data-i18n="pricing.pro.f2">✓ Unlimited invoices</li>
+            <li data-i18n="pricing.pro.f3">✓ HR & recruitment AI</li>
+            <li data-i18n="pricing.pro.f4">✓ Email & meetings AI assistant</li>
+            <li data-i18n="pricing.pro.f5">✓ Up to 5 user accounts</li>
+            <li data-i18n="pricing.pro.f6">✓ 100GB storage</li>
+            <li data-i18n="pricing.pro.f7">✓ Priority support</li>
+          </ul>
+          <div style="margin-top:1rem">
+            <a class="btn btn-primary btn-lg" href="./login.html" data-i18n="cta.start_free">Start Free Trial</a>
+          </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="card padded tier">
+          <span class="badge" data-i18n="pricing.enterprise.title">Enterprise</span>
+          <div class="price">
+            <span data-i18n="pricing.custom">Custom</span>
+          </div>
+          <p class="muted" data-i18n="pricing.enterprise.desc">Complete solution for large organizations</p>
+          <ul>
+            <li data-i18n="pricing.ent.f1">✓ All Professional features</li>
+            <li data-i18n="pricing.ent.f2">✓ Marketing automation</li>
+            <li data-i18n="pricing.ent.f3">✓ Advanced analytics</li>
+            <li data-i18n="pricing.ent.f4">✓ Unlimited user accounts</li>
+            <li data-i18n="pricing.ent.f5">✓ Unlimited storage</li>
+            <li data-i18n="pricing.ent.f6">✓ Dedicated account manager</li>
+            <li data-i18n="pricing.ent.f7">✓ Custom integrations</li>
+          </ul>
+          <div style="margin-top:1rem">
+            <a class="btn btn-secondary" href="./contact.html" data-i18n="cta.contact">Contact Sales</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section">
+      <div class="container">
+        <h2 data-i18n="pricing.faq">Frequently Asked Questions</h2>
+        <div class="grid grid-2" style="margin-top:1rem">
+          <div class="card padded">
+            <h3 data-i18n="pricing.faq1.q">Can I change plans anytime?</h3>
+            <p class="muted" data-i18n="pricing.faq1.a">Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately.</p>
+          </div>
+          <div class="card padded">
+            <h3 data-i18n="pricing.faq2.q">Is there a free trial?</h3>
+            <p class="muted" data-i18n="pricing.faq2.a">Yes, all plans come with a 14-day free trial. No credit card required.</p>
+          </div>
+          <div class="card padded">
+            <h3 data-i18n="pricing.faq3.q">What about onboarding?</h3>
+            <p class="muted" data-i18n="pricing.faq3.a">We provide comprehensive onboarding for all plans, including video tutorials and live support.</p>
+          </div>
+          <div class="card padded">
+            <h3 data-i18n="pricing.faq4.q">Do you offer discounts for annual billing?</h3>
+            <p class="muted" data-i18n="pricing.faq4.a">Yes, save 20% when you choose annual billing instead of monthly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Final -->
+    <section class="section">
+      <div class="container card padded elevated">
+        <div class="grid grid-2" style="align-items:center">
+          <div>
+            <h2 data-i18n="cta.ready">Ready to Transform Your Back-Office?</h2>
+            <p class="muted" data-i18n="cta.ready_desc">Start your free trial today. No credit card required.</p>
+          </div>
+          <div class="right">
+            <a class="btn btn-primary btn-lg" href="./login.html" data-i18n="cta.start_free">Start Free Trial</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container cols">
-      <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
-      <div><h3>Produto</h3><p><a href="./features.html">Funcionalidades</a></p></div>
-      <div><h3>Empresa</h3><p><a href="./contact.html">Contato</a></p></div>
-      <div><h3>Legal</h3><p><a href="./privacy.html">Privacidade</a></p><p><a href="./terms.html">Termos</a></p></div>
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="./assets/logo-mark.png" alt="" width="28" height="28" /><span>Easycheck</span>
+        </div>
+        <p class="muted" data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.product">Product</h3>
+        <p><a href="./features.html" data-i18n="footer.features">Features</a></p>
+        <p><a href="./pricing.html" data-i18n="nav.pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.company">Company</h3>
+        <p><a href="./contact.html" data-i18n="footer.contact">Contact</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <p><a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a></p>
+        <p><a href="./terms.html" data-i18n="footer.terms">Terms of Service</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small class="muted" data-i18n="footer.copyright">© 2025 Easycheck. All rights reserved.</small>
+      <div class="footer-social" style="display:flex;gap:.6rem">
+        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+        <a href="#" aria-label="GitHub" class="social-link">gh</a>
+      </div>
     </div>
   </footer>
 
   <script src="./script.js"></script>
 </body>
 </html>
-<script src="/script.js"></script>
