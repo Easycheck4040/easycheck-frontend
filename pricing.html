@@ -3,63 +3,66 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Preços — Easycheck</title>
+  <title>Preços | Easycheck</title>
   <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
 </head>
 <body>
   <header class="header">
     <div class="container navbar">
-      <a class="brand" href="./index.html" aria-label="Easycheck – Início">
-        <img src="./logo-easycheck-mark.png" alt="Easycheck logo">
-        <span>Easycheck</span>
-      </a>
-      <nav class="nav" aria-label="Principal">
+      <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
+      <nav class="nav">
+        <a href="./index.html">Início</a>
         <a href="./features.html">Funcionalidades</a>
         <a class="active" href="./pricing.html">Preços</a>
         <a href="./contact.html">Contato</a>
       </nav>
       <div class="cta">
-        <a class="btn btn-ghost" href="./login.html">Entrar</a>
-        <a class="btn btn-primary" href="./login.html#signup">Criar conta</a>
+        <div class="lang-switcher"><button class="lang-btn" data-lang="en">EN</button><button class="lang-btn" data-lang="pt">PT</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn" data-lang="de">DE</button></div>
+        <a class="btn btn-secondary" href="./login.html">Entrar</a>
       </div>
     </div>
   </header>
 
   <main class="section">
-    <div class="container">
-      <h1>Planos e Preços</h1>
-      <p class="muted">Começa grátis. Faz upgrade quando precisares.</p>
-      <div class="pricing" style="margin-top:var(--sp-5)">
-        <div class="card tier">
-          <h3>Starter</h3>
-          <p class="price">€0 <small>/ mês</small></p>
+    <div class="container stack">
+      <h1>Preços simples e transparentes</h1>
+      <p class="muted">Escolhe o plano certo para o teu negócio.</p>
+
+      <div class="pricing">
+        <div class="card elevated tier">
+          <span class="badge">Starter</span>
+          <div class="price">€49<small>/mês</small></div>
           <ul>
-            <li>✓ 1 workspace</li>
-            <li>✓ 2 membros</li>
-            <li>✓ 100 docs/mês</li>
+            <li>✓ 1 utilizador</li>
+            <li>✓ Módulo básico de contabilidade</li>
+            <li>✓ Até 100 faturas/mês</li>
+            <li>✓ Suporte por email</li>
           </ul>
           <a class="btn btn-primary" href="./login.html#signup">Começar</a>
         </div>
-        <div class="card tier elevated">
-          <div class="badge">Mais popular</div>
-          <h3>Pro</h3>
-          <p class="price">€19 <small>/ mês</small></p>
+
+        <div class="card elevated tier">
+          <span class="badge">Professional</span>
+          <div class="price">€149<small>/mês</small></div>
           <ul>
-            <li>✓ 5 workspaces</li>
-            <li>✓ 10 membros</li>
-            <li>✓ 5k docs/mês</li>
+            <li>✓ Até 5 utilizadores</li>
+            <li>✓ Suite completa (contabilidade, RH, IA)</li>
+            <li>✓ Faturas ilimitadas</li>
+            <li>✓ 100GB de storage</li>
           </ul>
-          <a class="btn btn-primary" href="./login.html#signup">Experimentar</a>
+          <a class="btn btn-primary" href="./login.html#signup">Começar</a>
         </div>
-        <div class="card tier">
-          <h3>Empresa</h3>
-          <p class="price">Custom <small>/ cotações</small></p>
+
+        <div class="card elevated tier">
+          <span class="badge">Enterprise</span>
+          <div class="price">Custom</div>
           <ul>
-            <li>✓ SSO, SCIM</li>
-            <li>✓ Controlo de dados</li>
+            <li>✓ Utilizadores e storage ilimitados</li>
             <li>✓ Suporte dedicado</li>
+            <li>✓ Integrações customizadas</li>
           </ul>
-          <a class="btn btn-ghost" href="./contact.html">Falar com vendas</a>
+          <a class="btn btn-primary" href="./contact.html">Falar com Vendas</a>
         </div>
       </div>
     </div>
@@ -67,32 +70,13 @@
 
   <footer class="footer">
     <div class="container cols">
-      <div>
-        <div class="brand" style="margin-bottom:.75rem">
-          <img src="./logo-easycheck-mark.png" alt="" />
-          <span>Easycheck</span>
-        </div>
-        <p class="muted">Suite de back-office com IA para finanças, RH e operações — com privacidade e conformidade.</p>
-      </div>
-      <div>
-        <h3>Produto</h3>
-        <p><a href="./features.html">Funcionalidades</a></p>
-        <p><a href="./pricing.html">Preços</a></p>
-      </div>
-      <div>
-        <h3>Empresa</h3>
-        <p><a href="./contact.html">Contato</a></p>
-      </div>
-      <div>
-        <h3>Legal</h3>
-        <p><a href="./privacy.html">Privacidade</a></p>
-        <p><a href="./terms.html">Termos</a></p>
-      </div>
-    </div>
-    <div class="container" style="margin-top:1.5rem">
-      <hr class="separator" />
-      <p class="muted">© 2025 Easycheck. Todos os direitos reservados.</p>
+      <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
+      <div><h3>Produto</h3><p><a href="./features.html">Funcionalidades</a></p></div>
+      <div><h3>Empresa</h3><p><a href="./contact.html">Contato</a></p></div>
+      <div><h3>Legal</h3><p><a href="./privacy.html">Privacidade</a></p><p><a href="./terms.html">Termos</a></p></div>
     </div>
   </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>
