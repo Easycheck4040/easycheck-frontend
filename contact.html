@@ -1,74 +1,166 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Contato | Easycheck</title>
+  <meta name="description" content="Contact Easycheck — We'd love to hear from you." />
+  <meta property="og:title" content="Contact — Easycheck" />
+  <meta property="og:description" content="Get in touch with the Easycheck team." />
+  <meta property="og:type" content="website" />
+  <link rel="canonical" href="https://easycheck.app/contact" />
+  <title>Contact — Easycheck</title>
+
   <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
+  <meta property="og:image" content="./assets/logo-full.png" />
 </head>
 <body>
+  <!-- Header -->
   <header class="header">
     <div class="container navbar">
-      <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
-      <nav class="nav">
-        <a href="./index.html">Início</a>
-        <a href="./features.html">Funcionalidades</a>
-        <a href="./pricing.html">Preços</a>
-        <a class="active" href="./contact.html">Contato</a>
+      <a class="brand" href="./index.html" aria-label="Easycheck — Home">
+        <img src="./assets/logo-mark.png" alt="Easycheck" width="28" height="28" />
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./index.html" data-i18n="nav.home">Home</a>
+        <a href="./features.html" data-i18n="nav.features">Features</a>
+        <a href="./pricing.html" data-i18n="nav.pricing">Pricing</a>
+        <a class="active" href="./contact.html" data-i18n="nav.contact">Contact</a>
       </nav>
-      <div class="cta">
-        <div class="lang-switcher"><button class="lang-btn" data-lang="en">EN</button><button class="lang-btn" data-lang="pt">PT</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn" data-lang="de">DE</button></div>
-        <a class="btn btn-secondary" href="./login.html">Entrar</a>
+      <div class="cta" style="display:flex;align-items:center;gap:.5rem">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="pt">PT</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+        <a class="btn btn-secondary" href="./login.html" id="loginBtn" data-i18n="nav.signin">Sign in</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
       </div>
     </div>
   </header>
 
-  <main class="section">
-    <div class="container grid grid-2">
-      <div class="card padded elevated">
-        <h1>Fala connosco</h1>
-        <p class="muted">Respondemos rápido (CET 9h–18h).</p>
-        <form class="form" id="contactForm">
-          <div class="input"><label>Nome</label><input required placeholder="O teu nome"></div>
-          <div class="input"><label>Email</label><input type="email" required placeholder="tu@empresa.com"></div>
-          <div class="input"><label>Assunto</label>
-            <select>
-              <option>Vendas</option><option>Suporte</option><option>Parcerias</option><option>Outro</option>
-            </select>
-          </div>
-          <div class="input"><label>Mensagem</label><textarea rows="5" required placeholder="Como podemos ajudar?"></textarea></div>
-          <button class="btn btn-primary" type="submit">Enviar</button>
-          <p class="help">Ao enviar, concordas com a nossa <a href="./privacy.html">Política de Privacidade</a>.</p>
-        </form>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container center">
+        <span class="badge" data-i18n="contact.pageTitle">Get in Touch</span>
+        <h1 data-i18n="contact.pageTitle">Get in Touch</h1>
+        <p class="lead" data-i18n="contact.pageSubtitle">We'd love to hear from you. Send us a message.</p>
       </div>
+    </section>
 
-      <div class="card padded">
-        <h2>Informações</h2>
-        <p><strong>Email:</strong> hello@easycheck.app</p>
-        <p><strong>Telefone:</strong> +352 000 000 000</p>
-        <p><strong>Morada:</strong> Luxemburgo</p>
-        <hr class="separator">
-        <p class="muted">Segue-nos</p>
-        <p><a href="#">LinkedIn</a> · <a href="#">X</a> · <a href="#">GitHub</a></p>
+    <!-- Contact content -->
+    <section class="section">
+      <div class="container grid grid-2">
+        <!-- Form -->
+        <div class="card padded elevated">
+          <form class="form" id="contactForm" novalidate>
+            <div class="input">
+              <label for="name" data-i18n="contact.name">Name</label>
+              <input id="name" name="name" type="text" placeholder="John Doe" />
+            </div>
+
+            <div class="input">
+              <label for="email" data-i18n="contact.email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@company.com" />
+            </div>
+
+            <div class="input">
+              <label for="company" data-i18n="contact.company">Company</label>
+              <input id="company" name="company" type="text" placeholder="Company Inc." />
+            </div>
+
+            <div class="input">
+              <label for="subject" data-i18n="contact.subject">Subject</label>
+              <select id="subject" name="subject">
+                <option value="" selected data-i18n="contact.selectSubject">Select a subject</option>
+                <option value="sales" data-i18n="contact.sales">Sales Inquiry</option>
+                <option value="support" data-i18n="contact.support">Support</option>
+                <option value="partnership" data-i18n="contact.partnership">Partnership</option>
+                <option value="other" data-i18n="contact.other">Other</option>
+              </select>
+            </div>
+
+            <div class="input">
+              <label for="message" data-i18n="contact.message">Message</label>
+              <textarea id="message" name="message" rows="6" placeholder="How can we help?"></textarea>
+            </div>
+
+            <button class="btn btn-primary btn-lg" type="submit" data-i18n="contact.send">Send Message</button>
+            <p class="help" data-i18n="contact.chatHint">Chat widget will be integrated here</p>
+          </form>
+        </div>
+
+        <!-- Info -->
+        <div class="card padded">
+          <h2 data-i18n="contact.info">Contact Information</h2>
+          <div class="stack" style="margin-top:.5rem">
+            <p><strong data-i18n="contact.email_label">Email</strong>: <a href="mailto:hello@easycheck.app">hello@easycheck.app</a></p>
+            <p><strong data-i18n="contact.phone_label">Phone</strong>: <a href="tel:+35200000000">+352 000 000 00</a></p>
+            <p><strong data-i18n="contact.address_label">Address</strong>: 10 Rue Example, 1000 Luxembourg</p>
+            <p><strong data-i18n="contact.hours_label">Business Hours</strong>: <span data-i18n="contact.hours">Monday - Friday: 9:00 AM - 6:00 PM CET</span></p>
+            <div>
+              <strong data-i18n="contact.social_label">Follow Us</strong>:
+              <div style="display:flex;gap:.6rem;margin-top:.4rem">
+                <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+                <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
+                <a href="#" class="social-link" aria-label="GitHub">gh</a>
+              </div>
+            </div>
+          </div>
+
+          <hr class="separator" />
+
+          <h3 data-i18n="cta.title">Ready to Transform Your Back-Office?</h3>
+          <p class="muted" data-i18n="cta.description">Join hundreds of European SMEs already using Easycheck.</p>
+          <div style="margin-top:1rem">
+            <a class="btn btn-primary" href="./login.html" data-i18n="cta.start_free">Start Free Trial</a>
+            <a class="btn btn-secondary" href="./pricing.html" data-i18n="cta.view_full_pricing">View Full Pricing</a>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container cols">
-      <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
-      <div><h3>Produto</h3><p><a href="./features.html">Funcionalidades</a></p></div>
-      <div><h3>Empresa</h3><p><a href="./pricing.html">Preços</a></p></div>
-      <div><h3>Legal</h3><p><a href="./privacy.html">Privacidade</a></p><p><a href="./terms.html">Termos</a></p></div>
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="./assets/logo-mark.png" alt="" width="28" height="28" /><span>Easycheck</span>
+        </div>
+        <p class="muted" data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.product">Product</h3>
+        <p><a href="./features.html" data-i18n="footer.features">Features</a></p>
+        <p><a href="./pricing.html" data-i18n="nav.pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.company">Company</h3>
+        <p><a href="./contact.html" data-i18n="footer.contact">Contact</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <p><a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a></p>
+        <p><a href="./terms.html" data-i18n="footer.terms">Terms of Service</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small class="muted" data-i18n="footer.copyright">© 2025 Easycheck. All rights reserved.</small>
+      <div class="footer-social" style="display:flex;gap:.6rem">
+        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+        <a href="#" aria-label="GitHub" class="social-link">gh</a>
+      </div>
     </div>
   </footer>
 
   <script src="./script.js"></script>
-  <script>
-    document.getElementById('contactForm')?.addEventListener('submit', (e)=>{
-      e.preventDefault(); alert('Obrigado! Vamos responder em breve.'); e.target.reset();
-    });
-  </script>
 </body>
 </html>
