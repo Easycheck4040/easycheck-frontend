@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Easycheck App — Workspace</title>
+  <link rel="stylesheet" href="../style.css" />
+  <link rel="icon" type="image/png" href="../assets/logo-mark.png" sizes="32x32" />
+</head>
+<body>
+  <script>
+    // Redireciona se não estiver autenticado
+    if (localStorage.getItem('easycheck-auth')!=='true') {
+      window.location.replace('../login.html');
+    }
+  </script>
+
+  <div class="app">
+    <aside class="app-sidebar">
+      <div class="brand"><img src="../assets/logo-mark.png" alt="" /><span>Easycheck</span></div>
+      <nav class="app-nav">
+        <a class="active" href="./index.html">RH — Assistente</a>
+        <a href="#">Contabilidade</a>
+        <a href="#">Email & Reuniões</a>
+        <a href="#" onclick="localStorage.removeItem('easycheck-auth'); location.href='../index.html'">Terminar sessão</a>
+      </nav>
+    </aside>
+
+    <main class="app-main">
+      <h1>RH — Assistente com IA</h1>
+      <p class="muted">Pede anúncios de vaga, plano de onboarding, extração de competências, etc.</p>
+
+      <div class="chat" id="hrChat">
+        <div class="chat-window" id="chatWindow" aria-live="polite"></div>
+        <div class="composer">
+          <input id="chatInput" placeholder="Ex.: Cria um anúncio de vaga para júnior de marketing" />
+          <button class="btn btn-primary" id="sendBtn">Enviar</button>
+        </div>
+        <div class="status" id="chatStatus">Pronto.</div>
+      </div>
+      <p class="help" style="margin-top:var(--sp-4)">
+        <strong>Dica:</strong> liga o teu backend Render/Cloudflare e define
+        <code>window.EASYCHECK_API_BASE</code> numa tag script antes de <code>script.js</code>.
+      </p>
+    </main>
+  </div>
+
+  <!-- Se tiveres backend, define aqui: -->
+  <!-- <script>window.EASYCHECK_API_BASE = "https://teu-render.onrender.com";</script> -->
+  <script src="../script.js"></script>
+</body>
+</html>
