@@ -12,23 +12,32 @@
 <meta property="og:image" content="/assets/logo-full.png" />
 </head>
 <body>
-  <header class="header">
-    <div class="container navbar">
-      <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
-      <nav class="nav">
-        <a href="./index.html">Início</a>
-        <a class="active" href="./features.html">Funcionalidades</a>
-        <a href="./pricing.html">Preços</a>
-        <a href="./contact.html">Contato</a>
-      </nav>
-      <div class="cta">
-        <div class="lang-switcher">
-          <button class="lang-btn" data-lang="en">EN</button><button class="lang-btn" data-lang="pt">PT</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn" data-lang="de">DE</button>
-        </div>
-        <a class="btn btn-secondary" href="./login.html">Entrar</a>
+<header class="header">
+  <div class="container navbar">
+    <a class="brand" href="/index.html" aria-label="Easycheck — Início">
+      <img src="/assets/logo-mark.png" alt="Easycheck" />
+      <span>Easycheck</span>
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="/index.html">Início</a>
+      <a href="/features.html" class="active">Funcionalidades</a>
+      <a href="/pricing.html">Preços</a>
+      <a href="/contact.html">Contato</a>
+    </nav>
+    <div class="cta">
+      <div class="lang-switcher" role="group" aria-label="Language">
+        <button class="lang-btn" data-lang="en">EN</button>
+        <button class="lang-btn" data-lang="pt">PT</button>
+        <button class="lang-btn" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="de">DE</button>
       </div>
+      <a class="btn btn-secondary" href="/login.html" id="loginBtn">Entrar</a>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
-  </header>
+  </div>
+</header>
 
   <main class="section">
     <div class="container stack">
