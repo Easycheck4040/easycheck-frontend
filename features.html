@@ -3,56 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Funcionalidades — Easycheck</title>
+  <title>Funcionalidades | Easycheck</title>
   <link rel="stylesheet" href="./style.css" />
+  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
 </head>
 <body>
   <header class="header">
     <div class="container navbar">
-      <a class="brand" href="./index.html" aria-label="Easycheck – Início">
-        <img src="./logo-easycheck-mark.png" alt="Easycheck logo">
-        <span>Easycheck</span>
-      </a>
-      <nav class="nav" aria-label="Principal">
+      <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
+      <nav class="nav">
+        <a href="./index.html">Início</a>
         <a class="active" href="./features.html">Funcionalidades</a>
         <a href="./pricing.html">Preços</a>
         <a href="./contact.html">Contato</a>
       </nav>
       <div class="cta">
-        <a class="btn btn-ghost" href="./login.html">Entrar</a>
-        <a class="btn btn-primary" href="./login.html#signup">Criar conta</a>
+        <div class="lang-switcher">
+          <button class="lang-btn" data-lang="en">EN</button><button class="lang-btn" data-lang="pt">PT</button><button class="lang-btn" data-lang="fr">FR</button><button class="lang-btn" data-lang="de">DE</button>
+        </div>
+        <a class="btn btn-secondary" href="./login.html">Entrar</a>
       </div>
     </div>
   </header>
 
   <main class="section">
-    <div class="container">
-      <h1>Funcionalidades</h1>
-      <p class="muted">Tudo o que precisas para gerir o back-office com eficiência.</p>
-      <div class="grid grid-3" style="margin-top:var(--sp-5)">
-        <div class="card elevated" style="padding:var(--sp-5)">
-          <h3>Importação inteligente</h3>
-          <p>Arrasta PDFs, CSVs ou e-mails — a IA processa e classifica automaticamente.</p>
+    <div class="container stack">
+      <h1>Funcionalidades Poderosas</h1>
+      <p class="muted">Tudo o que precisas para gerir o teu back-office com eficiência.</p>
+
+      <div class="grid grid-3">
+        <div class="card elevated padded">
+          <div class="icon-bubble">📑</div>
+          <h3>Contabilidade</h3>
+          <ul class="stack">
+            <li>✓ Faturas e notas de crédito</li>
+            <li>✓ IVA/TVA e exportação</li>
+            <li>✓ Balanços e relatórios</li>
+          </ul>
         </div>
-        <div class="card elevated" style="padding:var(--sp-5)">
-          <h3>Workflows</h3>
-          <p>Cria aprovações e automações com condições e prazos.</p>
+        <div class="card elevated padded">
+          <div class="icon-bubble">👥</div>
+          <h3>RH & Recrutamento</h3>
+          <ul class="stack">
+            <li>✓ Anúncio de vaga com IA</li>
+            <li>✓ Parsing de CV e competências</li>
+            <li>✓ Onboarding justo e sem vieses</li>
+          </ul>
         </div>
-        <div class="card elevated" style="padding:var(--sp-5)">
-          <h3>Pesquisa universal</h3>
-          <p>Encontra qualquer documento, fatura ou conversa em segundos.</p>
+        <div class="card elevated padded">
+          <div class="icon-bubble">✉️</div>
+          <h3>Email & Reuniões</h3>
+          <ul class="stack">
+            <li>✓ Caixas inteligentes</li>
+            <li>✓ Resumos automáticos</li>
+            <li>✓ Atribuição de ações</li>
+          </ul>
         </div>
-        <div class="card" style="padding:var(--sp-5)">
-          <h3>Permissões granulares</h3>
-          <p>Perfis por equipa e cliente, com registo de auditoria.</p>
+        <div class="card elevated padded">
+          <div class="icon-bubble">🛡️</div>
+          <h3>Segurança</h3>
+          <ul class="stack">
+            <li>✓ GDPR, SSO, MFA</li>
+            <li>✓ Logs e auditoria</li>
+            <li>✓ Criptografia end-to-end</li>
+          </ul>
         </div>
-        <div class="card" style="padding:var(--sp-5)">
-          <h3>SDK & Guard</h3>
-          <p>Integração com guard.js, tokens de design e APIs estáveis.</p>
+        <div class="card elevated padded">
+          <div class="icon-bubble">🌍</div>
+          <h3>Multilingue</h3>
+          <p>PT, EN, FR, DE — alternância instantânea.</p>
         </div>
-        <div class="card" style="padding:var(--sp-5)">
-          <h3>Modo escuro automático</h3>
-          <p>Adapta-se ao sistema do utilizador sem configurações extras.</p>
+        <div class="card elevated padded">
+          <div class="icon-bubble">🔗</div>
+          <h3>Integrações</h3>
+          <p>API estável, SDK leve, guard.js e tokens de design.</p>
         </div>
       </div>
     </div>
@@ -60,32 +84,13 @@
 
   <footer class="footer">
     <div class="container cols">
-      <div>
-        <div class="brand" style="margin-bottom:.75rem">
-          <img src="./logo-easycheck-mark.png" alt="" />
-          <span>Easycheck</span>
-        </div>
-        <p class="muted">Suite de back-office com IA para finanças, RH e operações — com privacidade e conformidade.</p>
-      </div>
-      <div>
-        <h3>Produto</h3>
-        <p><a href="./features.html">Funcionalidades</a></p>
-        <p><a href="./pricing.html">Preços</a></p>
-      </div>
-      <div>
-        <h3>Empresa</h3>
-        <p><a href="./contact.html">Contato</a></p>
-      </div>
-      <div>
-        <h3>Legal</h3>
-        <p><a href="./privacy.html">Privacidade</a></p>
-        <p><a href="./terms.html">Termos</a></p>
-      </div>
-    </div>
-    <div class="container" style="margin-top:1.5rem">
-      <hr class="separator" />
-      <p class="muted">© 2025 Easycheck. Todos os direitos reservados.</p>
+      <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
+      <div><h3>Produto</h3><p><a href="./pricing.html">Preços</a></p></div>
+      <div><h3>Empresa</h3><p><a href="./contact.html">Contato</a></p></div>
+      <div><h3>Legal</h3><p><a href="./privacy.html">Privacidade</a></p><p><a href="./terms.html">Termos</a></p></div>
     </div>
   </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>
