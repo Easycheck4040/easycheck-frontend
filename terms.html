@@ -1,43 +1,176 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Termos de Serviço | Easycheck</title>
+  <meta name="description" content="Easycheck Terms of Service." />
+  <meta property="og:title" content="Terms — Easycheck" />
+  <meta property="og:description" content="Terms and conditions for using Easycheck." />
+  <meta property="og:type" content="website" />
+  <title>Terms — Easycheck</title>
+
   <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
+  <meta property="og:image" content="./assets/logo-full.png" />
 </head>
 <body>
-<header class="header">
-  <div class="container navbar">
-    <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
-    <nav class="nav"><a href="./index.html">Início</a><a href="./features.html">Funcionalidades</a><a href="./pricing.html">Preços</a><a href="./contact.html">Contato</a></nav>
-    <div class="cta"><a class="btn btn-secondary" href="./login.html">Entrar</a></div>
-  </div>
-</header>
-
-<main class="section">
-  <div class="container stack">
-    <h1>Termos de Serviço</h1>
-    <p class="muted">Última atualização: Novembro 2025</p>
-    <div class="card padded">
-      <h3>Acordo</h3><p>Ao usar o site/serviço, concordas com estes termos.</p>
-      <h3>Uso</h3><p>Não podes copiar, revender ou tentar engenharia reversa do software.</p>
-      <h3>Limitação de responsabilidade</h3><p>O serviço é fornecido “como está”.</p>
-      <h3>Lei Aplicável</h3><p>França.</p>
-      <h3>Contacto</h3><p>legal@easycheck.app</p>
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a class="brand" href="./index.html" aria-label="Easycheck — Home">
+        <img src="./assets/logo-mark.png" alt="Easycheck" width="28" height="28" />
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./index.html" data-i18n="nav.home">Home</a>
+        <a href="./features.html" data-i18n="nav.features">Features</a>
+        <a href="./pricing.html" data-i18n="nav.pricing">Pricing</a>
+        <a href="./contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="cta" style="display:flex;align-items:center;gap:.5rem">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="pt">PT</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+        <a class="btn btn-secondary" href="./login.html" id="loginBtn" data-i18n="nav.signin">Sign in</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
-  </div>
-</main>
+  </header>
 
-<footer class="footer">
-  <div class="container cols">
-    <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
-    <div><h3>Produto</h3><p><a href="./features.html">Funcionalidades</a></p></div>
-    <div><h3>Empresa</h3><p><a href="./pricing.html">Preços</a></p></div>
-    <div><h3>Legal</h3><p><a href="./privacy.html">Privacidade</a></p></div>
-  </div>
-</footer>
-<script src="./script.js"></script>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container center">
+        <span class="badge" data-i18n="terms.title">Terms of Service</span>
+        <h1 data-i18n="terms.title">Terms of Service</h1>
+        <p class="lead" data-i18n="terms.updated">Last updated: November 2025</p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container grid grid-2">
+        <!-- Column A -->
+        <div class="stack">
+          <div class="card padded elevated">
+            <h2 data-i18n="terms.agreement.title">Agreement to Terms</h2>
+            <p class="muted" data-i18n="terms.agreement.text">
+              By accessing and using the Easycheck website and services, you accept and agree to be bound by the terms and provision of this agreement.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.use.title">Use License</h2>
+            <p class="muted" data-i18n="terms.use.text">
+              Permission is granted to temporarily download one copy of the materials for personal, non-commercial transitory viewing only.
+            </p>
+            <ul class="stack">
+              <li data-i18n="terms.use.modify">Modify or copy the materials</li>
+              <li data-i18n="terms.use.commercial">Use the materials for any commercial purpose</li>
+              <li data-i18n="terms.use.reverse">Attempt to reverse engineer, disassemble, or decompile any software</li>
+              <li data-i18n="terms.use.remove">Remove any copyright or other proprietary notations</li>
+            </ul>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.disclaimer.title">Disclaimer</h2>
+            <p class="muted" data-i18n="terms.disclaimer.text">The materials on Easycheck's website are provided on an 'as is' basis.</p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.limitations.title">Limitations</h2>
+            <p class="muted" data-i18n="terms.limitations.text">In no event shall Easycheck or its suppliers be liable for any damages.</p>
+          </div>
+        </div>
+
+        <!-- Column B -->
+        <div class="stack">
+          <div class="card padded">
+            <h2 data-i18n="terms.accuracy.title">Accuracy of Materials</h2>
+            <p class="muted" data-i18n="terms.accuracy.text">
+              The materials appearing on Easycheck's website could include technical errors.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.modifications.title">Modifications</h2>
+            <p class="muted" data-i18n="terms.modifications.text">
+              Easycheck may revise the materials contained on its website at any time without notice.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.links.title">Links</h2>
+            <p class="muted" data-i18n="terms.links.text">
+              Easycheck has not reviewed all of the sites linked to its website.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.modifications_service.title">Modifications to Terms</h2>
+            <p class="muted" data-i18n="terms.modifications_service.text">
+              Easycheck may revise these terms of service at any time without notice.
+            </p>
+          </div>
+
+          <div class="card padded elevated">
+            <h2 data-i18n="terms.law.title">Governing Law</h2>
+            <p class="muted" data-i18n="terms.law.text">
+              These terms and conditions are governed by the laws of France.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="terms.contact.title">Contact Information</h2>
+            <p class="muted" data-i18n="terms.contact.text">
+              If you have any questions, please contact us at legal@easycheck.app
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container cols">
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="./assets/logo-mark.png" alt="" width="28" height="28" /><span>Easycheck</span>
+        </div>
+        <p class="muted" data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.product">Product</h3>
+        <p><a href="./features.html" data-i18n="footer.features">Features</a></p>
+        <p><a href="./pricing.html" data-i18n="nav.pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.company">Company</h3>
+        <p><a href="./contact.html" data-i18n="footer.contact">Contact</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <p><a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a></p>
+        <p><a href="./terms.html" data-i18n="footer.terms">Terms of Service</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small class="muted" data-i18n="footer.copyright">© 2025 Easycheck. All rights reserved.</small>
+      <div class="footer-social" style="display:flex;gap:.6rem">
+        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+        <a href="#" aria-label="GitHub" class="social-link">gh</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>
