@@ -1,113 +1,98 @@
-<!doctype html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Política de Privacidade — Easycheck</title>
-<link rel="stylesheet" href="./style.css"/>
-</head><body>
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Preços — Easycheck</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container navbar">
+      <a class="brand" href="./index.html" aria-label="Easycheck – Início">
+        <img src="./logo-easycheck-mark.png" alt="Easycheck logo">
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="./features.html">Funcionalidades</a>
+        <a class="active" href="./pricing.html">Preços</a>
+        <a href="./contact.html">Contato</a>
+      </nav>
+      <div class="cta">
+        <a class="btn btn-ghost" href="./login.html">Entrar</a>
+        <a class="btn btn-primary" href="./login.html#signup">Criar conta</a>
+      </div>
+    </div>
+  </header>
 
-<header class="nav">
-  <div class="container navbar">
-    <div class="brand"><span class="logo">✓</span><span>Easycheck</span></div>
-    <nav class="menu">
-      <a href="index.html">Início</a>
-      <a href="features.html">Funcionalidades</a>
-      <a href="pricing.html">Preços</a>
-      <a href="login.html">Entrar</a>
-    </nav>
-  </div>
-</header>
+  <main class="section">
+    <div class="container">
+      <h1>Planos e Preços</h1>
+      <p class="muted">Começa grátis. Faz upgrade quando precisares.</p>
+      <div class="pricing" style="margin-top:var(--sp-5)">
+        <div class="card tier">
+          <h3>Starter</h3>
+          <p class="price">€0 <small>/ mês</small></p>
+          <ul>
+            <li>✓ 1 workspace</li>
+            <li>✓ 2 membros</li>
+            <li>✓ 100 docs/mês</li>
+          </ul>
+          <a class="btn btn-primary" href="./login.html#signup">Começar</a>
+        </div>
+        <div class="card tier elevated">
+          <div class="badge">Mais popular</div>
+          <h3>Pro</h3>
+          <p class="price">€19 <small>/ mês</small></p>
+          <ul>
+            <li>✓ 5 workspaces</li>
+            <li>✓ 10 membros</li>
+            <li>✓ 5k docs/mês</li>
+          </ul>
+          <a class="btn btn-primary" href="./login.html#signup">Experimentar</a>
+        </div>
+        <div class="card tier">
+          <h3>Empresa</h3>
+          <p class="price">Custom <small>/ cotações</small></p>
+          <ul>
+            <li>✓ SSO, SCIM</li>
+            <li>✓ Controlo de dados</li>
+            <li>✓ Suporte dedicado</li>
+          </ul>
+          <a class="btn btn-ghost" href="./contact.html">Falar com vendas</a>
+        </div>
+      </div>
+    </div>
+  </main>
 
-<main class="container" style="padding:24px 0">
-  <h1>Política de Privacidade</h1>
-  <p class="muted">Última atualização: 01/11/2025</p>
-
-  <div class="card" style="margin-top:12px">
-    <p>Esta Política descreve como a <b>Easycheck</b> (“nós”) trata dados pessoais quando utilizas o nosso site e a nossa aplicação de back-office com IA (“Serviço”). Cumprimos o Regulamento (UE) 2016/679 (“<b>RGPD</b>”).</p>
-  </div>
-
-  <h2>1. Quem é o responsável pelo tratamento?</h2>
-  <div class="card">
-    <p><b>Responsável:</b> Easycheck ({{INSERIR NOME LEGAL}})</p>
-    <p><b>Sede:</b> {{INSERIR ENDEREÇO}}</p>
-    <p><b>E-mail de contacto:</b> {{SUPORTE@SEU-DOMINIO}}</p>
-    <p><b>Encarregado de Proteção de Dados (DPO):</b> {{DPO@SEU-DOMINIO}} (se aplicável)</p>
-  </div>
-
-  <h2>2. Que dados recolhemos?</h2>
-  <div class="card">
-    <ul>
-      <li><b>Conta:</b> e-mail, palavra-passe (hash), nome (opcional).</li>
-      <li><b>Dados de empresa:</b> nome legal, VAT, endereço, IBAN/BIC, idioma, timezone.</li>
-      <li><b>Clientes e documentos:</b> dados que inseres (ex.: faturas, notas de crédito, templates, relatórios).</li>
-      <li><b>RH:</b> critérios da vaga, candidatos (incl. CVs que carregas).</li>
-      <li><b>Conexões:</b> credenciais de SMTP e configurações — <i>cifradas em repouso</i>.</li>
-      <li><b>Utilização:</b> logs técnicos (IP, user-agent, data/hora, erros) para segurança e desempenho.</li>
-      <li><b>Cookies essenciais:</b> sessão de autenticação; não utilizamos cookies de marketing por padrão.</li>
-    </ul>
-  </div>
-
-  <h2>3. Para que usamos os dados? (Bases legais)</h2>
-  <div class="card">
-    <ul>
-      <li><b>Prestar o Serviço</b> (execução do contrato): autenticação, armazenamento e geração de documentos, envio de e-mails, ranking de CVs, etc.</li>
-      <li><b>Segurança e prevenção de abuso</b> (interesse legítimo): deteção de falhas, prevenção de spam via SMTP, auditoria.</li>
-      <li><b>Comunicações</b> (contrato/interesse legítimo): avisos sobre a conta, atualizações e suporte.</li>
-      <li><b>Obrigação legal</b>: faturas, comprovativos e pedidos de autoridades competentes.</li>
-      <li><b>Consentimento</b> (quando aplicável): funcionalidades opcionais (ex.: newsletters/analytics).</li>
-    </ul>
-  </div>
-
-  <h2>4. Conservação</h2>
-  <div class="card">
-    <p>Guardamos dados pelo período necessário para prestar o Serviço e cumprir obrigações legais. Podes solicitar eliminação da tua conta; alguns dados (ex.: faturação) podem ser retidos pelos prazos legais aplicáveis.</p>
-  </div>
-
-  <h2>5. Partilha e sub-processadores</h2>
-  <div class="card">
-    <p>Usamos fornecedores que atuam como <b>sub-processadores</b> apenas para operar o Serviço (hospedagem, base de dados, entrega de e-mails, CDN). Exemplos: infraestrutura na UE e provedores equivalentes. Celebramos cláusulas contratuais adequadas e instruções de processamento conforme o RGPD.</p>
-    <p>Não vendemos dados pessoais.</p>
-  </div>
-
-  <h2>6. Transferências internacionais</h2>
-  <div class="card">
-    <p>Quando há transferência para fora do EEE, aplicamos salvaguardas como <b>Cláusulas Contratuais-Tipo</b> e medidas complementares de segurança.</p>
-  </div>
-
-  <h2>7. Segurança</h2>
-  <div class="card">
-    <ul>
-      <li>Encriptação em trânsito (TLS) e encriptação de credenciais sensíveis em repouso.</li>
-      <li>Controlo de acesso por empresa/usuário e registos de auditoria.</li>
-      <li>Boas práticas de desenvolvimento e segregação de ambientes.</li>
-    </ul>
-  </div>
-
-  <h2>8. Os teus direitos</h2>
-  <div class="card">
-    <p>Tens direito de acesso, retificação, apagamento, limitação, portabilidade e oposição. Para exercer, contacta: {{DPO/EMAIL SUPORTE}}. Tens também o direito de reclamar junto da autoridade de controlo competente (ex.: <b>CNPD</b> – Luxemburgo).</p>
-  </div>
-
-  <h2>9. Cookies</h2>
-  <div class="card">
-    <p>Usamos apenas <b>cookies essenciais</b> para login/sessão. Qualquer analytics opcional será desativado por padrão e só ativado com consentimento.</p>
-  </div>
-
-  <h2>10. IA e automatizações</h2>
-  <div class="card">
-    <p>Algumas funcionalidades usam modelos de IA para classificação de CVs, geração de texto e detecção de anomalias. Mantemos logs de decisão e fornecemos meios de revisão humana quando aplicável.</p>
-  </div>
-
-  <h2>11. Alterações</h2>
-  <div class="card">
-    <p>Podemos atualizar esta Política. Publicaremos a versão atual nesta página com nova data de vigência.</p>
-  </div>
-</main>
-
-<footer>
-  <div class="container" style="padding:16px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
-    <span class="muted">© 2025 Easycheck.</span>
-    <span class="muted">GDPR-ready • Hospedado na UE</span>
-  </div>
-</footer>
-<script src="cookie-consent.js"></script>
-</body></html>
+  <footer class="footer">
+    <div class="container cols">
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="./logo-easycheck-mark.png" alt="" />
+          <span>Easycheck</span>
+        </div>
+        <p class="muted">Suite de back-office com IA para finanças, RH e operações — com privacidade e conformidade.</p>
+      </div>
+      <div>
+        <h3>Produto</h3>
+        <p><a href="./features.html">Funcionalidades</a></p>
+        <p><a href="./pricing.html">Preços</a></p>
+      </div>
+      <div>
+        <h3>Empresa</h3>
+        <p><a href="./contact.html">Contato</a></p>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p><a href="./privacy.html">Privacidade</a></p>
+        <p><a href="./terms.html">Termos</a></p>
+      </div>
+    </div>
+    <div class="container" style="margin-top:1.5rem">
+      <hr class="separator" />
+      <p class="muted">© 2025 Easycheck. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+</html>
