@@ -1,58 +1,173 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Política de Privacidade | Easycheck</title>
+  <meta name="description" content="Easycheck Privacy Policy — GDPR compliant AI back-office." />
+  <meta property="og:title" content="Privacy — Easycheck" />
+  <meta property="og:description" content="How Easycheck collects, uses, and protects your data." />
+  <meta property="og:type" content="website" />
+  <title>Privacy — Easycheck</title>
+
   <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
+  <meta property="og:image" content="./assets/logo-full.png" />
 </head>
 <body>
-<header class="header">
-  <div class="container navbar">
-    <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
-    <nav class="nav"><a href="./index.html">Início</a><a href="./features.html">Funcionalidades</a><a href="./pricing.html">Preços</a><a href="./contact.html">Contato</a></nav>
-    <div class="cta"><a class="btn btn-secondary" href="./login.html">Entrar</a></div>
-  </div>
-</header>
-
-<main class="section">
-  <div class="container stack">
-    <h1>Política de Privacidade</h1>
-    <p class="muted">Última atualização: Novembro 2025</p>
-    <div class="card padded">
-      <h3>Introdução</h3>
-      <p>Na Easycheck, protegemos a tua privacidade. Esta política explica como recolhemos, usamos e protegemos dados.</p>
-      <h3>Dados que recolhemos</h3>
-      <ul>
-        <li>Informações fornecidas por ti (formulários e conta)</li>
-        <li>Dados de utilização e cookies</li>
-        <li>Dados de faturação ao adquirir serviços</li>
-      </ul>
-      <h3>Como usamos os dados</h3>
-      <ul>
-        <li>Fornecer e melhorar o serviço</li>
-        <li>Comunicar atualizações e ofertas</li>
-        <li>Cumprir requisitos legais (GDPR)</li>
-      </ul>
-      <h3>Partilha de dados</h3>
-      <p>Não vendemos dados pessoais. Partilha apenas com processadores necessários e sob contrato.</p>
-      <h3>Segurança</h3>
-      <p>Criptografia end-to-end, SSO/MFA e auditoria.</p>
-      <h3>Contacto</h3>
-      <p>privacy@easycheck.app</p>
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a class="brand" href="./index.html" aria-label="Easycheck — Home">
+        <img src="./assets/logo-mark.png" alt="Easycheck" width="28" height="28" />
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Main">
+        <a href="./index.html" data-i18n="nav.home">Home</a>
+        <a href="./features.html" data-i18n="nav.features">Features</a>
+        <a href="./pricing.html" data-i18n="nav.pricing">Pricing</a>
+        <a href="./contact.html" data-i18n="nav.contact">Contact</a>
+      </nav>
+      <div class="cta" style="display:flex;align-items:center;gap:.5rem">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="pt">PT</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+        <a class="btn btn-secondary" href="./login.html" id="loginBtn" data-i18n="nav.signin">Sign in</a>
+        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
-  </div>
-</main>
+  </header>
 
-<footer class="footer">
-  <div class="container cols">
-    <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
-    <div><h3>Produto</h3><p><a href="./features.html">Funcionalidades</a></p></div>
-    <div><h3>Empresa</h3><p><a href="./pricing.html">Preços</a></p></div>
-    <div><h3>Legal</h3><p><a href="./terms.html">Termos</a></p></div>
-  </div>
-</footer>
-<script src="./script.js"></script>
+  <main>
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container center">
+        <span class="badge" data-i18n="privacy.title">Privacy Policy</span>
+        <h1 data-i18n="privacy.title">Privacy Policy</h1>
+        <p class="lead" data-i18n="privacy.updated">Last updated: November 2025</p>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="section">
+      <div class="container grid grid-2">
+        <!-- Left column -->
+        <div class="stack">
+          <div class="card padded elevated">
+            <h2 data-i18n="privacy.intro.title">Introduction</h2>
+            <p class="muted" data-i18n="privacy.intro.text">
+              At Easycheck, we are committed to protecting your privacy.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="privacy.collection.title">Information We Collect</h2>
+            <p class="muted" data-i18n="privacy.collection.intro">We collect information in various ways:</p>
+            <ul class="stack">
+              <li data-i18n="privacy.collection.personal">Personal information you voluntarily provide through forms</li>
+              <li data-i18n="privacy.collection.usage">Usage data collected automatically</li>
+              <li data-i18n="privacy.collection.cookies">Information from cookies and similar tracking technologies</li>
+              <li data-i18n="privacy.collection.payment">Payment and billing information when you purchase our services</li>
+            </ul>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="privacy.use.title">How We Use Your Information</h2>
+            <p class="muted" data-i18n="privacy.use.intro">We use the information we collect for:</p>
+            <ul class="stack">
+              <li data-i18n="privacy.use.service">Providing and improving our services</li>
+              <li data-i18n="privacy.use.communicate">Communicating with you about updates and offers</li>
+              <li data-i18n="privacy.use.compliance">Complying with legal obligations and GDPR requirements</li>
+              <li data-i18n="privacy.use.security">Ensuring security and preventing fraud</li>
+            </ul>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="privacy.gdpr.title">GDPR Compliance</h2>
+            <p class="muted" data-i18n="privacy.gdpr.text">
+              We comply fully with the General Data Protection Regulation (GDPR).
+            </p>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="stack">
+          <div class="card padded">
+            <h2 data-i18n="privacy.sharing.title">Data Sharing</h2>
+            <p class="muted" data-i18n="privacy.sharing.text">We do not sell your personal data to third parties.</p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="privacy.security.title">Data Security</h2>
+            <p class="muted" data-i18n="privacy.security.text">
+              We implement advanced security measures including end-to-end encryption.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="privacy.retention.title">Data Retention</h2>
+            <p class="muted" data-i18n="privacy.retention.text">
+              We retain your data only as long as necessary for the purposes outlined in this policy.
+            </p>
+          </div>
+
+          <div class="card padded">
+            <h2 data-i18n="privacy.cookies.title">Cookies</h2>
+            <p class="muted" data-i18n="privacy.cookies.text">
+              Our website uses cookies to enhance your experience.
+            </p>
+          </div>
+
+          <div class="card padded elevated">
+            <h2 data-i18n="privacy.contact.title">Contact Us</h2>
+            <p class="muted" data-i18n="privacy.contact.text">
+              For privacy inquiries, contact us at privacy@easycheck.app
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container cols">
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="./assets/logo-mark.png" alt="" width="28" height="28" /><span>Easycheck</span>
+        </div>
+        <p class="muted" data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.product">Product</h3>
+        <p><a href="./features.html" data-i18n="footer.features">Features</a></p>
+        <p><a href="./pricing.html" data-i18n="nav.pricing">Pricing</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.company">Company</h3>
+        <p><a href="./contact.html" data-i18n="footer.contact">Contact</a></p>
+      </div>
+      <div>
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <p><a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a></p>
+        <p><a href="./terms.html" data-i18n="footer.terms">Terms of Service</a></p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small class="muted" data-i18n="footer.copyright">© 2025 Easycheck. All rights reserved.</small>
+      <div class="footer-social" style="display:flex;gap:.6rem">
+        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+        <a href="#" aria-label="GitHub" class="social-link">gh</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="./script.js"></script>
 </body>
 </html>
