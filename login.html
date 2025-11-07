@@ -1,164 +1,100 @@
-<!doctype html><html lang="pt"><head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Entrar – Easycheck</title>
-<link rel="stylesheet" href="./style.css"/>
-<style>
-  :root{
-    --bg:#0f1115; --card:#121520; --stroke:#22283a; --muted:#9bbcff; --txt:#e6e8ef; --accent:#0A84FF;
-  }
-  body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,Arial;margin:0}
-  .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
-  .panel{width:100%;max-width:520px;background:var(--card);border:1px solid var(--stroke);border-radius:16px;padding:24px}
-  .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:700}
-  .brand .logo{background:var(--accent);color:#fff;border-radius:10px;padding:6px 10px}
-  .tabs{display:flex;gap:6px;margin:8px 0 16px}
-  .tab{flex:1;padding:10px 12px;text-align:center;border-radius:10px;border:1px solid var(--stroke);cursor:pointer;background:#151a28}
-  .tab.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
-  label{display:block;margin:6px 0 4px}
-  input{width:100%;padding:12px 14px;border-radius:10px;border:1px solid var(--stroke);background:#0f1320;color:var(--txt)}
-  .row{display:flex;gap:10px;flex-wrap:wrap}
-  .actions{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:10px}
-  button{background:var(--accent);color:#fff;border:0;border-radius:10px;padding:12px 16px;font-weight:600;cursor:pointer}
-  button.ghost{background:#1f2538}
-  .muted{color:#c5cde6;opacity:.9;font-size:.9em}
-  .err{background:#3a1b1b;border:1px solid #5c2a2a;color:#ffd6d6;padding:10px;border-radius:10px;display:none;margin-bottom:10px}
-  .pw{position:relative}
-  .pw .toggle{position:absolute;right:10px;top:36px;font-size:.9em;color:var(--muted);cursor:pointer}
-  a{color:var(--muted);text-decoration:none}
-  a:hover{color:#cfe0ff}
-</style>
-</head><body>
-<div class="wrap">
-  <div class="panel">
-    <div class="head">
-      <div class="brand"><span class="logo">✓</span><span>Easycheck</span></div>
-      <a href="index.html" class="muted">← Voltar ao site</a>
+<!doctype html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Entrar / Criar conta — Easycheck</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container navbar">
+      <a class="brand" href="./index.html" aria-label="Easycheck – Início">
+        <img src="./logo-easycheck-mark.png" alt="Easycheck logo">
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="./features.html">Funcionalidades</a>
+        <a href="./pricing.html">Preços</a>
+        <a href="./contact.html">Contato</a>
+      </nav>
+      <div class="cta">
+        <a class="btn btn-ghost" href="./login.html">Entrar</a>
+        <a class="btn btn-primary" href="./login.html#signup">Criar conta</a>
+      </div>
     </div>
+  </header>
 
-    <div class="tabs">
-      <div class="tab active" id="tab-in">Entrar</div>
-      <div class="tab" id="tab-up">Criar conta</div>
+  <main class="section">
+    <div class="container grid grid-2">
+      <div class="card elevated" style="padding:var(--sp-6)">
+        <h1>Entrar</h1>
+        <form class="form" id="login-form">
+          <div class="input">
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" placeholder="tu@empresa.com" required />
+          </div>
+          <div class="input">
+            <label for="password">Palavra-passe</label>
+            <input id="password" type="password" name="password" placeholder="••••••••" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Entrar</button>
+          <span class="help">Esqueceste a palavra-passe? <a href="#">Recuperar</a></span>
+        </form>
+      </div>
+
+      <div class="card" style="padding:var(--sp-6)" id="signup">
+        <h1>Criar conta</h1>
+        <form class="form" id="signup-form">
+          <div class="input">
+            <label for="name">Nome</label>
+            <input id="name" name="name" placeholder="O teu nome" required />
+          </div>
+          <div class="input">
+            <label for="email2">Email</label>
+            <input id="email2" type="email" name="email" placeholder="tu@empresa.com" required />
+          </div>
+          <div class="input">
+            <label for="password2">Palavra-passe</label>
+            <input id="password2" type="password" name="password" placeholder="Mínimo 8 caracteres" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Criar conta</button>
+          <span class="help">Ao criar conta, concordas com os <a href="./terms.html">Termos</a> e a <a href="./privacy.html">Privacidade</a>.</span>
+        </form>
+      </div>
     </div>
+  </main>
 
-    <div id="error" class="err"></div>
-
-    <!-- ENTRAR -->
-    <form id="form-in">
-      <label>Email</label>
-      <input id="in-email" autocomplete="email" placeholder="voce@empresa.com" required>
-      <div class="pw">
-        <label>Senha</label>
-        <input id="in-pass" type="password" autocomplete="current-password" placeholder="••••••••" required>
-        <span class="toggle" data-t="in-pass">mostrar</span>
-      </div>
-      <div class="actions">
-        <button type="button" class="ghost" id="forgot">Esqueci minha senha</button>
-        <button type="submit">Entrar</button>
-      </div>
-    </form>
-
-    <!-- CRIAR CONTA -->
-    <form id="form-up" style="display:none;margin-top:6px">
-      <label>Email corporativo</label>
-      <input id="up-email" autocomplete="email" placeholder="voce@empresa.com" required>
-      <div class="row" style="width:100%">
-        <div class="pw" style="flex:1;min-width:180px">
-          <label>Senha</label>
-          <input id="up-pass" type="password" autocomplete="new-password" placeholder="mín. 8 caracteres" required>
-          <span class="toggle" data-t="up-pass">mostrar</span>
+  <footer class="footer">
+    <div class="container cols">
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="./logo-easycheck-mark.png" alt="" />
+          <span>Easycheck</span>
         </div>
-        <div class="pw" style="flex:1;min-width:180px">
-          <label>Confirmar senha</label>
-          <input id="up-pass2" type="password" autocomplete="new-password" placeholder="repete a senha" required>
-          <span class="toggle" data-t="up-pass2">mostrar</span>
-        </div>
+        <p class="muted">Suite de back-office com IA para finanças, RH e operações — com privacidade e conformidade.</p>
       </div>
-      <p class="muted">Ao criar conta, receberás um e-mail para confirmar. Depois, podes entrar.</p>
-      <div class="actions" style="justify-content:flex-end">
-        <button type="submit">Criar conta</button>
+      <div>
+        <h3>Produto</h3>
+        <p><a href="./features.html">Funcionalidades</a></p>
+        <p><a href="./pricing.html">Preços</a></p>
       </div>
-    </form>
+      <div>
+        <h3>Empresa</h3>
+        <p><a href="./contact.html">Contato</a></p>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p><a href="./privacy.html">Privacidade</a></p>
+        <p><a href="./terms.html">Termos</a></p>
+      </div>
+    </div>
+    <div class="container" style="margin-top:1.5rem">
+      <hr class="separator" />
+      <p class="muted">© 2025 Easycheck. Todos os direitos reservados.</p>
+    </div>
+  </footer>
 
-    <p class="muted" style="margin-top:14px">Dúvidas? Fala com a gente: support@easycheck…</p>
-  </div>
-</div>
-
-<!-- Supabase (frontend) -->
-<script src="lib/supabase.js"></script>
-<script>
-(function(){
-  const $ = s => document.querySelector(s);
-  const showErr = (msg) => { const el=$('#error'); el.textContent = msg; el.style.display='block'; };
-  const clearErr = () => { const el=$('#error'); el.textContent=''; el.style.display='none'; };
-
-  // Tabs
-  const tabIn = $('#tab-in'), tabUp = $('#tab-up');
-  const formIn = $('#form-in'), formUp = $('#form-up');
-  tabIn.onclick = ()=>{ tabIn.classList.add('active'); tabUp.classList.remove('active'); formIn.style.display='block'; formUp.style.display='none'; clearErr(); };
-  tabUp.onclick = ()=>{ tabUp.classList.add('active'); tabIn.classList.remove('active'); formUp.style.display='block'; formIn.style.display='none'; clearErr(); };
-
-  // Mostrar/ocultar senha
-  document.addEventListener('click', (e)=>{
-    if(e.target.classList.contains('toggle')){
-      const id = e.target.getAttribute('data-t');
-      const inp = document.getElementById(id);
-      if(!inp) return;
-      const isPw = inp.type === 'password';
-      inp.type = isPw ? 'text' : 'password';
-      e.target.textContent = isPw ? 'ocultar' : 'mostrar';
-    }
-  });
-
-  // Supabase ready
-  (async () => {
-    const sb = await window.sbReady;
-
-    // Entrar
-    formIn.addEventListener('submit', async (e)=>{
-      e.preventDefault(); clearErr();
-      const email = $('#in-email').value.trim();
-      const pass  = $('#in-pass').value.trim();
-      if(!email || !pass){ showErr('Preenche e-mail e senha.'); return; }
-
-      const { error } = await sb.auth.signInWithPassword({ email, password: pass });
-      if(error){ showErr(error.message); return; }
-      // redireciona para a primeira página interna
-      location.href = 'connections.html';
-    });
-
-    // Criar conta
-    formUp.addEventListener('submit', async (e)=>{
-      e.preventDefault(); clearErr();
-      const email = $('#up-email').value.trim();
-      const p1    = $('#up-pass').value.trim();
-      const p2    = $('#up-pass2').value.trim();
-      if(!email || !p1 || !p2){ showErr('Preenche todos os campos.'); return; }
-      if(p1.length < 8){ showErr('A senha deve ter pelo menos 8 caracteres.'); return; }
-      if(p1 !== p2){ showErr('As senhas não coincidem.'); return; }
-
-      const { error } = await sb.auth.signUp({
-        email, password: p1,
-        options: { emailRedirectTo: location.origin + '/login.html' }
-      });
-      if(error){ showErr(error.message); return; }
-      alert('Conta criada! Verifica o teu e-mail para confirmar e depois faz login.');
-      // volta para a aba de login
-      tabIn.click();
-    });
-
-    // Esqueci a senha (envia e-mail de recuperação)
-    $('#forgot').onclick = async ()=>{
-      clearErr();
-      const email = prompt('Qual é o teu e-mail?');
-      if(!email) return;
-      const { error } = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + '/login.html' });
-      if(error){ showErr(error.message); return; }
-      alert('Enviámos um e-mail de redefinição de senha. Verifica a caixa de entrada.');
-    };
-  })();
-})();
-</script>
-  <script src="cookie-consent.js"></script>
-</body></html>
+  <script src="./script.js"></script>
+</body>
+</html>
