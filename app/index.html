@@ -4,31 +4,38 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Easycheck App — Workspace</title>
-  <link rel="stylesheet" href="../style.css" />
-  <link rel="icon" type="image/png" href="../assets/logo-mark.png" sizes="32x32" />
+
+  <!-- Estilos + Logos -->
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="/assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/assets/favicon-512.png" sizes="512x512" />
+  <meta property="og:image" content="/assets/logo-full.png" />
 </head>
 <body>
+  <!-- Gate de sessão: se não estiver logado, manda para login -->
   <script>
-    // Redireciona se não estiver autenticado
-    if (localStorage.getItem('easycheck-auth')!=='true') {
-      window.location.replace('../login.html');
+    if (localStorage.getItem('easycheck-auth') !== 'true') {
+      location.replace('/login.html');
     }
   </script>
 
   <div class="app">
     <aside class="app-sidebar">
-      <div class="brand"><img src="../assets/logo-mark.png" alt="" /><span>Easycheck</span></div>
-      <nav class="app-nav">
-        <a class="active" href="./index.html">RH — Assistente</a>
-        <a href="#">Contabilidade</a>
-        <a href="#">Email & Reuniões</a>
-        <a href="#" onclick="localStorage.removeItem('easycheck-auth'); location.href='../index.html'">Terminar sessão</a>
+      <div class="brand">
+        <img src="/assets/logo-mark.png" alt="Easycheck" />
+        <span>Easycheck</span>
+      </div>
+      <nav class="app-nav" aria-label="Navegação da app">
+        <a class="active" href="/app/index.html">RH — Assistente</a>
+        <a href="#" aria-disabled="true">Contabilidade</a>
+        <a href="#" aria-disabled="true">Email & Reuniões</a>
+        <a href="#" id="logoutLink">Terminar sessão</a>
       </nav>
     </aside>
 
     <main class="app-main">
       <h1>RH — Assistente com IA</h1>
-      <p class="muted">Pede anúncios de vaga, plano de onboarding, extração de competências, etc.</p>
+      <p class="muted">Pede anúncios de vaga, plano de onboarding, extrair competências, resumos, etc.</p>
 
       <div class="chat" id="hrChat">
         <div class="chat-window" id="chatWindow" aria-live="polite"></div>
@@ -38,15 +45,47 @@
         </div>
         <div class="status" id="chatStatus">Pronto.</div>
       </div>
-      <p class="help" style="margin-top:var(--sp-4)">
-        <strong>Dica:</strong> liga o teu backend Render/Cloudflare e define
-        <code>window.EASYCHECK_API_BASE</code> numa tag script antes de <code>script.js</code>.
+
+      <section style="margin-top:2rem">
+        <h2>Snippets rápidos</h2>
+        <div class="grid grid-3">
+          <button class="btn btn-secondary" id="snippetJob">Anúncio de vaga</button>
+          <button class="btn btn-secondary" id="snippetOnboarding">Onboarding (30 dias)</button>
+          <button class="btn btn-secondary" id="snippetSum">Resumir texto</button>
+        </div>
+      </section>
+
+      <p class="help" style="margin-top:1rem">
+        Dica: se tiveres backend, define <code>window.EASYCHECK_API_BASE</code> num
+        <em>script</em> antes de <code>/script.js</code> para respostas reais.
       </p>
     </main>
   </div>
 
-  <!-- Se tiveres backend, define aqui: -->
-  <!-- <script>window.EASYCHECK_API_BASE = "https://teu-render.onrender.com";</script> -->
-  <script src="../script.js"></script>
+  <!-- <script>window.EASYCHECK_API_BASE="https://TEU-BACKEND.exemplo.com";</script> -->
+  <script src="/script.js"></script>
+  <script>
+    // Logout
+    document.getElementById('logoutLink')?.addEventListener('click', function(e){
+      e.preventDefault();
+      localStorage.removeItem('easycheck-auth');
+      location.href = '/index.html';
+    });
+
+    // Preenchimento rápido de prompts
+    const input = document.getElementById('chatInput');
+    document.getElementById('snippetJob')?.addEventListener('click', ()=> {
+      input.value = 'Cria um anúncio de vaga para Assistente de Marketing Júnior em Luxemburgo.';
+      input.focus();
+    });
+    document.getElementById('snippetOnboarding')?.addEventListener('click', ()=> {
+      input.value = 'Escreve um plano de onboarding de 30 dias para um SDR júnior.';
+      input.focus();
+    });
+    document.getElementById('snippetSum')?.addEventListener('click', ()=> {
+      input.value = 'Resume este texto: [cola aqui o texto]';
+      input.focus();
+    });
+  </script>
 </body>
 </html>
