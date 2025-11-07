@@ -4,13 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Easycheck — Suite de Back-Office com IA</title>
-  <meta name="description" content="Automatiza finanças, RH e operações com IA. Visual moderno, rápido e seguro.">
+  <meta name="description" content="Automatiza finanças, RH, marketing e segurança. Foca no crescimento, não no papel.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
+  <!-- HEADER (pro com i18n + switcher + link RH) -->
   <header class="header">
     <div class="container navbar">
       <a class="brand" href="./index.html" aria-label="Easycheck – Início">
@@ -18,70 +19,156 @@
         <span>Easycheck</span>
       </a>
       <nav class="nav" aria-label="Principal">
-        <a href="./features.html">Funcionalidades</a>
-        <a href="./pricing.html">Preços</a>
-        <a href="./contact.html">Contato</a>
+        <a href="./features.html"><span data-i18n="nav.features">Funcionalidades</span></a>
+        <a href="./pricing.html"><span data-i18n="nav.pricing">Preços</span></a>
+        <a href="./contact.html"><span data-i18n="nav.contact">Contato</span></a>
+        <a href="./hr.html">RH</a>
       </nav>
       <div class="cta">
-        <a class="btn btn-ghost" href="./login.html">Entrar</a>
-        <a class="btn btn-primary" href="./login.html#signup">Criar conta</a>
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="btn btn-ghost lang-btn" data-lang="en">EN</button>
+          <button class="btn btn-ghost lang-btn" data-lang="pt">PT</button>
+          <button class="btn btn-ghost lang-btn" data-lang="fr">FR</button>
+          <button class="btn btn-ghost lang-btn" data-lang="de">DE</button>
+        </div>
+        <a class="btn btn-ghost" href="./login.html"><span data-i18n="nav.signin">Entrar</span></a>
+        <a class="btn btn-primary" href="./login.html#signup"><span data-i18n="cta.get_started">Começar</span></a>
       </div>
     </div>
   </header>
 
-  <main>
-    <section class="hero container">
-      <span class="kicker">Novo visual — Fluent + Apple</span>
-      <h1>O back-office que trabalha por ti.</h1>
-      <p>Centraliza e automatiza tarefas de contabilidade, RH, aprovações e atendimento — com IA e foco em privacidade. Integra com Supabase e a tua stack atual.</p>
-      <div class="actions">
-        <a class="btn btn-primary" href="./login.html#signup">Criar conta</a>
-        <a class="btn btn-ghost" href="./features.html">Ver funcionalidades</a>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container grid grid-3">
-        <div class="card feature elevated">
-          <div class="icon">✓</div>
+  <!-- HERO enterprise (sem “Novo visual”) -->
+  <section class="hero">
+    <div class="container grid grid-2">
+      <div class="stack">
+        <h1 data-i18n="hero.title">Suite AI All-in-One para Back-Office</h1>
+        <p class="lead" data-i18n="hero.subtitle">
+          Automatize contabilidade, RH, marketing e segurança. Foque no crescimento, não no trabalho administrativo.
+        </p>
+        <div class="stack" style="gap:var(--sp-3)">
+          <div class="kpi">
+            <div class="item">
+              <div class="num">500+</div>
+              <div class="muted" data-i18n="trust.title">Confiado por PMEs Europeus</div>
+            </div>
+            <div class="item">
+              <div class="num">99.9%</div>
+              <div class="muted">Uptime</div>
+            </div>
+            <div class="item">
+              <div class="num">GDPR</div>
+              <div class="muted">Compliance</div>
+            </div>
+          </div>
           <div>
-            <h3>Automação com IA</h3>
-            <p>Resumos, respostas e reconciliação automática de documentos e e-mails.</p>
+            <a class="btn btn-primary" href="./login.html#signup"><span data-i18n="cta.get_started">Começar</span></a>
+            <a class="btn btn-ghost" href="./features.html"><span data-i18n="cta.learn_more">Saiba Mais Sobre Funcionalidades</span></a>
+            <a class="btn btn-ghost" href="./hr.html">RH + IA</a>
           </div>
         </div>
-        <div class="card feature elevated">
-          <div class="icon">🔒</div>
-          <div>
-            <h3>Privacidade primeiro</h3>
-            <p>Controlo de dados, registos de auditoria e conformidade GDPR por padrão.</p>
-          </div>
-        </div>
-        <div class="card feature elevated">
-          <div class="icon">⚡</div>
-          <div>
-            <h3>Integração simples</h3>
-            <p>SDK leve, guard.js e tokens de design para escalar sem partir a UI.</p>
-          </div>
+        <div class="trust" style="margin-top:var(--sp-5)">
+          <img class="item" src="./logo-easycheck-text.png" alt="Trusted brand 1" loading="lazy">
+          <img class="item" src="./logo-easycheck-text.png" alt="Trusted brand 2" loading="lazy">
+          <img class="item" src="./logo-easycheck-text.png" alt="Trusted brand 3" loading="lazy">
+          <img class="item" src="./logo-easycheck-text.png" alt="Trusted brand 4" loading="lazy">
         </div>
       </div>
-    </section>
 
-    <section class="section">
-      <div class="container grid grid-2">
-        <div class="card elevated" style="padding:var(--sp-6)">
-          <h2>Painel limpo e focado</h2>
-          <p>Interface minimalista, com foco nas tarefas críticas. Menos ruído, mais ação.</p>
-          <a class="btn btn-primary" href="./pricing.html">Ver planos</a>
+      <!-- Mini Chat IA (quick assist) na home – reutiliza o mesmo endpoint do RH -->
+      <div class="card elevated padded">
+        <h2 style="margin-bottom:.25rem">Assistente Rápido com IA</h2>
+        <p class="muted">Peça algo agora (ex.: “Resumo este texto”, “Escreve email ao cliente”, “Cria anúncio de vaga”).</p>
+        <div class="chat" id="hrChat">
+          <div class="chat-window" id="chatWindow" aria-live="polite"></div>
+          <div class="composer">
+            <input id="chatInput" placeholder="Escreve a tua pergunta…" />
+            <button class="btn btn-primary" id="sendBtn">Enviar</button>
+          </div>
+          <div class="status" id="chatStatus">Pronto.</div>
         </div>
-        <div class="card" style="padding:var(--sp-6)">
-          <h2>Colaboração segura</h2>
-          <p>Permissões por equipa, registo de alterações e partilha seletiva com clientes.</p>
-          <a class="btn btn-ghost" href="./features.html">Explorar</a>
+        <div class="help" style="margin-top:var(--sp-3)">
+          Dica: para fluxo completo de RH (anúncios, triagem, onboarding) usa a página <a href="./hr.html">RH</a>.
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
+  <!-- 3 pilares -->
+  <section class="section">
+    <div class="container grid grid-3">
+      <div class="card elevated padded">
+        <div class="icon-bubble">⚙️</div>
+        <h3 data-i18n="features.accounting">Automação de Contabilidade</h3>
+        <p data-i18n="features.accounting_desc">Faturas, IVA, balanços e mais — tudo automatizado.</p>
+        <hr class="separator">
+        <ul class="stack">
+          <li>✓ Reconciliação automática</li>
+          <li>✓ Exportação para SAF-T / CSV / PDF</li>
+          <li>✓ Aprovações com prazos</li>
+        </ul>
+      </div>
+      <div class="card elevated padded">
+        <div class="icon-bubble">🧠</div>
+        <h3 data-i18n="features.email_ai">IA para Email & Reuniões</h3>
+        <p data-i18n="features.email_ai_desc">Resumos, sugestão de resposta e ações.</p>
+        <hr class="separator">
+        <ul class="stack">
+          <li>✓ Caixas inteligentes</li>
+          <li>✓ Resumo automático pós-reunião</li>
+          <li>✓ Atribuição de tarefas</li>
+        </ul>
+      </div>
+      <div class="card elevated padded">
+        <div class="icon-bubble">👥</div>
+        <h3 data-i18n="features.hr">RH Avançado</h3>
+        <p data-i18n="features.hr_desc">Parsing de CV, ranking multilíngue e fairness.</p>
+        <hr class="separator">
+        <ul class="stack">
+          <li>✓ Anúncios de vaga com IA</li>
+          <li>✓ Extração de competências</li>
+          <li>✓ Onboarding assistido</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bloco soft com KPIs/benefits -->
+  <section class="section">
+    <div class="container softband">
+      <div class="grid grid-3">
+        <div class="stack">
+          <h3 data-i18n="features.security">Compatível com GDPR e Seguro</h3>
+          <p data-i18n="features.security_desc">Segurança enterprise com auditoria, SSO e controlo de dados.</p>
+        </div>
+        <div class="stack">
+          <h3 data-i18n="features.translations">Suporte Multilíngue</h3>
+          <p data-i18n="features.translations_desc">PT, EN, FR, DE com alternância instantânea.</p>
+        </div>
+        <div class="stack">
+          <h3>Integração simples</h3>
+          <p>SDK leve, guard.js e tokens de design para escalar sem partir a UI.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA para preços -->
+  <section class="section tight">
+    <div class="container card elevated padded">
+      <div class="grid grid-2" style="align-items:center">
+        <div class="stack">
+          <h2 data-i18n="cta.ready">Pronto para Transformar o Teu Back-Office?</h2>
+          <p class="muted" data-i18n="cta.ready_desc">Começa já a avaliação gratuita. Sem cartão de crédito.</p>
+        </div>
+        <div class="right">
+          <a class="btn btn-primary" href="./login.html#signup" data-i18n="cta.start_free">Iniciar Avaliação Gratuita</a>
+          <a class="btn btn-ghost" href="./pricing.html" data-i18n="cta.view_full_pricing">Ver Preços Completos</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="container cols">
       <div>
@@ -89,29 +176,34 @@
           <img src="./logo-easycheck-mark.png" alt="" />
           <span>Easycheck</span>
         </div>
-        <p class="muted">Suite de back-office com IA para finanças, RH e operações — com privacidade e conformidade.</p>
+        <p class="muted" data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
       </div>
       <div>
-        <h3>Produto</h3>
-        <p><a href="./features.html">Funcionalidades</a></p>
-        <p><a href="./pricing.html">Preços</a></p>
+        <h3 data-i18n="footer.product">Produto</h3>
+        <p><a href="./features.html"><span data-i18n="nav.features">Funcionalidades</span></a></p>
+        <p><a href="./pricing.html"><span data-i18n="nav.pricing">Preços</span></a></p>
       </div>
       <div>
-        <h3>Empresa</h3>
-        <p><a href="./contact.html">Contato</a></p>
+        <h3 data-i18n="footer.company">Empresa</h3>
+        <p><a href="./contact.html"><span data-i18n="nav.contact">Contato</span></a></p>
+        <p><a href="./hr.html">RH</a></p>
       </div>
       <div>
-        <h3>Legal</h3>
-        <p><a href="./privacy.html">Privacidade</a></p>
-        <p><a href="./terms.html">Termos</a></p>
+        <h3 data-i18n="footer.legal">Legal</h3>
+        <p><a href="./privacy.html"><span data-i18n="footer.privacy">Política de Privacidade</span></a></p>
+        <p><a href="./terms.html"><span data-i18n="footer.terms">Termos de Serviço</span></a></p>
       </div>
     </div>
     <div class="container" style="margin-top:1.5rem">
       <hr class="separator" />
-      <p class="muted">© 2025 Easycheck. Todos os direitos reservados.</p>
+      <p class="muted" data-i18n="footer.copyright">© 2025 Easycheck. Todos os direitos reservados.</p>
     </div>
   </footer>
 
+  <!-- Define a API (opcional): coloca o teu Render aqui -->
+  <script>
+    // window.EASYCHECK_API_BASE = "https://TEU-RENDER.onrender.com";
+  </script>
   <script src="./script.js"></script>
 </body>
 </html>
