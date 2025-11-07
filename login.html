@@ -4,58 +4,124 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Entrar | Easycheck</title>
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="assets/logo-mark.png" sizes="32x32" />
+
+  <!-- Estilos + Logos -->
+  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="/assets/logo-mark.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="/assets/favicon-512.png" sizes="512x512" />
+  <meta property="og:image" content="/assets/logo-full.png" />
 </head>
 <body>
-<header class="header">
-  <div class="container navbar">
-    <a class="brand" href="./index.html"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></a>
-    <nav class="nav"><a href="./index.html">Início</a><a href="./features.html">Funcionalidades</a><a href="./pricing.html">Preços</a><a href="./contact.html">Contato</a></nav>
-  </div>
-</header>
-
-<main class="section">
-  <div class="container grid grid-2">
-    <div class="card padded elevated">
-      <h1>Entrar</h1>
-      <p class="muted">A IA só está disponível após login.</p>
-      <form class="form" id="loginForm">
-        <div class="input"><label>Email</label><input type="email" required placeholder="tu@empresa.com"></div>
-        <div class="input"><label>Password</label><input type="password" required placeholder="••••••••"></div>
-        <button class="btn btn-primary" type="submit">Continuar</button>
-        <p class="help">Ao continuar, aceitas os <a href="./terms.html">Termos</a> e a <a href="./privacy.html">Privacidade</a>.</p>
-      </form>
+  <!-- Header -->
+  <header class="header">
+    <div class="container navbar">
+      <a class="brand" href="/index.html" aria-label="Easycheck — Início">
+        <img src="/assets/logo-mark.png" alt="Easycheck" />
+        <span>Easycheck</span>
+      </a>
+      <nav class="nav" aria-label="Principal">
+        <a href="/index.html">Início</a>
+        <a href="/features.html">Funcionalidades</a>
+        <a href="/pricing.html">Preços</a>
+        <a href="/contact.html">Contato</a>
+      </nav>
+      <div class="cta">
+        <div class="lang-switcher" role="group" aria-label="Language">
+          <button class="lang-btn" data-lang="en">EN</button>
+          <button class="lang-btn" data-lang="pt">PT</button>
+          <button class="lang-btn" data-lang="fr">FR</button>
+          <button class="lang-btn" data-lang="de">DE</button>
+        </div>
+      </div>
     </div>
+  </header>
 
-    <div class="card padded">
-      <h2>Criar conta</h2>
-      <p>Sem cartão de crédito. Cancela quando quiseres.</p>
-      <ul class="stack">
-        <li>✓ 14 dias grátis</li>
-        <li>✓ IA de RH e e-mail</li>
-        <li>✓ Conformidade GDPR</li>
-      </ul>
+  <!-- Conteúdo -->
+  <main class="section">
+    <div class="container grid grid-2">
+      <!-- Card de Login -->
+      <div class="card padded elevated">
+        <h1 style="margin-bottom:.25rem">Entrar</h1>
+        <p class="muted" style="margin-bottom:1.25rem">Faz login para desbloquear a IA e o teu Workspace.</p>
+
+        <form class="form" id="loginForm" novalidate>
+          <div class="input">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" required placeholder="tu@empresa.com" autocomplete="username" />
+          </div>
+          <div class="input">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" required placeholder="••••••••" autocomplete="current-password" />
+          </div>
+
+          <button class="btn btn-primary" type="submit">Continuar</button>
+          <p class="help">Ao continuar, aceitas os <a href="/terms.html">Termos</a> e a <a href="/privacy.html">Privacidade</a>.</p>
+        </form>
+      </div>
+
+      <!-- Card lateral -->
+      <div class="card padded">
+        <h2>Criar conta</h2>
+        <p class="muted">Sem cartão de crédito. Cancela quando quiseres.</p>
+        <ul class="stack" style="margin-top:.5rem">
+          <li>✓ 14 dias grátis</li>
+          <li>✓ IA para RH, Email & Reuniões</li>
+          <li>✓ Conformidade GDPR</li>
+        </ul>
+        <div style="margin-top:1rem">
+          <a class="btn btn-secondary" href="/pricing.html">Ver planos</a>
+        </div>
+      </div>
     </div>
-  </div>
-</main>
+  </main>
 
-<footer class="footer">
-  <div class="container cols">
-    <div class="brand"><img src="assets/logo-mark.png" alt=""><span>Easycheck</span></div>
-    <div><h3>Produto</h3><p><a href="./features.html">Funcionalidades</a></p></div>
-    <div><h3>Empresa</h3><p><a href="./pricing.html">Preços</a></p></div>
-    <div><h3>Legal</h3><p><a href="./privacy.html">Privacidade</a></p></div>
-  </div>
-</footer>
+  <!-- Rodapé -->
+  <footer class="footer">
+    <div class="container cols">
+      <div>
+        <div class="brand" style="margin-bottom:.75rem">
+          <img src="/assets/logo-mark.png" alt="" /><span>Easycheck</span>
+        </div>
+        <p class="muted">Suite de back-office alimentada por IA para PMEs modernas.</p>
+      </div>
+      <div>
+        <h3>Produto</h3>
+        <p><a href="/features.html">Funcionalidades</a></p>
+        <p><a href="/pricing.html">Preços</a></p>
+      </div>
+      <div>
+        <h3>Empresa</h3>
+        <p><a href="/contact.html">Contato</a></p>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p><a href="/privacy.html">Privacidade</a></p>
+        <p><a href="/terms.html">Termos</a></p>
+      </div>
+    </div>
+  </footer>
 
-<script src="./script.js"></script>
-<script>
-  document.getElementById('loginForm')?.addEventListener('submit', (e)=>{
-    e.preventDefault();
-    localStorage.setItem('easycheck-auth','true');
-    window.location.href = './app/index.html';
-  });
-</script>
+  <!-- Scripts -->
+  <script src="/script.js"></script>
+  <script>
+    // Login simples: guarda sessão e redireciona para o Workspace
+    document.getElementById('loginForm')?.addEventListener('submit', function(e){
+      e.preventDefault();
+
+      // (Opcional) validação mínima
+      var email = document.getElementById('email');
+      var password = document.getElementById('password');
+      if(!email.value || !password.value){
+        alert('Preenche email e password.');
+        return;
+      }
+
+      // Marca sessão (demo). No futuro, trocar por chamada ao backend.
+      localStorage.setItem('easycheck-auth','true');
+
+      // Redireciona para a app
+      window.location.href = '/app/index.html';
+    });
+  </script>
 </body>
 </html>
