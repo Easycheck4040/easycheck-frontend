@@ -1,131 +1,31 @@
-<!doctype html>
-<html lang="pt">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Easycheck — Suite de Back-Office com IA</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Easycheck - AI-powered bac...ropean SMEs. Automate accounting, HR, marketing, and security.">
+    <meta name="keywords" content="SaaS, back-office, accounting, HR, AI assistant, SME, Europe">
+    <meta property="og:title" content="Easycheck - All-in-One AI Back-Office Suite">
+    <meta property="og:description" content="Automate your back-...fice. Accounting, HR, marketing, and security in one platform.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://easycheck.app">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Easycheck - AI Back-Office Suite">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://easycheck.app">
+    <!-- Added Inter font from Google Fonts -->
+...
+                    <p data-i18n="footer.copyright">&copy; 2025 Easycheck. All rights reserved.</p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="LinkedIn" class="social-link">in</a>
+                        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+                        <a href="#" aria-label="GitHub" class="social-link">gh</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
 
-  <!-- Estilos + Logos (usar caminhos RELATIVOS) -->
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="./assets/logo-mark.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
-  <meta property="og:image" content="./assets/logo-full.png" />
-  <meta name="description" content="Automatize contabilidade, RH, e-mails, reuniões e muito mais. Tudo com IA, em conformidade com GDPR." />
-</head>
-<body>
-  <!-- Mensagem se o JS estiver desativado -->
-  <noscript style="display:block;background:#111;color:#fff;padding:10px;text-align:center;">
-    O JavaScript está desativado. Algumas funcionalidades podem não funcionar.
-  </noscript>
-
-  <!-- Header -->
-  <header class="header">
-    <div class="container navbar">
-      <a class="brand" href="./index.html" aria-label="Easycheck — Início">
-        <img src="./assets/logo-mark.png" alt="Easycheck" width="28" height="28" />
-        <span>Easycheck</span>
-      </a>
-      <nav class="nav" aria-label="Principal">
-        <a class="active" href="./index.html">Início</a>
-        <a href="./features.html">Funcionalidades</a>
-        <a href="./pricing.html">Preços</a>
-        <a href="./contact.html">Contato</a>
-      </nav>
-      <div class="cta" style="display:flex;align-items:center;gap:.5rem">
-        <div class="lang-switcher" role="group" aria-label="Language">
-          <button class="lang-btn" data-lang="en">EN</button>
-          <button class="lang-btn" data-lang="pt">PT</button>
-          <button class="lang-btn" data-lang="fr">FR</button>
-          <button class="lang-btn" data-lang="de">DE</button>
-        </div>
-        <a class="btn btn-secondary" href="./login.html" id="loginBtn">Entrar</a>
-        <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <span class="badge">Confiado por 500+ PMEs europeias</span>
-      <h1>Suite de Back-Office com IA</h1>
-      <p class="lead">Automatize contabilidade, RH, e-mail e reuniões. Foque no crescimento, não na papelada.</p>
-      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
-        <a class="btn btn-primary btn-lg" href="./pricing.html">Começar grátis</a>
-        <a class="btn btn-secondary btn-lg" href="./features.html">Ver funcionalidades</a>
-        <button class="btn btn-outline btn-lg" id="openAIapp">Abrir Workspace de IA</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- Benefícios rápidos -->
-  <section class="section">
-    <div class="container grid grid-3">
-      <div class="card padded">
-        <div class="icon-bubble">💼</div>
-        <h3>Contabilidade</h3>
-        <p class="muted">Faturas, notas de crédito, orçamentos, IVA e balanços — tudo num só lugar.</p>
-      </div>
-      <div class="card padded">
-        <div class="icon-bubble">👤</div>
-        <h3>RH com IA</h3>
-        <p class="muted">Análise de CV, extração estruturada e ranking multilíngue sem viés.</p>
-      </div>
-      <div class="card padded">
-        <div class="icon-bubble">✉️</div>
-        <h3>Email & Reuniões</h3>
-        <p class="muted">Resumos, ações, agendamento inteligente e conformidade.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Chamada final -->
-  <section class="section">
-    <div class="container card padded elevated">
-      <div class="grid grid-2" style="align-items:center">
-        <div>
-          <h2>Pronto para transformar o teu back-office?</h2>
-          <p class="muted">Começa hoje com 14 dias grátis (sem cartão).</p>
-        </div>
-        <div class="right">
-          <a class="btn btn-primary btn-lg" href="./pricing.html">Iniciar avaliação</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container cols">
-      <div>
-        <div class="brand" style="margin-bottom:.75rem">
-          <img src="./assets/logo-mark.png" alt="" width="28" height="28" /><span>Easycheck</span>
-        </div>
-        <p class="muted">AI-powered back-office para PMEs modernas.</p>
-      </div>
-      <div>
-        <h3>Produto</h3>
-        <p><a href="./features.html">Funcionalidades</a></p>
-        <p><a href="./pricing.html">Preços</a></p>
-      </div>
-      <div>
-        <h3>Empresa</h3>
-        <p><a href="./contact.html">Contato</a></p>
-      </div>
-      <div>
-        <h3>Legal</h3>
-        <p><a href="./privacy.html">Privacidade</a></p>
-        <p><a href="./terms.html">Termos</a></p>
-      </div>
-    </div>
-    <div class="container footer-bottom">
-      <small class="muted">© 2025 Easycheck. Todos os direitos reservados.</small>
-    </div>
-  </footer>
-
-  <!-- Script no fim (caminho RELATIVO) -->
-  <script src="./script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
