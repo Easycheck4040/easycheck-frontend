@@ -1,0 +1,109 @@
+<!doctype html><html lang="pt"><head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Cookies — Easycheck</title>
+<link rel="stylesheet" href="./style.css"/>
+<style>
+  .tog{display:flex;align-items:center;gap:10px}
+  .tog input{width:auto}
+  .kvs{display:grid;gap:6px}
+  .kvs div{display:flex;justify-content:space-between;gap:8px}
+  .muted small{opacity:.9}
+</style>
+</head><body>
+
+<header class="nav">
+  <div class="container navbar">
+    <div class="brand"><span class="logo">✓</span><span>Easycheck</span></div>
+    <nav class="menu">
+      <a href="index.html">Início</a>
+      <a href="features.html">Funcionalidades</a>
+      <a href="pricing.html">Preços</a>
+      <a href="login.html">Entrar</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container" style="padding:24px 0">
+  <h1>Cookies</h1>
+  <p class="muted">Explicamos que cookies usamos e como podes gerir as tuas preferências.</p>
+
+  <div class="card" style="margin-top:12px">
+    <h3 style="margin:0 0 8px">Resumo</h3>
+    <p>Usamos apenas <b>cookies essenciais</b> para login/sessão. “Analytics” está <b>desligado por padrão</b> e só será ativado se aceitares.</p>
+  </div>
+
+  <section class="grid cols-2" style="margin-top:14px">
+    <div class="card">
+      <h3 style="margin-top:0">Categorias</h3>
+
+      <div class="tog" style="margin:8px 0">
+        <input type="checkbox" id="c_essential" checked disabled>
+        <label for="c_essential"><b>Essenciais</b> (sempre ativos)</label>
+      </div>
+      <p class="muted">Necessários para o site funcionar (ex.: autenticação, segurança). Não podem ser desativados.</p>
+
+      <div class="tog" style="margin:8px 0">
+        <input type="checkbox" id="c_analytics">
+        <label for="c_analytics"><b>Analytics</b> (opcional)</label>
+      </div>
+      <p class="muted">Medição agregada de uso para melhorar o produto (sem publicidade). Só ativamos com o teu consentimento.</p>
+
+      <!-- Futuras categorias (mantidas como exemplo, não usadas agora)
+      <div class="tog" style="margin:8px 0">
+        <input type="checkbox" id="c_functional">
+        <label for="c_functional"><b>Funcionais</b> (opcional)</label>
+      </div>
+      <div class="tog" style="margin:8px 0">
+        <input type="checkbox" id="c_marketing">
+        <label for="c_marketing"><b>Marketing</b> (opcional)</label>
+      </div>
+      -->
+
+      <div class="row" style="justify-content:flex-end;margin-top:10px">
+        <button id="save" class="btn">Guardar preferências</button>
+      </div>
+      <p id="saved" class="muted" style="display:none;margin-top:8px"><small>Preferências guardadas. Podes voltar aqui para alterar quando quiseres.</small></p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Detalhes técnicos</h3>
+      <div class="kvs">
+        <div><span>Armazenamento de consentimento</span><span><code>localStorage</code></span></div>
+        <div><span>Chave</span><span><code>ec_cookie_consent</code></span></div>
+        <div><span>Valor</span><span><code>{"essential":true,"analytics":false}</code></span></div>
+      </div>
+      <p class="muted" style="margin-top:8px">Se um dia adicionarmos analytics (ex.: Plausible/Umami na UE), só será carregado quando “Analytics” estiver ativo.</p>
+      <p class="muted">Consulta também a nossa <a href="privacy.html">Política de Privacidade</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="padding:16px 0;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px">
+    <span class="muted">© 2025 Easycheck.</span>
+    <span class="muted">GDPR-ready • Hospedado na UE</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const KEY = 'ec_cookie_consent';
+  const load = () => {
+    try { return JSON.parse(localStorage.getItem(KEY)||'{}'); } catch { return {}; }
+  };
+  const save = (v) => localStorage.setItem(KEY, JSON.stringify(v));
+
+  // estado atual
+  const s = load();
+  const analyticsOn = !!s.analytics;
+  document.getElementById('c_analytics').checked = analyticsOn;
+
+  document.getElementById('save').onclick = ()=>{
+    const out = { essential:true, analytics: document.getElementById('c_analytics').checked };
+    save(out);
+    document.getElementById('saved').style.display = 'block';
+  };
+})();
+</script>
+</body></html>
