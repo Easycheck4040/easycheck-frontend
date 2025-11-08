@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Easycheck — Dashboard</title>
+  <meta name="description" content="Your AI back-office dashboard for accounting, HR, email and more." />
+  <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
+  <script>window.EASYCHECK_API_URL = "https://SEU_BACKEND_URL";</script>
+  <link rel="stylesheet" href="./style.css" />
+  <style>
+    /* ajustes rápidos para o layout do app (inspirado no resto do site) */
+    .app-shell{display:grid;grid-template-columns:260px 1fr;min-height:100dvh}
+    .sidebar{border-right:1px solid var(--line);background:var(--bg-2)}
+    .side-top{padding:1rem;border-bottom:1px solid var(--line)}
+    .side-nav{padding:1rem;display:grid;gap:.35rem}
+    .side-nav a{padding:.6rem .75rem;border-radius:12px;color:var(--muted);font-weight:600}
+    .side-nav a:hover,.side-nav a.active{background:var(--baby);color:var(--ink)}
+    .main{display:grid;grid-template-rows:72px 1fr}
+    .topbar{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);backdrop-filter:var(--backdrop);-webkit-backdrop-filter:var(--backdrop);padding:0 1rem;background:linear-gradient(to bottom, var(--glass), rgba(255,255,255,0))}
+    .topbar .brand{gap:.5rem}
+    .content{padding:1.2rem}
+    .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1rem}
+    @media (max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width:640px){.app-shell{grid-template-columns:1fr}.sidebar{display:none}}
+    .kpi .value{font-size:1.8rem;font-weight:800}
+    .tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;margin-top:1rem}
+    @media (max-width:1000px){.tools{grid-template-columns:1fr}}
+    /* Chat */
+    .chat-card{display:grid;grid-template-rows:1fr auto;min-height:420px}
+    #chatWidget{overflow:auto;border:1px solid var(--line);border-radius:12px;padding:1rem;background:var(--bg-2)}
+    .msg{max-width:80%;padding:.6rem .8rem;border-radius:12px;margin:.25rem 0;border:1px solid var(--line)}
+    .msg.me{margin-left:auto;background:#e9f3ff}
+    .msg.ai{background:#f7fafc}
+    #chatForm{display:flex;gap:.5rem;margin-top:.6rem}
+    #chatForm input{flex:1}
+  </style>
+</head>
+<body>
+
+  <div class="app-shell">
+    <!-- =============== SIDEBAR =============== -->
+    <aside class="sidebar">
+      <div class="side-top">
+        <a class="brand" href="./index.html" aria-label="Easycheck — Home">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Easycheck</span>
+        </a>
+      </div>
+      <nav class="side-nav">
+        <a class="active" href="./app.html">Dashboard</a>
+        <a href="#">Accounting</a>
+        <a href="#">HR</a>
+        <a href="#">Email & Meetings</a>
+        <a href="#">Marketing</a>
+        <a href="#">Security</a>
+        <a href="./features.html">Features</a>
+        <a href="./pricing.html">Pricing</a>
+        <a href="./contact.html">Contact</a>
+      </nav>
+    </aside>
+
+    <!-- =============== MAIN =============== -->
+    <main class="main">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="brand">
+          <span class="mark" aria-hidden="true"></span>
+          <strong>Dashboard</strong>
+        </div>
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <div class="lang-switcher" role="group" aria-label="Language">
+            <button class="lang-btn" data-lang="en">EN</button>
+            <button class="lang-btn" data-lang="pt">PT</button>
+            <button class="lang-btn" data-lang="fr">FR</button>
+            <button class="lang-btn" data-lang="de">DE</button>
+          </div>
+          <a class="btn btn-secondary" href="./login.html">Sign out</a>
+        </div>
+      </div>
+
+      <!-- CONTENT -->
+      <div class="content container">
+        <!-- KPIs -->
+        <div class="kpis">
+          <div class="card padded kpi">
+            <div class="caption">Invoices (30d)</div>
+            <div class="value">124</div>
+            <div class="muted">€ 87,450</div>
+          </div>
+          <div class="card padded kpi">
+            <div class="caption">New Candidates</div>
+            <div class="value">36</div>
+            <div class="muted">HR Pipeline</div>
+          </div>
+          <div class="card padded kpi">
+            <div class="caption">Emails triaged</div>
+            <div class="value">812</div>
+            <div class="muted">AI Assistant</div>
+          </div>
+          <div class="card padded kpi">
+            <div class="caption">Marketing CTR</div>
+            <div class="value">3.8%</div>
+            <div class="muted">Last 7 days</div>
+          </div>
+        </div>
+
+        <!-- Ferramentas / integrações -->
+        <div class="tools">
+          <div class="card padded elevated">
+            <h3>Connect Email</h3>
+            <p class="muted">Liga a tua conta para o assistente de e-mail classificar e resumir mensagens.</p>
+            <button id="connectEmailBtn" class="btn btn-primary">Connect email</button>
+          </div>
+
+          <div class="card padded elevated">
+            <h3>Connect AI Key</h3>
+            <p class="muted">Adiciona a chave de IA (ou usa a nossa) para ativar automações.</p>
+            <button id="connectAIKey" class="btn btn-secondary">Add key</button>
+          </div>
+
+          <div class="card padded elevated">
+            <h3>Connect SMTP</h3>
+            <p class="muted">Envia propostas e faturas pelo teu domínio com autenticação.</p>
+            <button id="connectSMTPBtn" class="btn btn-secondary">Configure SMTP</button>
+          </div>
+        </div>
+
+        <!-- Chat RH -->
+        <section class="section" style="padding-top:1.2rem">
+          <div class="grid grid-2" style="align-items:start">
+            <div class="card padded elevated chat-card">
+              <div>
+                <h2>HR — AI Chat</h2>
+                <p class="muted">Pede à IA para filtrar candidatos, resumir CVs ou criar mensagens.</p>
+                <div id="chatWidget" aria-live="polite" aria-label="Chat messages"></div>
+              </div>
+              <form id="chatForm">
+                <input type="text" placeholder="Ask HR assistant…" aria-label="Message to HR AI" />
+                <button class="btn btn-primary" type="submit">Send</button>
+              </form>
+            </div>
+
+            <div class="card padded">
+              <h2>Quick Actions</h2>
+              <ul class="stack">
+                <li><button class="btn btn-secondary" type="button">Create invoice</button></li>
+                <li><button class="btn btn-secondary" type="button">Import candidates CSV</button></li>
+                <li><button class="btn btn-secondary" type="button">Summarize inbox</button></li>
+              </ul>
+              <hr class="separator" />
+              <p class="caption">Estas ações serão ligadas à tua API real quando ativarmos os endpoints.</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script>
+    // Chat fake (frontend apenas): mantém os IDs que combinámos
+    document.addEventListener("DOMContentLoaded", () => {
+      const chat = document.getElementById("chatWidget");
+      const form = document.getElementById("chatForm");
+      if (form) {
+        form.addEventListener("submit", (e) => {
+          e.preventDefault();
+          const input = form.querySelector("input");
+          const text = input.value.trim();
+          if (!text) return;
+          chat.insertAdjacentHTML("beforeend", `<div class="msg me">${text}</div>`);
+          input.value = "";
+          // resposta simulada
+          setTimeout(() => {
+            chat.insertAdjacentHTML("beforeend", `<div class="msg ai">I’ll help with that. (placeholder)</div>`);
+            chat.scrollTop = chat.scrollHeight;
+          }, 400);
+        });
+      }
+    });
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>
