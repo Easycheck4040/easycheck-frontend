@@ -1,35 +1,34 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Contact Easycheck — We'd love to hear from you." />
-  <meta property="og:title" content="Contact — Easycheck" />
-  <meta property="og:description" content="Get in touch with the Easycheck team." />
-  <meta property="og:type" content="website" />
-  <link rel="canonical" href="https://easycheck.app/contact" />
-  <title>Contact — Easycheck</title>
-
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="icon" type="image/png" href="./assets/logo-mark.png" sizes="32x32" />
+  <title>Easycheck — Contact Us</title>
+  <meta name="description" content="Get in touch with our sales or support team. We’d love to hear from you." />
+  <meta property="og:title" content="Easycheck — Contact" />
+  <meta property="og:description" content="Contact the Easycheck team for sales, support or partnerships." />
+  <meta property="og:image" content="./assets/feature-3.jpg" />
   <link rel="icon" type="image/png" href="./assets/favicon-512.png" sizes="512x512" />
-  <meta property="og:image" content="./assets/logo-full.png" />
+  <script>window.EASYCHECK_API_URL = "https://SEU_BACKEND_URL";</script>
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <!-- Header -->
+  <!-- ================= HEADER ================= -->
   <header class="header">
     <div class="container navbar">
       <a class="brand" href="./index.html" aria-label="Easycheck — Home">
-        <img src="./assets/logo-mark.png" alt="Easycheck" width="28" height="28" />
+        <span class="mark" aria-hidden="true"></span>
         <span>Easycheck</span>
       </a>
-      <nav class="nav" aria-label="Main">
+
+      <nav class="nav" aria-label="Primary">
         <a href="./index.html" data-i18n="nav.home">Home</a>
         <a href="./features.html" data-i18n="nav.features">Features</a>
         <a href="./pricing.html" data-i18n="nav.pricing">Pricing</a>
         <a class="active" href="./contact.html" data-i18n="nav.contact">Contact</a>
       </nav>
-      <div class="cta" style="display:flex;align-items:center;gap:.5rem">
+
+      <div class="cta">
         <div class="lang-switcher" role="group" aria-label="Language">
           <button class="lang-btn" data-lang="en">EN</button>
           <button class="lang-btn" data-lang="pt">PT</button>
@@ -37,130 +36,146 @@
           <button class="lang-btn" data-lang="de">DE</button>
         </div>
         <a class="btn btn-secondary" href="./login.html" id="loginBtn" data-i18n="nav.signin">Sign in</a>
-        <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <button class="hamburger" id="hamburger" aria-label="Open navigation" aria-expanded="false">
           <span></span><span></span><span></span>
         </button>
       </div>
     </div>
   </header>
 
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container center">
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="container hero-card">
+      <div>
         <span class="badge" data-i18n="contact.pageTitle">Get in Touch</span>
-        <h1 data-i18n="contact.pageTitle">Get in Touch</h1>
-        <p class="lead" data-i18n="contact.pageSubtitle">We'd love to hear from you. Send us a message.</p>
+        <h1 data-i18n="contact.pageSubtitle">We'd love to hear from you. Send us a message.</h1>
+        <p class="lead muted">Sales · Support · Partnerships · Other</p>
       </div>
-    </section>
+      <div class="hero-photo">
+        <img src="./assets/feature-3.jpg" alt="Contact Easycheck" loading="eager" />
+      </div>
+    </div>
+  </section>
 
-    <!-- Contact content -->
-    <section class="section">
-      <div class="container grid grid-2">
-        <!-- Form -->
-        <div class="card padded elevated">
-          <form class="form" id="contactForm" novalidate>
-            <div class="input">
-              <label for="name" data-i18n="contact.name">Name</label>
-              <input id="name" name="name" type="text" placeholder="John Doe" />
-            </div>
-
-            <div class="input">
-              <label for="email" data-i18n="contact.email">Email</label>
-              <input id="email" name="email" type="email" placeholder="you@company.com" />
-            </div>
-
-            <div class="input">
-              <label for="company" data-i18n="contact.company">Company</label>
-              <input id="company" name="company" type="text" placeholder="Company Inc." />
-            </div>
-
-            <div class="input">
-              <label for="subject" data-i18n="contact.subject">Subject</label>
-              <select id="subject" name="subject">
-                <option value="" selected data-i18n="contact.selectSubject">Select a subject</option>
-                <option value="sales" data-i18n="contact.sales">Sales Inquiry</option>
-                <option value="support" data-i18n="contact.support">Support</option>
-                <option value="partnership" data-i18n="contact.partnership">Partnership</option>
-                <option value="other" data-i18n="contact.other">Other</option>
-              </select>
-            </div>
-
-            <div class="input">
-              <label for="message" data-i18n="contact.message">Message</label>
-              <textarea id="message" name="message" rows="6" placeholder="How can we help?"></textarea>
-            </div>
-
-            <button class="btn btn-primary btn-lg" type="submit" data-i18n="contact.send">Send Message</button>
-            <p class="help" data-i18n="contact.chatHint">Chat widget will be integrated here</p>
-          </form>
-        </div>
-
-        <!-- Info -->
-        <div class="card padded">
-          <h2 data-i18n="contact.info">Contact Information</h2>
-          <div class="stack" style="margin-top:.5rem">
-            <p><strong data-i18n="contact.email_label">Email</strong>: <a href="mailto:hello@easycheck.app">hello@easycheck.app</a></p>
-            <p><strong data-i18n="contact.phone_label">Phone</strong>: <a href="tel:+35200000000">+352 000 000 00</a></p>
-            <p><strong data-i18n="contact.address_label">Address</strong>: 10 Rue Example, 1000 Luxembourg</p>
-            <p><strong data-i18n="contact.hours_label">Business Hours</strong>: <span data-i18n="contact.hours">Monday - Friday: 9:00 AM - 6:00 PM CET</span></p>
-            <div>
-              <strong data-i18n="contact.social_label">Follow Us</strong>:
-              <div style="display:flex;gap:.6rem;margin-top:.4rem">
-                <a href="#" class="social-link" aria-label="LinkedIn">in</a>
-                <a href="#" class="social-link" aria-label="Twitter">𝕏</a>
-                <a href="#" class="social-link" aria-label="GitHub">gh</a>
-              </div>
-            </div>
+  <!-- ================= CONTACT FORM ================= -->
+  <section class="section">
+    <div class="container grid grid-2" style="align-items:start">
+      <!-- Form -->
+      <div class="card padded elevated">
+        <h2 data-i18n="contact.contact_us">Contact Sales</h2>
+        <form id="contactForm" class="form">
+          <div class="input">
+            <label for="name" data-i18n="contact.name">Name</label>
+            <input id="name" name="name" type="text" required />
           </div>
 
-          <hr class="separator" />
+          <div class="input">
+            <label for="email" data-i18n="contact.email">Email</label>
+            <input id="email" name="email" type="email" required />
+          </div>
 
-          <h3 data-i18n="cta.title">Ready to Transform Your Back-Office?</h3>
+          <div class="input">
+            <label for="company" data-i18n="contact.company">Company</label>
+            <input id="company" name="company" type="text" />
+          </div>
+
+          <div class="input">
+            <label for="subject" data-i18n="contact.subject">Subject</label>
+            <select id="subject" name="subject" required>
+              <option value="" selected disabled data-i18n="contact.selectSubject">Select a subject</option>
+              <option value="sales" data-i18n="contact.sales">Sales Inquiry</option>
+              <option value="support" data-i18n="contact.support">Support</option>
+              <option value="partnership" data-i18n="contact.partnership">Partnership</option>
+              <option value="other" data-i18n="contact.other">Other</option>
+            </select>
+          </div>
+
+          <div class="input">
+            <label for="message" data-i18n="contact.message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" data-i18n="contact.send">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="card padded">
+        <h2 data-i18n="contact.info">Contact Information</h2>
+        <p><strong data-i18n="contact.email_label">Email:</strong> <a href="mailto:info@easycheck.app">info@easycheck.app</a></p>
+        <p><strong data-i18n="contact.phone_label">Phone:</strong> +352 202 555 123</p>
+        <p><strong data-i18n="contact.address_label">Address:</strong><br /> 7 Rue de l'Industrie, Luxembourg City</p>
+        <p><strong data-i18n="contact.hours_label">Business Hours:</strong><br />
+          <span data-i18n="contact.hours">Monday - Friday: 9:00 AM - 6:00 PM CET</span>
+        </p>
+        <div class="stack" style="margin-top:1rem">
+          <p class="muted" data-i18n="contact.social_label">Follow Us</p>
+          <div style="display:flex;gap:.6rem">
+            <a href="#" class="social-link">in</a>
+            <a href="#" class="social-link">𝕏</a>
+            <a href="#" class="social-link">gh</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="section">
+    <div class="container card padded elevated">
+      <div class="grid grid-2" style="align-items:center">
+        <div>
+          <h2 data-i18n="cta.title">Ready to Transform Your Back-Office?</h2>
           <p class="muted" data-i18n="cta.description">Join hundreds of European SMEs already using Easycheck.</p>
-          <div style="margin-top:1rem">
-            <a class="btn btn-primary" href="./login.html" data-i18n="cta.start_free">Start Free Trial</a>
-            <a class="btn btn-secondary" href="./pricing.html" data-i18n="cta.view_full_pricing">View Full Pricing</a>
-          </div>
+        </div>
+        <div class="right">
+          <a class="btn btn-primary" href="./pricing.html" data-i18n="cta.start_free">Start Free Trial</a>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <!-- Footer -->
+  <!-- ================= FOOTER ================= -->
   <footer class="footer">
     <div class="container cols">
       <div>
         <div class="brand" style="margin-bottom:.75rem">
-          <img src="./assets/logo-mark.png" alt="" width="28" height="28" /><span>Easycheck</span>
+          <span class="mark" aria-hidden="true"></span>
+          <span>Easycheck</span>
         </div>
         <p class="muted" data-i18n="footer.tagline">AI-powered back-office for modern SMEs.</p>
       </div>
+
       <div>
         <h3 data-i18n="footer.product">Product</h3>
         <p><a href="./features.html" data-i18n="footer.features">Features</a></p>
-        <p><a href="./pricing.html" data-i18n="nav.pricing">Pricing</a></p>
+        <p><a href="./pricing.html" data-i18n="footer.pricing">Pricing</a></p>
       </div>
+
       <div>
         <h3 data-i18n="footer.company">Company</h3>
         <p><a href="./contact.html" data-i18n="footer.contact">Contact</a></p>
+        <p><a href="#" data-i18n="footer.careers">Careers</a></p>
       </div>
+
       <div>
         <h3 data-i18n="footer.legal">Legal</h3>
         <p><a href="./privacy.html" data-i18n="footer.privacy">Privacy Policy</a></p>
         <p><a href="./terms.html" data-i18n="footer.terms">Terms of Service</a></p>
       </div>
     </div>
+
     <div class="container footer-bottom">
       <small class="muted" data-i18n="footer.copyright">© 2025 Easycheck. All rights reserved.</small>
-      <div class="footer-social" style="display:flex;gap:.6rem">
+      <div style="display:flex;gap:.6rem">
         <a href="#" aria-label="LinkedIn" class="social-link">in</a>
-        <a href="#" aria-label="Twitter" class="social-link">𝕏</a>
+        <a href="#" aria-label="Twitter/X" class="social-link">𝕏</a>
         <a href="#" aria-label="GitHub" class="social-link">gh</a>
       </div>
     </div>
   </footer>
 
+  <!-- SCRIPTS -->
   <script src="./script.js"></script>
 </body>
 </html>
